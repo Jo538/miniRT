@@ -6,7 +6,7 @@
 #    By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/07 14:53:43 by jchartie         ###   ########.fr        #
+#    Updated: 2026/09/07 16:39:12 by jchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ endif
 INCLUDES += -Iinclude -I$(LIBFT_DIR)
 
 # Sources and Objects
-MAIN_SOURCES = 
+MAIN_SOURCES = main.c
 MAIN_OBJECTS = $(addprefix $(OBJ_DIR), $(MAIN_SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a	$(MLX_DIR)/libmlx.a
 
