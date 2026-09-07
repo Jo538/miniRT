@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/07 16:25:54 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/07 17:01:17 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef enum e_id
 	LIGHT,
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	INVALID
 } t_id;
 
 typedef struct s_object
@@ -39,9 +40,5 @@ typedef struct s_object
 	float diameter;
 	float height;
 } t_object;
-
-t)object test*;
-
-test = malloc(sizeof())
 
 #endif
