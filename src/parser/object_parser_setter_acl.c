@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object_parser_setter.c                             :+:      :+:    :+:   */
+/*   object_parser_setter_acl.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 12:57:35 by benji             #+#    #+#             */
-/*   Updated: 2026/09/08 13:53:58 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/08 14:15:14 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ void	put_light(t_object **tab, char **info, int *tab_trot)
 {
 	if (tab[1]->is_set == 1)
 		return (*tab_trot = -1);
+	tab[2]->id = LIGHT;
 	tab[2]->coordinates[0] = ft_atof(info[1]);
 	tab[2]->coordinates[1] = ft_atof(info[2]);
 	tab[2]->coordinates[2] = ft_atof(info[3]);
 	tab[2]->ratio = ft_atof(info[4]);
-	tab[2]->rgb[0] = ft_atoi(info[5]);
+	tab[2]->rgb[0] = ft_atoi(info[5]); //peut etre changer en fonction de l entree de info avec les ,
 	tab[2]->rgb[1] = ft_atoi(info[6]);
 	tab[2]->rgb[2] = ft_atoi(info[7]);
 	if (info[8] != NULL) //verifie si c est le bon nombre de choses dans info
@@ -31,6 +32,7 @@ void	put_camera(t_object **tab, char **info, int *tab_trot)
 {
 	if (tab[1]->is_set == 1)
 		return (*tab_trot = -1);
+	tab[1]->id = CAMERA;
 	tab[1]->coordinates[0] = ft_atof(info[1]);
 	tab[1]->coordinates[1] = ft_atof(info[2]);
 	tab[1]->coordinates[2] = ft_atof(info[3]);
@@ -46,6 +48,7 @@ void	put_ambient_lightning(t_object **tab, char **info, int *tab_trot)
 {
 	if (tab[0]->is_set == 1)
 		return (*tab_trot = -1);
+	tab[0]->id = AMBIENT_LIGHTING;
 	//rajouter un checker de si c est un bon float qui est mis
 	tab[0]->ratio = ft_atof(info[1]);
 	//rajouter un checker de si c est un bon int qui est mis

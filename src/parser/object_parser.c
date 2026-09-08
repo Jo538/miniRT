@@ -6,7 +6,7 @@
 /*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 16:42:46 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/08 13:55:35 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/08 14:30:59 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	recognize_obj_type(char **info)
 	return (INVALID);
 }
 
+// CHOSE encore a faire :
+//le checker pour savoir s il y a le bon nombre d arg dans info pour chaque objets
+//le setter de tout a NULL
+//
+
 void	set_tab(t_object **tab, char **info, int *tab_trot)
 {
 	int	type_obj;
@@ -43,6 +48,7 @@ void	set_tab(t_object **tab, char **info, int *tab_trot)
 }
 
 
+
 t_object *object_parser(char ***info, int size)
 {
 	int			tab_trot;
@@ -54,8 +60,8 @@ t_object *object_parser(char ***info, int size)
 	tab_info_obj = malloc(sizeof(t_object) * size); //peut etre mettre un +3 pour le size
 	if (!tab_info_obj)
 		return (NULL);
-	while (info_trot <= 2)
-	tab_info_obj[info_trot++].is_set = 0;
+	while (info_trot <= 2) //en vrai le remplacer par une fonction qui me tout a NULL/0 pour eviter les segfaults
+		tab_info_obj[info_trot++].is_set = 0;
 	info_trot = 0;
 	while (info_trot < size && tab_trot != -1)
 		set_tab(&tab_info_obj, info[info_trot++], &tab_trot);
