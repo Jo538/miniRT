@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_reader.c                                      :+:      :+:    :+:   */
+/*   test_file_reader.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/08 17:20:23 by jchartie         ###   ########.fr       */
+/*   Created: 2026/09/08 15:12:36 by jchartie          #+#    #+#             */
+/*   Updated: 2026/09/08 16:26:56 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "test.h"
 
-char	**extract_line(int fd)
+void test_extract_line(int fd, char **expected)
 {
-	char	*line;
-	char	**row;
+	int i = 0;
 
-	row = NULL;
-	line = get_next_line(fd);
-	if (ft_strchr(line, '\n'))
-		line = ft_strtrim(line, "\n");
-	row = ft_split(line, ' ');
-	return (row);
+	char **line = extract_line(fd);
+	while (line[i])
+	{
+		if (strcmp(line[i], expected[i]))
+		{
+			printf("FAILURE: %s, %s\n", line[i], expected[i]);
+			return ;	
+		}
+		i++;
+	}
+	printf("SUCCESS\n");
 }

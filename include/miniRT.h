@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/08 14:07:51 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/08 16:06:29 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ typedef struct s_object
 	float diameter;
 	float height;
 } t_object;
+
+char	**extract_line(int fd);
 
 #endif

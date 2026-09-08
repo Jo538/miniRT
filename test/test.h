@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_reader.c                                      :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/08 17:20:23 by jchartie         ###   ########.fr       */
+/*   Created: 2026/09/08 15:11:00 by jchartie          #+#    #+#             */
+/*   Updated: 2026/09/08 16:05:04 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#ifndef TEST_H
+# define TEST_H
 
-char	**extract_line(int fd)
-{
-	char	*line;
-	char	**row;
+# include "miniRT.h"
 
-	row = NULL;
-	line = get_next_line(fd);
-	if (ft_strchr(line, '\n'))
-		line = ft_strtrim(line, "\n");
-	row = ft_split(line, ' ');
-	return (row);
-}
+void test_extract_line(int fd, char **expected);
+
+#endif
