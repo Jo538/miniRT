@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object_parser.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 16:42:46 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/07 17:20:25 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/08 13:55:35 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ void	set_tab(t_object **tab, char **info, int *tab_trot)
 
 	type_obj = recognize_obj_type(info);
 	if (type_obj == INVALID)
-		*tab_trot = -1;
-	else
+		return (*tab_trot = -1);
+	if (type_obj == AMBIENT_LIGHTING || type_obj == CAMERA || type_obj == LIGHT)
+		return (acl_case(tab, info, tab_trot, type_obj));
+	return (other_case(tab, info, tab_trot, type_obj));
+
 }
 
 
@@ -48,11 +51,14 @@ t_object *object_parser(char ***info, int size)
 
 	tab_trot = 3;
 	info_trot = 0;
-	tab_info_obj = malloc(sizeof(t_object) * size);
+	tab_info_obj = malloc(sizeof(t_object) * size); //peut etre mettre un +3 pour le size
 	if (!tab_info_obj)
 		return (NULL);
+	while (info_trot <= 2)
+	tab_info_obj[info_trot++].is_set = 0;
+	info_trot = 0;
 	while (info_trot < size && tab_trot != -1)
 		set_tab(&tab_info_obj, info[info_trot++], &tab_trot);
 	if (tab_trot == -1)
-	return (free(tab_info_obj), printf("TEST\n"), NULL);
+		return (free(tab_info_obj), printf("TEST\n"), NULL);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+         #
+#    By: benji <benji@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/10 11:15:08 by jchartie          #+#    #+#              #
-#    Updated: 2025/11/24 16:02:39 by jchartie         ###   ########.fr        #
+#    Updated: 2026/09/08 13:22:12 by benji            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ ft_memchr.c	ft_memmove.c	ft_putendl_fd.c	ft_split.c	ft_striteri.c	\
 ft_strlcpy.c	ft_strncmp.c	ft_strtrim.c	ft_toupper.c	\
 ft_bzero.c	ft_isalpha.c	ft_isprint.c	ft_memcmp.c	ft_memset.c	\
 ft_putnbr_fd.c	ft_strchr.c	ft_strjoin.c	ft_strlen.c	ft_strnstr.c	\
-ft_substr.c
+ft_substr.c ft_atof.c
 BONUS_SOURCES = ft_lstnew_bonus.c	ft_lstadd_front_bonus.c	\
 ft_lstsize_bonus.c	ft_lstlast_bonus.c	ft_lstadd_back_bonus.c	\
 ft_lstdelone_bonus.c	ft_lstclear_bonus.c	ft_lstiter_bonus.c	\
@@ -37,13 +37,13 @@ $(NAME): $(MAIN_OBJECTS)
 
 # Compilation of the .c files into .o files (main + bonus)
 %.o: %.c
-	$(CC) -o $@ -c $< $(CFLAGS) 
+	$(CC) -o $@ -c $< $(CFLAGS)
 
 # Phony targets declaration
 .PHONY: all clean fclean re bonus
 
 # Compilation of bonus .c files into .o files
-bonus: $(BONUS_OBJECTS) $(NAME) 
+bonus: $(BONUS_OBJECTS) $(NAME)
 	ar rcs $(NAME) $(BONUS_OBJECTS)
 
 # Removal of object files
@@ -56,4 +56,3 @@ fclean: clean
 
 # Recompile all files
 re: fclean all
-
