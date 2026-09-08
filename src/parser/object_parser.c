@@ -55,7 +55,7 @@ t_object *object_parser(char ***info, int size)
 	if (!tab_info_obj)
 		return (NULL);
 	while (info_trot <= 2)
-	tab_info_obj[info_trot++].is_set = 0;
+		tab_info_obj[info_trot++].is_set = 0;
 	info_trot = 0;
 	while (info_trot < size && tab_trot != -1)
 		set_tab(&tab_info_obj, info[info_trot++], &tab_trot);
