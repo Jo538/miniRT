@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   miniRT.h                                           :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/08 14:07:51 by jchartie         ###   ########.fr       */
+/*   Created: 2026/01/11 21:42:49 by admin             #+#    #+#             */
+/*   Updated: 2026/09/08 14:13:18 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+# define MAX 4096
+# if BUFFER_SIZE > MAX
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE MAX
+# endif
 
 # include <stdio.h>
 # include <fcntl.h>
-# include <errno.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
 # include "libft.h"
-# include "get_next_line.h"
 
-typedef enum e_id
-{
-	AMBIENT_LIGHTING,
-	CAMERA,
-	LIGHT,
-	SPHERE,
-	PLANE,
-	CYLINDER
-} t_id;
-
-typedef struct s_object
-{
-	t_id id; //peutetre changer a int si fonctionne pas avec t_id
-	float ratio;
-	int	rgb[3];
-	float coordinates[3];
-	float vector[3];
-	int fov;
-	float diameter;
-	float height;
-} t_object;
+char	*get_next_line(int fd);
+char	*ft_read(int fd, char *stash);
+char	*ft_strjoin_gnl(char *s1, char *s2);
 
 #endif

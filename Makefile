@@ -6,7 +6,7 @@
 #    By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/07 16:39:12 by jchartie         ###   ########.fr        #
+#    Updated: 2026/09/08 14:17:24 by jchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ NAME = miniRT
 SRC_DIR = src/
 OBJ_DIR = obj/
 LIBFT_DIR = lib/libft
+GNL_DIR = lib/gnl
 
 # Libraries and Flags
 ifeq ($(shell uname), Darwin)
@@ -42,10 +43,12 @@ else
 	INCLUDES = -I$(MLX_DIR) -I/usr/include
 	MLX_FLAGS = -L/usr/lib -lXext -lX11 -lm -lz
 endif
-INCLUDES += -Iinclude -I$(LIBFT_DIR)
+INCLUDES += -Iinclude -I$(LIBFT_DIR) -I$(GNL_DIR)
 
 # Sources and Objects
-MAIN_SOURCES = main.c
+GNL_SOURCES = get_next_line_utils.c	get_next_line.c
+GNL_OBJ = $(addprefix $(GNL_DIR)/, $(GNL_SOURCES:.c=.o))
+MAIN_SOURCES = main.c 
 MAIN_OBJECTS = $(addprefix $(OBJ_DIR), $(MAIN_SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a	$(MLX_DIR)/libmlx.a
 
@@ -53,12 +56,16 @@ LIB_OBJ = $(LIBFT_DIR)/libft.a	$(MLX_DIR)/libmlx.a
 all: $(NAME)
 
 # Make the so_long executable
-$(NAME): $(MAIN_OBJECTS) $(LIB_OBJ)
+$(NAME): $(MAIN_OBJECTS) $(LIB_OBJ) $(GNL_OBJ)
 		$(CC) $(MAIN_OBJECTS) $(LIB_OBJ) $(MLX_FLAGS) -o $(NAME)
 
 # Make each library $(@D) expands to the .a directory
 %.a:
 	$(MAKE) -C $(@D)
+
+# Make GNL object files
+$(GNL_DIR)/%.o: $(GNL_DIR)/%.c
+	$(CC) -o $@ -c $< $(CFLAGS) $(INCLUDES)
 
 # Make the project's object files
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
@@ -79,6 +86,7 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(MLX_DIR) clean
+	rm -f $(GNL_OBJ)
 	rm -f $(NAME)
 
 # Recompile all files
