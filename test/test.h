@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 15:11:00 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/08 16:05:04 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/08 18:43:54 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "miniRT.h"
 
-void test_extract_line(int fd, char **expected);
+void test_extract_line(int fd);
 
 #endif
