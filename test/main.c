@@ -5,36 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 12:20:41 by jchartie         ###   ########.fr       */
+/*   Created: 2026/09/08 15:19:59 by jchartie          #+#    #+#             */
+/*   Updated: 2026/09/09 11:59:28 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "test.h"
 
-static int	open_scene(char *file, int *fd)
+int main(void)
 {
-	*fd = open(file, O_RDONLY);
+	int fd = open("/home/jchartie/42/rank04/miniRT/scenes/plane.rt", O_RDONLY);
+	test_extract_line(fd);
 	
-	if (*fd == -1)
-	{
-		perror("Error");
-		return (1);
-	}
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	int	fd;
-
-	if (argc != 2)
-	{
-		ft_putstr_fd("Error: wrong number of arguments\n", 2);
-		return (1);
-	}
-	if (open_scene(argv[1], &fd))
-		return (1);
-	extract_file(fd);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/08 13:37:28 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/09 12:07:48 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include "libft.h"
+# include "get_next_line.h"
 
 typedef enum e_id
 {
@@ -43,5 +44,8 @@ typedef struct s_object
 	float height;
 	int	is_set;
 } t_object;
+
+char	**extract_line(int fd);
+void	extract_file(int fd);
 
 #endif

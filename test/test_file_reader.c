@@ -1,40 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   test_file_reader.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 12:20:41 by jchartie         ###   ########.fr       */
+/*   Created: 2026/09/08 15:12:36 by jchartie          #+#    #+#             */
+/*   Updated: 2026/09/09 12:12:41 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "test.h"
 
-static int	open_scene(char *file, int *fd)
+
+
+static int	free_all(char **result)
 {
-	*fd = open(file, O_RDONLY);
-	
-	if (*fd == -1)
+	int i = 0;
+	while (result[i])
 	{
-		perror("Error");
-		return (1);
+		free(result[i]);
+		i++;
 	}
+	free(result);
 	return (0);
 }
 
-int	main(int argc, char **argv)
+void test_extract_line(int fd)
 {
-	int	fd;
+	int i = 0;
 
-	if (argc != 2)
+	char **line = extract_line(fd);
+	while (line[i])
 	{
-		ft_putstr_fd("Error: wrong number of arguments\n", 2);
-		return (1);
+		printf("%s ", line[i]);
+		i++;
 	}
-	if (open_scene(argv[1], &fd))
-		return (1);
-	extract_file(fd);
-	return (0);
+	free_all(line);
 }
+
+
+
+
+
