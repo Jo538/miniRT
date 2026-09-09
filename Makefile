@@ -6,7 +6,7 @@
 #    By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/09 12:15:14 by jchartie         ###   ########.fr        #
+#    Updated: 2026/09/09 16:20:19 by jchartie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,9 @@ endif
 INCLUDES += -Iinclude -I$(LIBFT_DIR) -I$(GNL_DIR)
 
 # Sources and Objects
-VPATH = $(SRC_DIR):$(GNL_DIR)
-SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c
+VPATH = $(SRC_DIR):$(GNL_DIR):src/parser
+SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c \
+          checker.c checker2.c object_parser.c
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a
 

@@ -6,13 +6,13 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 14:32:10 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:43:15 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	free_tab(char **tab)
+void	free_tab(char **tab)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ char	**extract_line(int fd)
 	return (row);
 }
 
-void	extract_file(int fd)
+int	extract_file(int fd)
 {
 	char	**row;
 
@@ -53,8 +53,10 @@ void	extract_file(int fd)
 	{
 		row = extract_line(fd);
 		if (!row)
-			return ;
-		// benji function to parse row
+			return (0);
+		if (!is_correct(row))
+			return (1);
+		printf("%s\n", "SUCCESS");
 		free_tab(row);
 	}
 }

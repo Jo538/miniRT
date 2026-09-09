@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 12:07:48 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:21:15 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,17 @@ typedef struct s_object
 } t_object;
 
 char	**extract_line(int fd);
-void	extract_file(int fd);
+int	extract_file(int fd);
+int	recognize_obj_type(char **info);
+
+// CHECKER
+int	is_capital(char *str);
+int	is_in_range(char *str, float min, float max);
+int	has_right_number_of_cells(char **row, int expected);
+int	has_correct_colour_format(char *str);
+int	is_correct(char **row);
+
+// UTILS
+void	free_tab(char **tab);
 
 #endif
