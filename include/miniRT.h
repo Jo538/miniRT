@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
 /*   Updated: 2026/09/09 12:07:48 by jchartie         ###   ########.fr       */
@@ -26,8 +26,11 @@ typedef enum e_id
 	LIGHT,
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
+	INVALID
 } t_id;
+
+//dans le tab objects, ambient lighning prends la place 0, CAM la place 1 et LIGHT la 2
 
 typedef struct s_object
 {
@@ -39,6 +42,7 @@ typedef struct s_object
 	int fov;
 	float diameter;
 	float height;
+	int	is_set;
 } t_object;
 
 char	**extract_line(int fd);
