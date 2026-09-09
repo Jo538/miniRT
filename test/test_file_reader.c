@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 15:12:36 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/08 18:46:59 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 12:12:41 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,8 @@ void test_extract_line(int fd)
 	}
 	free_all(line);
 }
+
+
+
+
 

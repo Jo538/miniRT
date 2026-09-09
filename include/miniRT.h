@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 11:30:01 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 12:07:48 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ typedef struct s_object
 } t_object;
 
 char	**extract_line(int fd);
+void	extract_file(int fd);
 
 #endif
