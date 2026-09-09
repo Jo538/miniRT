@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 12:56:27 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 14:32:10 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	extract_file(int fd)
 	while (1)
 	{
 		row = extract_line(fd);
-		int i = 0;
 		if (!row)
 			return ;
 		// benji function to parse row
