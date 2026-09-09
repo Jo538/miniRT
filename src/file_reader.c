@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 12:55:42 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 12:56:27 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,6 @@ void	extract_file(int fd)
 		int i = 0;
 		if (!row)
 			return ;
-		while (row && row[i])
-		{
-			printf("%s ", row[i]);
-			i++;
-		}
 		// benji function to parse row
 		free_tab(row);
 	}
