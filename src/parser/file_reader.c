@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 16:43:15 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 19:00:23 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	extract_file(int fd)
 		if (!row)
 			return (0);
 		if (!is_correct(row))
-			return (1);
+			return (printf("%s\n", "FAILURE"), 1);
+			// free row + add messages
 		printf("%s\n", "SUCCESS");
 		free_tab(row);
 	}

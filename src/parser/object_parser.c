@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 16:42:46 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/09 16:42:24 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 18:25:53 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	recognize_obj_type(char **info)
 {
-	if (ft_strncmp(info[0], "A", 1) && ft_strlen(info[0]) == 1)
+	if (!ft_strncmp(info[0], "A", 1) && ft_strlen(info[0]) == 1)
 		return (AMBIENT_LIGHTING);
-	if (ft_strncmp(info[0], "C", 1) && ft_strlen(info[0]) == 1)
+	if (!ft_strncmp(info[0], "C", 1) && ft_strlen(info[0]) == 1)
 		return (CAMERA);
-	if (ft_strncmp(info[0], "L", 1) && ft_strlen(info[0]) == 1)
+	if (!ft_strncmp(info[0], "L", 1) && ft_strlen(info[0]) == 1)
 		return (LIGHT);
-	if (ft_strncmp(info[0], "sp", 2) && ft_strlen(info[0]) == 2)
+	if (!ft_strncmp(info[0], "sp", 2) && ft_strlen(info[0]) == 2)
 		return (SPHERE);
-	if (ft_strncmp(info[0], "pl", 2) && ft_strlen(info[0]) == 2)
+	if (!ft_strncmp(info[0], "pl", 2) && ft_strlen(info[0]) == 2)
 		return (PLANE);
-	if (ft_strncmp(info[0], "cy", 2) && ft_strlen(info[0]) == 2)
+	if (!ft_strncmp(info[0], "cy", 2) && ft_strlen(info[0]) == 2)
 		return (CYLINDER);
 	return (INVALID);
 }

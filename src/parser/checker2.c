@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:25:54 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 16:37:28 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 18:58:34 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	is_in_range(char *str, float min, float max)
 	float	num;
 
 	num = ft_atof(str);
+	printf("%f\n", num);
+	fflush(stdout);
 	if (num < min || num > max)
 		return (0);
 	return (1);
@@ -60,7 +62,9 @@ int	count_virgule(char *str, int count)
 		ptr = ft_strchr(str, ',');
 		if (!ptr)
 			break ;
-		count++;		
+		count++;
+		str = ptr;
+		ptr = NULL;	
 	}
 	return (count);
 }
