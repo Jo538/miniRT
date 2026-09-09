@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/07 17:19:44 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 12:20:41 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,6 @@ int	main(int argc, char **argv)
 	}
 	if (open_scene(argv[1], &fd))
 		return (1);
+	extract_file(fd);
+	return (0);
 }
