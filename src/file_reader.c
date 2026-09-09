@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 14:32:10 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:31:03 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,22 @@ char	**extract_line(int fd)
 void	extract_file(int fd)
 {
 	char	**row;
+	t_head_objects	*head_of_all;
 
 	row = NULL;
+	head_of_all = create_linked_list_object();
+	// printf("skdjghf %p %p %p %p", head_of_all->A, head_of_all->C, head_of_all->L, head_of_all->first_object);
 	while (1)
 	{
 		row = extract_line(fd);
 		if (!row)
 			return ;
 		// benji function to parse row
+		// int i = -1;
+		// while (row[++i])
+		// 	printf ("%s ", row[i]);
+		// printf ("\n");
+		parser(row, head_of_all);
 		free_tab(row);
 	}
 }

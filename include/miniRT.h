@@ -6,7 +6,7 @@
 /*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 12:07:48 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/09 16:09:25 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,26 @@ typedef struct s_object
 	int fov;
 	float diameter;
 	float height;
-	int	is_set;
+	// t_object	*next;
 } t_object;
+
+typedef struct	s_head_objects
+{
+	t_object	*A;
+	t_object	*L;
+	t_object	*C;
+	t_object	*first_object;
+}				t_head_objects;
 
 char	**extract_line(int fd);
 void	extract_file(int fd);
+
+
+//PARSER
+void	parser(char **row, t_head_objects *head_of_all);
+t_head_objects	*create_linked_list_object(void);
+int	recognize_obj_type(char **info);
+
+
 
 #endif
