@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:58:35 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/10 11:43:36 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/10 16:45:32 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ int	ambient_light(char ** row)
 
 int	camera(char ** row)
 {
-	(void)row;
+	if (!has_right_number_of_cells(row, 4))
+		return (0);
+	if (!has_correct_vector_format(row[1]))
+		return (0);
 	return (1);
 }
 

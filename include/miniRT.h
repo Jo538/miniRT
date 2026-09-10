@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/10 14:37:30 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/10 17:00:53 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <stdbool.h>
 # include "libft.h"
 # include "get_next_line.h"
 
@@ -53,6 +54,7 @@ int	is_in_range(char *str, float min, float max);
 int	has_right_number_of_cells(char **row, int expected);
 int	has_correct_colour_format(char *str);
 int	is_correct(char **row);
+int	has_correct_vector_format(char *str);
 
 // UTILS
 void	free_tab(char **tab);
