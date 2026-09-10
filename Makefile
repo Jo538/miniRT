@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+         #
+#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/09 16:20:19 by jchartie         ###   ########.fr        #
+#    Updated: 2026/09/10 13:43:34 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ endif
 INCLUDES += -Iinclude -I$(LIBFT_DIR) -I$(GNL_DIR)
 
 # Sources and Objects
-VPATH = $(SRC_DIR):$(GNL_DIR):src/parser
+VPATH = $(SRC_DIR):$(GNL_DIR):src/parser:src/checker
 SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c \
           checker.c checker2.c object_parser.c
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
@@ -50,6 +50,11 @@ $(NAME): $(OBJECTS) $(LIB_OBJ)
 # Make each library ($(@D) expands to the .a file's directory)
 %.a:
 	$(MAKE) -C $(@D)
+
+# mlx is third-party: -w silences its deprecated OpenGL/prototype warnings.
+# Explicit target beats the %.a pattern rule, so libft still gets its warnings.
+$(MLX_DIR)/libmlx.a:
+	$(MAKE) -C $(@D) CC="$(CC) -w"
 
 # Make object files: VPATH lets make find the matching .c in src/ or lib/gnl
 $(OBJ_DIR)%.o: %.c | $(OBJ_DIR)

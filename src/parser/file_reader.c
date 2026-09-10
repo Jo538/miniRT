@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 19:00:23 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/10 14:36:48 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_tab(char **tab)
 	free(tab);
 }
 
-char	**extract_line(int fd)
+char	**extract_line(int fd, int *error)
 {
 	char	*new_line;
 	char	*line;
@@ -34,30 +34,38 @@ char	**extract_line(int fd)
 	row = NULL;
 	line = get_next_line(fd);
 	if (!line)
-		return (row);
+		return (NULL);
 	new_line = ft_strtrim(line, "\n");
 	free(line);
 	if (!new_line)
-		return (NULL);
+		return (*error = 1, NULL);
 	row = ft_split(new_line, ' ');
 	free(new_line);
+	if (!row)
+		*error = 1;
 	return (row);
 }
 
 int	extract_file(int fd)
 {
+	int		error;
 	char	**row;
 
+	error = 0;
 	row = NULL;
 	while (1)
 	{
-		row = extract_line(fd);
+		row = extract_line(fd, &error);
+		if (!row && error)
+			return (1);
 		if (!row)
 			return (0);
 		if (!is_correct(row))
-			return (printf("%s\n", "FAILURE"), 1);
-			// free row + add messages
-		printf("%s\n", "SUCCESS");
+		{
+			free_tab(row);
+			return (1);
+		}
 		free_tab(row);
 	}
+	return (0);
 }

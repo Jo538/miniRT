@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:58:35 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 18:41:39 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/10 11:43:36 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	ambient_light(char ** row)
 {
 	if (!has_right_number_of_cells(row, 3))
-		return (0);
-	if (!is_capital(row[0]))
 		return (0);
 	if (!is_in_range(row[1], 0.0f, 1.0f))
 		return (0);
