@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/10 17:00:53 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/10 17:22:59 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_id
 	CYLINDER,
 	INVALID
 } t_id;
+
 
 //dans le tab objects, ambient lighning prends la place 0, CAM la place 1 et LIGHT la 2
 

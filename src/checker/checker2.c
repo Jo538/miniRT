@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:25:54 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/10 17:13:22 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/10 17:28:42 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,22 @@ int	has_correct_colour_format(char *str)
 	return (1);
 }
 
+int	has_correct_float_formatting(char *str)
+{
+	float test = .1;
+	float test = 0.;
+	float test = 1.1;
+
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '.' && (str[i - 1] ))
+	}
+	
+}
+
 int	has_correct_vector_format(char *str)
 {
 	if (!has_valid_char(str, "+-.,0123456789"))
@@ -166,8 +182,8 @@ int	has_correct_vector_format(char *str)
 	 	return (0);	
 	if (!has_correct_sign_formatting(str, true, true))	
 	 	return (0);		
-	// if (!has_correct_number_of_items(str, 3))
-	// 	return (0);
+	if (!has_correct_number_of_items(str, 3))
+	 	return (0);
 	// char	**str_array = ft_split(str, ',');
 	// if (!str_array)
 	// {
