@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/10 14:36:48 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/10 14:57:57 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	extract_file(int fd)
 			return (1);
 		if (!row)
 			return (0);
+		if (!*row)
+			continue ;
 		if (!is_correct(row))
 		{
 			free_tab(row);
