@@ -6,7 +6,7 @@
 /*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:18:53 by benji             #+#    #+#             */
-/*   Updated: 2026/09/09 17:03:55 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/11 13:33:33 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,39 +15,46 @@
 t_object	*parse_camera(char **row)
 {
 	t_object	*to_return;
-	char		**tmp;
 
 	to_return = malloc(sizeof(t_object));
 	if (!to_return)
 		return (NULL);
 	to_return->id = CAMERA;
-	tmp = ft_split(row[1], ',');
-	if (!tmp)
-		return (NULL);
-
+	if (put_coordinates_i_objects(row[1], to_return) == 1)
+		return(free(to_return), NULL);
+	if (put_normalized_vector(row[2], to_return) == 1)
+		return(free(to_return), NULL);
+	to_return->fov = ft_atoi(row[3]);
+	return (to_return);
 }
 
-t_object *parse_ambient_lighting(char **row)
+t_object	*parse_ambient_lighting(char **row)
 {
 	t_object	*to_return;
-	char		**tmp;
-	int			i;
 
 	to_return = malloc(sizeof(t_object));
 	if (!to_return)
 		return (NULL);
 	to_return->id = AMBIENT_LIGHTING;
 	to_return->ratio = ft_atof(row[1]);
-	tmp = ft_split(row[2], ',');
-	if (!tmp)
+	if (put_rgb_i_objects(row[2], to_return) == 1)
+		return(free(to_return), NULL);
+	return (to_return);
+}
+
+t_object	*parse_light(char **row)
+{
+	t_object	*to_return;
+
+	to_return = malloc(sizeof(t_object));
+	if (!to_return)
 		return (NULL);
-	to_return->rgb[0] = ft_atoi(tmp[0]);
-	to_return->rgb[1] = ft_atoi(tmp[1]);
-	to_return->rgb[2] = ft_atoi(tmp[2]);
-	i = -1;
-	while (tmp[++i])
-		free(tmp[i]);
-	free(tmp);
+	to_return->id = LIGHT;
+	if (put_coordinates_i_objects(row[1], to_return) == 1)
+		return(free(to_return), NULL);
+	to_return->ratio = ft_atof(row[2]);
+	if (put_rgb_i_objects(row[3], to_return) == 1)
+		return(free(to_return), NULL);
 	return (to_return);
 }
 
@@ -57,6 +64,8 @@ void	acl_case(t_head_objects *head_of_all, char **row, int type_obj)
 		head_of_all->A = parse_ambient_lighting(row); //faire le cas ou le malloc ou le split echoue
 	if (type_obj == CAMERA)
 		head_of_all->C = parse_camera(row);
+	if (type_obj == LIGHT)
+		head_of_all->L = parse_light(row);
 }
 
 void	parser(char **row, t_head_objects *head_of_all)
@@ -66,5 +75,10 @@ void	parser(char **row, t_head_objects *head_of_all)
 	type_obj = recognize_obj_type(row);
 	if (type_obj == AMBIENT_LIGHTING || type_obj == CAMERA || type_obj == LIGHT)
 		acl_case(head_of_all, row, type_obj);
-	printf("l id est : %d", head_of_all->A->rgb[1]);
+	// if (type_obj == CAMERA)
+	// 	printf("l id est : %f\n", head_of_all->C->vector[2]);
+	// if (type_obj == LIGHT)
+	// 	printf("LIGHT = ratio %f\n", head_of_all->L->ratio);
+	else
+		other_case(head_of_all, row, type_obj);
 }

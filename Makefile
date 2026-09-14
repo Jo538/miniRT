@@ -6,7 +6,7 @@
 #    By: benji <benji@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/09 15:51:30 by benji            ###   ########.fr        #
+#    Updated: 2026/09/11 13:33:46 by benji            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ INCLUDES = -Iinclude -I$(LIBFT_DIR) -I$(GNL_DIR)
 
 # Sources and Objects
 VPATH = $(SRC_DIR):$(SRC_DIR)/parser:$(GNL_DIR)
-SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c parser.c parser_create_nodes.c object_parser.c
+SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c parser.c \
+			parser_create_nodes.c object_parser.c parser_utils.c parserbis.c
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a
 

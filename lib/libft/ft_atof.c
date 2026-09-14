@@ -3,33 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:28:28 by bribot            #+#    #+#             */
-/*   Updated: 2026/03/11 14:47:06 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/11 13:04:28 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include "libft.h"
 
+static float	parse_fraction(const char *s, int *i)
+{
+	float	frac;
+	float	divisor;
+
+	if (s[*i] != '.')
+		return (0.0f);
+	(*i)++;
+	frac = 0.0f;
+	divisor = 1.0f;
+	while (s[*i] >= '0' && s[*i] <= '9')
+	{
+		frac = frac * 10.0f + (s[*i] - '0');
+		divisor *= 10.0f;
+		(*i)++;
+	}
+	return (frac / divisor);
+}
+
 float	ft_atof(const char *s)
 {
-	float	to_return;
-	float	tmp;
 	int		i;
+	float	sign;
+	float	num;
 
 	i = 0;
-	if (!s)
-		return (0);
-	to_return = (float)ft_atoi(s);
-	while (s[0] && s[0] != '.')
-		s = s + 1;
-	if (s[i + 1])
-		s = s + 1;
-	tmp = (float)ft_atoi(s);
-	while (tmp > 1)
-		tmp = tmp / 10;
-	to_return = to_return + tmp;
-	return (to_return);
+	sign = 1.0f;
+	num = 0.0f;
+	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
+		i++;
+	if (s[i] == '-' || s[i] == '+')
+	{
+		if (s[i] == '-')
+			sign = -1.0f;
+		i++;
+	}
+	while (s[i] >= '0' && s[i] <= '9')
+	{
+		num = num * 10.0f + (s[i] - '0');
+		i++;
+	}
+	num += parse_fraction(s, &i);
+	return (sign * num);
 }

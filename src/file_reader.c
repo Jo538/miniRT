@@ -6,7 +6,7 @@
 /*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 16:31:03 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/11 13:59:46 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	extract_file(int fd)
 	{
 		row = extract_line(fd);
 		if (!row)
-			return ;
+			break ;
 		// benji function to parse row
 		// int i = -1;
 		// while (row[++i])
@@ -65,4 +65,9 @@ void	extract_file(int fd)
 		parser(row, head_of_all);
 		free_tab(row);
 	}
+	printf ("rgb = 255 TEST = %d", head_of_all->first_object->next->rgb[0]);
+	// free(head_of_all->A);
+	// free(head_of_all->C);
+	// free(head_of_all);
+
 }
