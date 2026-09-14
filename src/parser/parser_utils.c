@@ -6,11 +6,28 @@
 /*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 17:04:10 by benji             #+#    #+#             */
-/*   Updated: 2026/09/11 13:05:55 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/14 14:32:24 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+int	recognize_obj_type(char **info)
+{
+	if (ft_strncmp(info[0], "A", 1) == 0 && ft_strlen(info[0]) == 1)
+		return (AMBIENT_LIGHTING);
+	if (ft_strncmp(info[0], "C", 1) == 0 && ft_strlen(info[0]) == 1)
+		return (CAMERA);
+	if (ft_strncmp(info[0], "L", 1) == 0 && ft_strlen(info[0]) == 1)
+		return (LIGHT);
+	if (ft_strncmp(info[0], "sp", 2) == 0 && ft_strlen(info[0]) == 2)
+		return (SPHERE);
+	if (ft_strncmp(info[0], "pl", 2) == 0 && ft_strlen(info[0]) == 2)
+		return (PLANE);
+	if (ft_strncmp(info[0], "cy", 2) == 0 && ft_strlen(info[0]) == 2)
+		return (CYLINDER);
+	return (INVALID);
+}
 
 int	put_coordinates_i_objects(char *to_split, t_object *obj)
 {
