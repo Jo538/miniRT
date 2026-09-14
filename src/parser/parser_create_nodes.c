@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parser_create_nodes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 15:10:42 by benji            ###   ########.fr       */
+/*   Created: 2026/09/09 15:27:32 by benji             #+#    #+#             */
+/*   Updated: 2026/09/09 15:30:46 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	open_scene(char *file, int *fd)
+t_head_objects	*create_linked_list_object(void)
 {
-	*fd = open(file, O_RDONLY);
+	t_head_objects *to_return;
 
-	if (*fd == -1)
-	{
-		perror("Error");
-		return (1);
-	}
-	return (0);
-}
-
-int	main(int argc, char **argv)
-{
-	int	fd;
-
-	if (argc != 2)
-	{
-		ft_putstr_fd("Error: wrong number of arguments\n", 2);
-		return (1);
-	}
-	if (open_scene(argv[1], &fd))
-		return (1);
-	extract_file(fd);
+	to_return = malloc(sizeof(t_head_objects));
+	if (!to_return)
+		return (NULL);
+	to_return->A = NULL;
+	to_return->C = NULL;
+	to_return->L = NULL;
+	to_return->first_object = NULL;
+	return (to_return);
 }
