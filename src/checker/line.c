@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:58:35 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 11:48:46 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/15 11:54:30 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	camera(char ** row)
 	if (!has_correct_coordinates_format(row[1]))
 	 	return (0);
 	if (!has_correct_vector_format(row[2]))
+		return (0);
+	if (!is_in_range(row[3], 0, 180))
 		return (0);
 	return (1);
 }
