@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parserbis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 13:29:51 by benji             #+#    #+#             */
-/*   Updated: 2026/09/11 13:57:29 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/15 13:07:35 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	other_case(t_head_objects *head_of_all, char **row, int type_obj)
 	while (trot->next)
 			trot = trot->next;
 	trot->next = create_init_objects(row, type_obj);
-	// if (!trot->next)
+	if (!trot->next)
+		return ((void)(head_of_all->err = 1));
 	// fonction qui free la liste chainee ou alors peut etre une variable d erreur dans head_of_all
-
 }

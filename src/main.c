@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 14:33:32 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/15 15:47:30 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	open_scene(char *file, int *fd)
 int	main(int argc, char **argv)
 {
 	int	fd;
+	t_head_objects	*head_of_all;
+
 
 	if (argc != 2)
 	{
