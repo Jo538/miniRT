@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/11 13:59:46 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/15 12:53:18 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,27 @@ char	**extract_line(int fd)
 	return (row);
 }
 
-void	extract_file(int fd)
+t_head_objects	*extract_file(int fd)
 {
 	char	**row;
 	t_head_objects	*head_of_all;
 
 	row = NULL;
 	head_of_all = create_linked_list_object();
+	if (!head_of_all)
+		return (NULL);
 	// printf("skdjghf %p %p %p %p", head_of_all->A, head_of_all->C, head_of_all->L, head_of_all->first_object);
 	while (1)
 	{
 		row = extract_line(fd);
 		if (!row)
 			break ;
-		// benji function to parse row
-		// int i = -1;
-		// while (row[++i])
-		// 	printf ("%s ", row[i]);
-		// printf ("\n");
 		parser(row, head_of_all);
 		free_tab(row);
 	}
-	printf ("rgb = 255 TEST = %d", head_of_all->first_object->next->rgb[0]);
+	// printf ("rgb = 255 TEST = %d", head_of_all->first_object->next->rgb[0]);
 	// free(head_of_all->A);
 	// free(head_of_all->C);
 	// free(head_of_all);
-
+	return (head_of_all);
 }

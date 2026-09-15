@@ -64,11 +64,23 @@ int	acl_case(t_head_objects *head_of_all, char **row, int type_obj)
 
 	error = 0;
 	if (type_obj == AMBIENT_LIGHTING)
+	{
 		head_of_all->A = parse_ambient_lighting(row); //faire le cas ou le malloc ou le split echoue
+		if (!head_of_all->A)
+			return ((void)(head_of_all->err = 1));
+	}
 	if (type_obj == CAMERA)
+	{
 		head_of_all->C = parse_camera(row);
+		if (!head_of_all->C)
+			return ((void)(head_of_all->err = 1));
+	}
 	if (type_obj == LIGHT)
+	{
 		head_of_all->L = parse_light(row);
+		if (!head_of_all->L)
+			return ((void)(head_of_all->err = 1));
+	}
 }
 
 void	parser(char **row, t_head_objects *head_of_all)
@@ -84,4 +96,6 @@ void	parser(char **row, t_head_objects *head_of_all)
 	// 	printf("LIGHT = ratio %f\n", head_of_all->L->ratio);
 	else
 		other_case(head_of_all, row, type_obj);
+	if (head_of_all->err == 1)
+		return ; //mettre les bons free
 }

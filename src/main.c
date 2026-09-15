@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 15:10:42 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/15 13:08:51 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static int	open_scene(char *file, int *fd)
 int	main(int argc, char **argv)
 {
 	int	fd;
+	t_head_objects	*head_of_all;
+
 
 	if (argc != 2)
 	{
@@ -35,5 +37,9 @@ int	main(int argc, char **argv)
 	}
 	if (open_scene(argv[1], &fd))
 		return (1);
-	extract_file(fd);
+	head_of_all = extract_file(fd);
+	if (!head_of_all)
+		return (1);
+	window_orchestrator(head_of_all);
+	printf("RGB = %d\n", head_of_all->first_object->rgb[2]);
 }
