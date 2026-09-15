@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 11:16:35 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/15 11:52:05 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	cylinder(char ** row);
 int	has_correct_colour_format(char *str);
 int	has_correct_vector_format(char *str);
 int	has_correct_float_formatting(char *str);
+int	has_correct_coordinates_format(char *str);
 int	is_in_range(char *str, float min, float max);
 int	has_right_number_of_cells(char **row, int expected);
 int	has_correct_number_of_items(char *str, int expected);
