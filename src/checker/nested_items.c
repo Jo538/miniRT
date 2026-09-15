@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:25:54 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 11:51:50 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/15 12:01:24 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	has_correct_coordinates_format(char *str)
 	int	i = 0;
 	while (str_array[i])
 	{
-		if (!has_correct_float_formatting(str))
+		if (!has_correct_float_formatting(str_array[i]))
 		{
 			free_tab(str_array);
 			return (0);
