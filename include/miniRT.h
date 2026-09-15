@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/11 13:34:38 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/15 13:19:16 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 # include <errno.h>
 # include "libft.h"
 # include "get_next_line.h"
+# include "mlx.h"
+
+// DEFINITION DES TAILLES DE L ECRAN CENTRE EN 0
+
+# ifndef X_MAX
+#  define X_MAX 1920
+# endif
+
+# ifndef Y_MAX
+#  define Y_MAX 1080
+# endif
+
 
 typedef enum e_id
 {
@@ -51,10 +63,22 @@ typedef struct	s_head_objects
 	t_object	*L;
 	t_object	*C;
 	t_object	*first_object;
+	int			err;
 }				t_head_objects;
 
+typedef struct s_data_mlx
+{
+	void	*mlx;
+	void	*img;
+	void	*mlx_win;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}				t_data_mlx;
+
 char	**extract_line(int fd);
-void	extract_file(int fd);
+t_head_objects	*extract_file(int fd);
 
 
 //PARSER
@@ -66,6 +90,8 @@ int	put_rgb_i_objects(char *to_split, t_object *obj);
 int	put_normalized_vector(char *to_split, t_object *obj);
 void	other_case(t_head_objects *head_of_all, char **row, int type_obj);
 
+//MLX
+void	window_orchestrator(t_head_objects *head_of_all);
 
 
 #endif
