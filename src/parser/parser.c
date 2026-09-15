@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:18:53 by benji             #+#    #+#             */
-/*   Updated: 2026/09/15 15:38:17 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/15 16:14:00 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,8 @@ t_object	*parse_light(char **row)
 	return (to_return);
 }
 
-int	acl_case(t_head_objects *head_of_all, char **row, int type_obj)
+void	acl_case(t_head_objects *head_of_all, char **row, int type_obj)
 {
-	int error;
-
-	error = 0;
 	if (type_obj == AMBIENT_LIGHTING)
 	{
 		head_of_all->A = parse_ambient_lighting(row); //faire le cas ou le malloc ou le split echoue

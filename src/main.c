@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 15:47:30 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/15 16:52:13 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int argc, char **argv)
 	int	fd;
 	t_head_objects	*head_of_all;
 
-
 	if (argc != 2)
 	{
 		ft_putstr_fd("Error: wrong number of arguments\n", 2);
@@ -37,10 +36,17 @@ int	main(int argc, char **argv)
 	}
 	if (open_scene(argv[1], &fd))
 		return (1);
-	if (extract_file(fd))
+	head_of_all = create_linked_list_object();
+	if (!head_of_all || extract_file(fd, head_of_all))
 	{
 		close(fd);
+		get_next_line(fd);
 		return (1);
 	}
+
+	// mlx
+	free_hoa(head_of_all);
 	return (0);
 }
+
+

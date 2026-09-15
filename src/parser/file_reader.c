@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 15:52:04 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/15 16:51:48 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,13 @@ char	**extract_line(int fd, int *error)
 	return (row);
 }
 
-int	extract_file(int fd)
+int	extract_file(int fd, t_head_objects *head_of_all)
 {
 	int		error;
 	char	**row;
-	t_head_objects	*head_of_all;
 
 	error = 0;
 	row = NULL;
-	head_of_all = create_linked_list_object();
 	while (1)
 	{
 		row = extract_line(fd, &error);
@@ -63,14 +61,20 @@ int	extract_file(int fd)
 		if (!row)
 			return (0);
 		if (!*row)
-			continue ;
+		{
+			free_tab(row);
+			continue ;			
+		}
 		if (!is_correct(row))
 		{
+			free_hoa(head_of_all);
 			free_tab(row);
 			return (1);
 		}
 		parser(row, head_of_all);
 		free_tab(row);
+		if (head_of_all->err)
+			return (free_hoa(head_of_all), 1);
 	}
 	return (0);
 }
