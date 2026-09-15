@@ -6,15 +6,12 @@
 	"configurations": [
 		{
 			"name": "(lldb) Launch miniRT",
-			"type": "cppdbg",
+			"type": "lldb",
 			"request": "launch",
 			"program": "${workspaceFolder}/miniRT",
 			"args": ["${workspaceFolder}/scenes/plane.rt"],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": false,
-			"MIMode": "lldb"
+			"stopOnEntry": false,
+			"cwd": "${workspaceFolder}"
 		}
 	]
 }

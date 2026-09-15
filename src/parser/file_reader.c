@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 16:51:48 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/15 17:41:34 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ char	**extract_line(int fd, int *error)
 	return (row);
 }
 
+static int	has_ACL(t_head_objects *head)
+{
+	if (!head->A || !head->C || !head->L)
+	{
+		ft_putstr_fd("Error: one of ACL is missing.\n", 2);
+		return (0);				
+	}
+	return (1);
+}
+
 int	extract_file(int fd, t_head_objects *head_of_all)
 {
 	int		error;
@@ -59,7 +69,7 @@ int	extract_file(int fd, t_head_objects *head_of_all)
 		if (!row && error)
 			return (1);
 		if (!row)
-			return (0);
+			break ;
 		if (!*row)
 		{
 			free_tab(row);
@@ -76,5 +86,7 @@ int	extract_file(int fd, t_head_objects *head_of_all)
 		if (head_of_all->err)
 			return (free_hoa(head_of_all), 1);
 	}
+	if (!has_ACL(head_of_all))
+		return (free_hoa(head_of_all), 1);
 	return (0);
 }
