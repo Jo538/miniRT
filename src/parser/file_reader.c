@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/11 13:59:46 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/15 14:40:09 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	free_tab(char **tab)
+void	free_tab(char **tab)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ static void	free_tab(char **tab)
 	free(tab);
 }
 
-char	**extract_line(int fd)
+char	**extract_line(int fd, int *error)
 {
 	char	*new_line;
 	char	*line;
@@ -34,40 +34,43 @@ char	**extract_line(int fd)
 	row = NULL;
 	line = get_next_line(fd);
 	if (!line)
-		return (row);
+		return (NULL);
 	new_line = ft_strtrim(line, "\n");
 	free(line);
 	if (!new_line)
-		return (NULL);
+		return (*error = 1, NULL);
 	row = ft_split(new_line, ' ');
 	free(new_line);
+	if (!row)
+		*error = 1;
 	return (row);
 }
 
-void	extract_file(int fd)
+int	extract_file(int fd)
 {
+	int		error;
 	char	**row;
 	t_head_objects	*head_of_all;
 
+	error = 0;
 	row = NULL;
 	head_of_all = create_linked_list_object();
-	// printf("skdjghf %p %p %p %p", head_of_all->A, head_of_all->C, head_of_all->L, head_of_all->first_object);
 	while (1)
 	{
-		row = extract_line(fd);
+		row = extract_line(fd, &error);
+		if (!row && error)
+			return (1);
 		if (!row)
-			break ;
-		// benji function to parse row
-		// int i = -1;
-		// while (row[++i])
-		// 	printf ("%s ", row[i]);
-		// printf ("\n");
+			return (0);
+		if (!*row)
+			continue ;
+		if (!is_correct(row))
+		{
+			free_tab(row);
+			return (1);
+		}
 		parser(row, head_of_all);
 		free_tab(row);
 	}
-	printf ("rgb = 255 TEST = %d", head_of_all->first_object->next->rgb[0]);
-	// free(head_of_all->A);
-	// free(head_of_all->C);
-	// free(head_of_all);
-
+	return (0);
 }

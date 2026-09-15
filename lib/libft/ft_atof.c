@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/10 19:28:28 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/11 13:04:28 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/15 14:38:58 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
 #include "libft.h"
 
 static float	parse_fraction(const char *s, int *i)

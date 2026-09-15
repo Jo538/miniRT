@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 10:59:58 by jchartie          #+#    #+#             */
-/*   Updated: 2025/11/24 11:00:00 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/15 10:09:17 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,20 +88,20 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (result);
 }
-/*
-int main(void)
-{
-	char *s = ",,hello!,guapa,beautiful,";
-	char c = ',';
-	int i = 0;
+
+// int main(void)
+// {
+// 	char *s = "255,,255";
+// 	char c = ',';
+// 	int i = 0;
 	
-		char **ptr = ft_split(s, c);
-	while (i < (numwords(s, c) + 1))
-	{
-		printf("%s\n", ptr[i]);
-		free(ptr[i]);
-		i++;
-	}
-	free(ptr);
-	return (0);
-}*/
+// 		char **ptr = ft_split(s, c);
+// 	while (i < (numwords(s, c) + 1))
+// 	{
+// 		printf("%s\n", ptr[i]);
+// 		free(ptr[i]);
+// 		i++;
+// 	}
+// 	free(ptr);
+// 	return (0);
+// }
