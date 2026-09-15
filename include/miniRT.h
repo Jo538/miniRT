@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/10 17:22:59 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/15 10:41:07 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,16 @@ int	extract_file(int fd);
 int	recognize_obj_type(char **info);
 
 // CHECKER
+int	is_correct(char **row);
+int	sphere(char ** row);
+int	cylinder(char ** row);
+int	has_correct_colour_format(char *str);
 int	is_in_range(char *str, float min, float max);
 int	has_right_number_of_cells(char **row, int expected);
-int	has_correct_colour_format(char *str);
-int	is_correct(char **row);
-int	has_correct_vector_format(char *str);
+int	has_correct_number_of_items(char *str, int expected);
+int	has_correct_separator_formatting(char *str, char separator);
+int	has_correct_sign_formatting(char *str, bool check_negative, bool check_positive);
+int	has_valid_char(char *str, char *expected);
 
 // UTILS
 void	free_tab(char **tab);

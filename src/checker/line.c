@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:58:35 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/10 16:45:32 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/15 10:42:15 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	camera(char ** row)
 {
 	if (!has_right_number_of_cells(row, 4))
 		return (0);
-	if (!has_correct_vector_format(row[1]))
-		return (0);
+	// if (!has_correct_vector_format(row[1]))
+	// 	return (0);
 	return (1);
 }
 
@@ -39,18 +39,6 @@ int	light(char ** row)
 }
 
 int	plane(char ** row)
-{
-	(void)row;
-	return (1);
-}
-
-int	sphere(char ** row)
-{
-	(void)row;
-	return (1);
-}
-
-int	cylinder(char ** row)
 {
 	(void)row;
 	return (1);
