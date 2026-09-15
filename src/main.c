@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/09 12:20:41 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/15 12:19:58 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ int	main(int argc, char **argv)
 	}
 	if (open_scene(argv[1], &fd))
 		return (1);
-	extract_file(fd);
+	if (extract_file(fd))
+	{
+		close(fd);
+		return (1);
+	}
 	return (0);
 }
