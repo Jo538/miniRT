@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 17:04:10 by benji             #+#    #+#             */
-/*   Updated: 2026/09/14 14:32:24 by benji            ###   ########.fr       */
+/*   Updated: 2026/09/15 16:25:41 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,25 @@ int	put_normalized_vector(char *to_split, t_object *obj)
 		free(tmp[i]);
 	free(tmp);
 	return (0);
+}
+
+void	free_hoa(t_head_objects *head)
+{
+	t_object	*trot;
+	t_object	*tmp;
+
+	trot = head->first_object;
+	if (head->A)
+		free(head->A);
+	if (head->C)
+		free(head->C);
+	if (head->L)
+		free(head->L);
+	while (trot)
+	{
+		tmp = trot->next;
+		free(trot);
+		trot = tmp; 
+	}
+	free(head);
 }
