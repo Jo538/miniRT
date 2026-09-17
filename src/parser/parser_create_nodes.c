@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_create_nodes.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:27:32 by benji             #+#    #+#             */
-/*   Updated: 2026/09/15 12:52:52 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/17 17:41:14 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_head_objects	*create_linked_list_object(void)
 	to_return->C = NULL;
 	to_return->L = NULL;
 	to_return->first_object = NULL;
+	to_return->viewport = NULL;
 	to_return->err = 0;
 	return (to_return);
 }

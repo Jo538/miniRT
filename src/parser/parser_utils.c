@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 17:04:10 by benji             #+#    #+#             */
-/*   Updated: 2026/09/15 16:25:41 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/17 17:54:01 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	free_hoa(t_head_objects *head)
 		free(head->C);
 	if (head->L)
 		free(head->L);
+	if (head->viewport)
+		free(head->viewport);
 	while (trot)
 	{
 		tmp = trot->next;

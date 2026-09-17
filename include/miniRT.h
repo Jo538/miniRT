@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/17 16:13:53 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/17 17:38:20 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,21 @@ typedef struct s_object
 	struct s_object	*next;
 } t_object;
 
+typedef struct s_viewport
+{
+	double	width;
+	double	height;
+}	t_viewport;
+
 typedef struct	s_head_objects
 {
 	t_object	*A;
 	t_object	*L;
 	t_object	*C;
 	t_object	*first_object;
+	t_viewport	*viewport;
 	int			err;
 }				t_head_objects;
-
-typedef struct s_viewport
-{
-	double	width;
-	double	height;
-}	t_viewport;
 
 typedef struct s_ray
 {
