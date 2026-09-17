@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 16:23:52 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/17 16:13:53 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <stdbool.h>
+# include <math.h>
 # include "libft.h"
 # include "get_next_line.h"
 # include "mlx.h"
@@ -67,6 +68,19 @@ typedef struct	s_head_objects
 	t_object	*first_object;
 	int			err;
 }				t_head_objects;
+
+typedef struct s_viewport
+{
+	double	width;
+	double	height;
+}	t_viewport;
+
+typedef struct s_ray
+{
+	double	origin[3];
+	double	direction[3];
+}	t_ray;
+
 
 int	extract_file(int fd, t_head_objects *head_of_all);
 int	recognize_obj_type(char **info);
