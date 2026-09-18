@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 18:28:21 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/16 16:05:33 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/18 16:52:00 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	close_window_prop(int keypress, void *head_of_all_tmp)
 void	mlx_hook_orchestrator(t_head_objects *head_of_all)
 {
 	mlx_key_hook(head_of_all->mlx->mlx_win, close_window_prop, head_of_all);
-	// mlx_hook(head_of_all->mlx->mlx_win, 17, 1L << 0, ((int (*)(void *))close_window_redcross), head_of_all); //CA marche pas sfaut trouver un truc
+	// mlx_hook(head_of_all->mlx->mlx_win, 17, 1L << 0, ((int (*)())close_window_redcross), head_of_all); //CA marche pas sfaut trouver un truc
 
 }
 

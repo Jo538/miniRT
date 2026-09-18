@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/16 15:56:31 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/18 16:45:48 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "mlx.h"
+
+int	test_unitaire(void);
 
 // DEFINITION DES TAILLES DE L ECRAN CENTRE EN 0
 
@@ -80,6 +82,21 @@ typedef struct	s_head_objects
 	int			err;
 }				t_head_objects;
 
+typedef struct s_solutions //j ai pas eu de meilleurs idees de struct qui renvoie les solutions, mais je pense qu il y a mieux
+{
+	float	sol_y;
+	float	sol_x;
+	float	sol_z;
+	struct	s_solutions *next;
+}				t_solutions;
+
+typedef	struct	s_trifloat
+{
+	float	a;
+	float	b;
+	float	c;
+}				t_trifloat;
+
 int	extract_file(int fd, t_head_objects *head_of_all);
 int	recognize_obj_type(char **info);
 
@@ -112,6 +129,9 @@ int	put_rgb_i_objects(char *to_split, t_object *obj);
 int	put_normalized_vector(char *to_split, t_object *obj);
 void	other_case(t_head_objects *head_of_all, char **row, int type_obj);
 void	free_hoa(t_head_objects *head);
+
+//CALCULATOR
+float	make_dot_product(float first[3], float second[3]);
 
 //MLX
 void	window_orchestrator(t_head_objects *head_of_all);
