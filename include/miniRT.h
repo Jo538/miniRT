@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 16:23:52 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/16 15:56:31 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <stdbool.h>
+# include <math.h>
 # include "libft.h"
 # include "get_next_line.h"
 # include "mlx.h"
@@ -45,6 +46,16 @@ typedef enum e_id
 
 
 //dans le tab objects, ambient lighning prends la place 0, CAM la place 1 et LIGHT la 2
+typedef struct s_data_mlx
+{
+	void	*mlx;
+	void	*img;
+	void	*mlx_win;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_lenght;
+	int		endian;
+}				t_data_mlx;
 
 typedef struct s_object
 {
@@ -65,6 +76,7 @@ typedef struct	s_head_objects
 	t_object	*L;
 	t_object	*C;
 	t_object	*first_object;
+	t_data_mlx	*mlx;
 	int			err;
 }				t_head_objects;
 
@@ -88,16 +100,7 @@ int	has_valid_char(char *str, char *expected);
 
 // UTILS
 void	free_tab(char **tab);
-typedef struct s_data_mlx
-{
-	void	*mlx;
-	void	*img;
-	void	*mlx_win;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_lenght;
-	int		endian;
-}				t_data_mlx;
+
 
 
 //PARSER
