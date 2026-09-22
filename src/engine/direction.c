@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:27:16 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	find_viewport_coordinates(double *normalised_coord, t_rt *rt, double
 	viewport_coord[1] = viewport->height / 2 - normalised_coord[1] * viewport->height;
 }
 
-static void	dot_product(double scalar, double *vector_2, double *to_fill)
+static void	scalar_product(double scalar, double *vector_2, double *to_fill)
 {
 	to_fill[0] = scalar * vector_2[0];
 	to_fill[1] = scalar * vector_2[1];
@@ -38,8 +38,8 @@ static void	find_D(double *viewport_coord, t_ray *ray, t_rt *rt)
 	double u_right[3];
 	double v_up[3];
 	
-	dot_product(viewport_coord[0], rt->viewport->right, u_right);
-	dot_product(viewport_coord[1], rt->viewport->up, v_up);
+	scalar_product(viewport_coord[0], rt->viewport->right, u_right);
+	scalar_product(viewport_coord[1], rt->viewport->up, v_up);
 	
 	ray->direction[0] = rt->viewport->forward[0] + u_right[0] + v_up[0]; 
 	ray->direction[1] = rt->viewport->forward[1] + u_right[1] + v_up[1]; 

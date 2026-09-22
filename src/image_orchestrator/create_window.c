@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 18:28:21 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/22 20:23:27 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:27:40 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	close_window_prop(int keypress, void *data_mlx_tmp)
 	{
 		mlx_destroy_window(data_mlx->mlx, data_mlx->mlx_win);
 		mlx_destroy_image(data_mlx->mlx, data_mlx->img);
-		//mlx_destroy_display(data_mlx->mlx);
+		mlx_destroy_display(data_mlx->mlx);
 		free(data_mlx->mlx);
 		free(data_mlx);
 	}
