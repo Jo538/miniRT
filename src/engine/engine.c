@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_create_nodes.c                              :+:      :+:    :+:   */
+/*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/09 15:27:32 by benji             #+#    #+#             */
-/*   Updated: 2026/09/22 14:57:13 by admin            ###   ########.fr       */
+/*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
+/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	rt_init(t_head_objects **rt)
+void	run_engine(t_rt *rt)
 {
-	*rt = malloc(sizeof(t_head_objects));
-	if (!(*rt))
+	int		col;
+	int		row;
+	t_ray	ray;
+
+	row = 0;
+	while (row < Y_MAX)
 	{
-		ft_putstr_fd("Error: dynamic allocation failed.\n", 2);
-		return (1);		
+		col = 0;
+		while (col < X_MAX)
+		{
+			find_ray_direction(row, col, rt, &ray);
+			//Benji's quadratic solving for sphere
+			col++;
+		}
+		row++;
 	}
-	(*rt)->A = NULL;
-	(*rt)->C = NULL;
-	(*rt)->L = NULL;
-	(*rt)->first_object = NULL;
-	(*rt)->viewport = NULL;
-	(*rt)->err = 0;
-	return (1);
 }

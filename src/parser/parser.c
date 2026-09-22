@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:18:53 by benji             #+#    #+#             */
-/*   Updated: 2026/09/22 15:02:46 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_object	*parse_light(char **row)
 	return (to_return);
 }
 
-void	acl_case(t_head_objects *head_of_all, char **row, int type_obj)
+void	acl_case(t_rt *head_of_all, char **row, int type_obj)
 {
 	if (type_obj == AMBIENT_LIGHTING)
 	{
@@ -80,7 +80,7 @@ void	acl_case(t_head_objects *head_of_all, char **row, int type_obj)
 	}
 }
 
-void	parse_line(char **row, t_head_objects *head_of_all)
+void	parse_line(char **row, t_rt *head_of_all)
 {
 	int type_obj;
 

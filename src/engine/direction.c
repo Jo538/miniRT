@@ -6,35 +6,24 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 19:25:43 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static double	*normalise_pixel(double pixel_x, double pixel_y)
+static void	normalise_pixel(double pixel_x, double pixel_y, double *normalised_coord)
 {
-	double	*normalised_coord;
-
-	normalised_coord = malloc(2 * sizeof(double));
-	if (!normalised_coord)
-		return (NULL);
 	normalised_coord[0] = (pixel_x + 0.5) / X_MAX;
 	normalised_coord[1] = (pixel_y + 0.5) / Y_MAX;
-	return (normalised_coord);
 }
 
-static double	*find_viewport_coordinates(double *normalised_coord, t_head_objects *rt)
+static void	find_viewport_coordinates(double *normalised_coord, t_rt *rt, double *viewport_coord)
 {
-	double	*viewport_coord;
 	t_viewport *viewport = rt->viewport;
 
-	viewport_coord = malloc(2 * sizeof(double));
-	if (!viewport_coord)
-		return (NULL);
 	viewport_coord[0] = normalised_coord[0] * viewport->width - viewport->width/ 2;
 	viewport_coord[1] = viewport->height / 2 - normalised_coord[1] * viewport->height;
-	return (viewport_coord);
 }
 
 static void	dot_product(double scalar, double *vector_2, double *to_fill)
@@ -44,7 +33,7 @@ static void	dot_product(double scalar, double *vector_2, double *to_fill)
 	to_fill[2] = scalar * vector_2[2];
 }
 
-static void	find_D(double *viewport_coord, t_ray *ray, t_head_objects *rt)
+static void	find_D(double *viewport_coord, t_ray *ray, t_rt *rt)
 {
 	double u_right[3];
 	double v_up[3];
@@ -58,14 +47,12 @@ static void	find_D(double *viewport_coord, t_ray *ray, t_head_objects *rt)
 	normalise(ray->direction);
 }
 
-void	find_ray_direction(double pixel_x, double pixel_y, t_head_objects *rt, t_ray *ray)
+void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray)
 {
-	double	*normalised_coord;
-	double	*viewport_coord;
+	double	normalised_coord[2];
+	double	viewport_coord[2];
 	
-	normalised_coord = normalise_pixel(pixel_x, pixel_y);
-	viewport_coord = find_viewport_coordinates(normalised_coord, rt);
-	free(normalised_coord);
+	normalise_pixel(pixel_x, pixel_y, normalised_coord);
+	find_viewport_coordinates(normalised_coord, rt, viewport_coord);
 	find_D(viewport_coord, ray, rt);
-	free(viewport_coord);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parserbis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 13:29:51 by benji             #+#    #+#             */
-/*   Updated: 2026/09/15 16:27:46 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ t_object	*create_init_objects(char **row, int type_obj)
 	return (to_return);
 }
 
-void	other_case(t_head_objects *head_of_all, char **row, int type_obj)
+void	other_case(t_rt *head_of_all, char **row, int type_obj)
 {
 	t_object *trot;
 

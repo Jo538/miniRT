@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 19:33:58 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:17:07 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_viewport
 	double	up[3];
 }	t_viewport;
 
-typedef struct	s_head_objects
+typedef struct	s_rt
 {
 	t_object	*A;
 	t_object	*L;
@@ -77,7 +77,7 @@ typedef struct	s_head_objects
 	t_object	*first_object;
 	t_viewport	*viewport;
 	int			err;
-}				t_head_objects;
+}				t_rt;
 
 typedef struct s_ray
 {
@@ -86,10 +86,11 @@ typedef struct s_ray
 }	t_ray;
 
 
-int	extract_file(int fd, t_head_objects *head_of_all);
+int	extract_file(int fd, t_rt *head_of_all);
 int	recognize_obj_type(char **info);
 void	normalise(double *vector);
-int	parse_viewport(t_head_objects *rt);
+int	parse_viewport(t_rt *rt);
+void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray);
 
 // CHECKER
 int	is_correct(char **row);
@@ -121,18 +122,18 @@ typedef struct s_data_mlx
 
 
 //PARSER
-int	parse(int fd, t_head_objects *head_of_all);
-void	parse_line(char **row, t_head_objects *head_of_all);
-int	rt_init(t_head_objects **rt);
+int	parse(int fd, t_rt *head_of_all);
+void	parse_line(char **row, t_rt *head_of_all);
+int	rt_init(t_rt **rt);
 int	recognize_obj_type(char **info);
 int	put_coordinates_i_objects(char *to_split, t_object *obj);
 int	put_rgb_i_objects(char *to_split, t_object *obj);
 int	put_normalized_vector(char *to_split, t_object *obj);
-void	other_case(t_head_objects *head_of_all, char **row, int type_obj);
-void	free_hoa(t_head_objects *head);
+void	other_case(t_rt *head_of_all, char **row, int type_obj);
+void	free_hoa(t_rt *head);
 
 //MLX
-void	window_orchestrator(t_head_objects *head_of_all);
+void	window_orchestrator(t_rt *head_of_all);
 
 
 #endif

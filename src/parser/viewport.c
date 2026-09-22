@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 19:48:46 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	is_equal(double *vector_1, double *vector_2)
 	return (1);
 }
 
-static void	find_up_right(t_head_objects *rt)
+static void	find_up_right(t_rt *rt)
 {
 	t_object	*camera;
 	t_viewport	*viewport;
@@ -61,7 +61,7 @@ static void	find_up_right(t_head_objects *rt)
 	cross_product(viewport->forward, viewport->right, viewport->up);
 }
 
-int	parse_viewport(t_head_objects *rt)
+int	parse_viewport(t_rt *rt)
 {
 	double	FOV = rt->C->fov;
 	double	radian_FOV;

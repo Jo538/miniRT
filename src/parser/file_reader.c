@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 19:33:13 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**extract_line(int fd, int *error)
 	return (row);
 }
 
-static int	has_ACL(t_head_objects *head)
+static int	has_ACL(t_rt *head)
 {
 	if (!head->A || !head->C || !head->L)
 	{
@@ -56,7 +56,7 @@ static int	has_ACL(t_head_objects *head)
 	return (1);
 }
 
-int	extract_file(int fd, t_head_objects *head_of_all)
+int	extract_file(int fd, t_rt *head_of_all)
 {
 	int		error;
 	char	**row;
@@ -90,7 +90,7 @@ int	extract_file(int fd, t_head_objects *head_of_all)
 }
 
 
-int	parse(int fd, t_head_objects *head_of_all)
+int	parse(int fd, t_rt *head_of_all)
 {
 	if (extract_file(fd, head_of_all))
 	{

@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 17:04:10 by benji             #+#    #+#             */
-/*   Updated: 2026/09/17 17:54:01 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	put_normalized_vector(char *to_split, t_object *obj)
 	return (0);
 }
 
-void	free_hoa(t_head_objects *head)
+void	free_hoa(t_rt *head)
 {
 	t_object	*trot;
 	t_object	*tmp;
