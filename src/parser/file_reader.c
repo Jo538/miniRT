@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 15:15:43 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 19:17:59 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,16 @@ static void	cross_product(double *vector_1, double *vector_2, double *to_fill)
 	to_fill[2] = vector_1[0] * vector_2[1] -  vector_1[1] * vector_2[0];
 }
 
+void	normalise(double *vector)
+{
+	double	length;
+
+	length = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
+	vector[0] /= length;
+	vector[1] /= length;
+	vector[2] /= length;
+}
+
 static void	find_up_right(t_head_objects *rt)
 {
 	t_object	*camera;
@@ -109,6 +119,7 @@ static void	find_up_right(t_head_objects *rt)
 	viewport->forward[2] = camera->vector[2];
 	
 	cross_product((double []){0, 1, 0},viewport->forward, viewport->right);
+	normalise(viewport->right);
 	cross_product(viewport->forward, viewport->right, viewport->up);
 }
 
@@ -128,6 +139,7 @@ static int	parse_viewport(t_head_objects *rt)
 	find_up_right(rt);
 	return (0);
 }
+
 
 int	parse(int fd, t_head_objects *head_of_all)
 {

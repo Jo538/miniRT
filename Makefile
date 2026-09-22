@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+         #
+#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/15 16:14:38 by jchartie         ###   ########.fr        #
+#    Updated: 2026/09/22 19:24:55 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,11 @@ endif
 INCLUDES += -Iinclude -I$(LIBFT_DIR) -I$(GNL_DIR)
 
 # Sources and Objects
-VPATH = $(SRC_DIR):$(GNL_DIR):src/parser:src/checker:src/image_orchestrator
+VPATH = $(SRC_DIR):$(GNL_DIR):src/parser:src/checker:src/image_orchestrator:src/engine
 SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c \
           line.c line_bis.c nested_items.c utils_bis.c utils.c \
-		  parser_create_nodes.c parser_utils.c parser.c parserbis.c create_window.c
+		  parser_create_nodes.c parser_utils.c parser.c parserbis.c create_window.c \
+		  direction.c
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a
 
