@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:18:53 by benji             #+#    #+#             */
-/*   Updated: 2026/09/15 16:14:00 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/22 15:02:46 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	acl_case(t_head_objects *head_of_all, char **row, int type_obj)
 	}
 }
 
-void	parser(char **row, t_head_objects *head_of_all)
+void	parse_line(char **row, t_head_objects *head_of_all)
 {
 	int type_obj;
 

@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/17 17:38:20 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 15:04:06 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ typedef struct s_viewport
 {
 	double	width;
 	double	height;
+	double	forward[3];
+	double	right[3];
+	double	up[3];
 }	t_viewport;
 
 typedef struct	s_head_objects
@@ -116,8 +119,9 @@ typedef struct s_data_mlx
 
 
 //PARSER
-void	parser(char **row, t_head_objects *head_of_all);
-t_head_objects	*create_linked_list_object(void);
+int	parse(int fd, t_head_objects *head_of_all);
+void	parse_line(char **row, t_head_objects *head_of_all);
+int	rt_init(t_head_objects **rt);
 int	recognize_obj_type(char **info);
 int	put_coordinates_i_objects(char *to_split, t_object *obj);
 int	put_rgb_i_objects(char *to_split, t_object *obj);

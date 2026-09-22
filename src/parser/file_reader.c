@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 17:41:34 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/22 15:15:43 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,72 @@ int	extract_file(int fd, t_head_objects *head_of_all)
 			free_tab(row);
 			return (1);
 		}
-		parser(row, head_of_all);
+		parse_line(row, head_of_all);
 		free_tab(row);
 		if (head_of_all->err)
 			return (free_hoa(head_of_all), 1);
 	}
+	return (0);
+}
+
+static void	cross_product(double *vector_1, double *vector_2, double *to_fill)
+{
+	to_fill[0] = vector_1[1] * vector_2[2] -  vector_1[2] * vector_2[1];
+	to_fill[1] = vector_1[2] * vector_2[0] -  vector_1[0] * vector_2[2];
+	to_fill[2] = vector_1[0] * vector_2[1] -  vector_1[1] * vector_2[0];
+}
+
+static void	find_up_right(t_head_objects *rt)
+{
+	t_object	*camera;
+	t_viewport	*viewport;
+
+	camera = rt->C;
+	viewport = rt->viewport;
+	
+	viewport->forward[0] = camera->vector[0];
+	viewport->forward[1] = camera->vector[1];
+	viewport->forward[2] = camera->vector[2];
+	
+	cross_product((double []){0, 1, 0},viewport->forward, viewport->right);
+	cross_product(viewport->forward, viewport->right, viewport->up);
+}
+
+static int	parse_viewport(t_head_objects *rt)
+{
+	double	FOV = rt->C->fov;
+	double	radian_FOV;
+	rt->viewport = malloc(sizeof(t_viewport));
+	if (!rt->viewport)
+	{
+		ft_putstr_fd("Error: dynamic allocation failed.\n", 2);
+		return (1);
+	}
+	radian_FOV = FOV * M_PI / 180;
+	rt->viewport->width = 2 * tan(radian_FOV / 2);
+	rt->viewport->height = rt->viewport->width * Y_MAX / X_MAX;
+	find_up_right(rt);
+	return (0);
+}
+
+int	parse(int fd, t_head_objects *head_of_all)
+{
+	if (extract_file(fd, head_of_all))
+	{
+		close(fd);
+		get_next_line(fd);
+		return (1);
+	}
 	if (!has_ACL(head_of_all))
-		return (free_hoa(head_of_all), 1);
+	{
+		free_hoa(head_of_all);
+		return (1);		
+	}
+	if (parse_viewport(head_of_all))
+	{
+		close(fd);
+		free_hoa(head_of_all);
+		return (1);		
+	}
 	return (0);
 }
