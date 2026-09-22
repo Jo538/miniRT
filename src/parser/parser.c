@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:18:53 by benji             #+#    #+#             */
-/*   Updated: 2026/09/15 16:14:00 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/22 20:23:10 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,41 +58,41 @@ t_object	*parse_light(char **row)
 	return (to_return);
 }
 
-void	acl_case(t_head_objects *head_of_all, char **row, int type_obj)
+void	acl_case(t_rt *rt, char **row, int type_obj)
 {
 	if (type_obj == AMBIENT_LIGHTING)
 	{
-		head_of_all->A = parse_ambient_lighting(row); //faire le cas ou le malloc ou le split echoue
-		if (!head_of_all->A)
-			return ((void)(head_of_all->err = 1));
+		rt->A = parse_ambient_lighting(row); //faire le cas ou le malloc ou le split echoue
+		if (!rt->A)
+			return ((void)(rt->err = 1));
 	}
 	if (type_obj == CAMERA)
 	{
-		head_of_all->C = parse_camera(row);
-		if (!head_of_all->C)
-			return ((void)(head_of_all->err = 1));
+		rt->C = parse_camera(row);
+		if (!rt->C)
+			return ((void)(rt->err = 1));
 	}
 	if (type_obj == LIGHT)
 	{
-		head_of_all->L = parse_light(row);
-		if (!head_of_all->L)
-			return ((void)(head_of_all->err = 1));
+		rt->L = parse_light(row);
+		if (!rt->L)
+			return ((void)(rt->err = 1));
 	}
 }
 
-void	parser(char **row, t_head_objects *head_of_all)
+void	parse_line(char **row, t_rt *rt)
 {
 	int type_obj;
 
 	type_obj = recognize_obj_type(row);
 	if (type_obj == AMBIENT_LIGHTING || type_obj == CAMERA || type_obj == LIGHT)
-		acl_case(head_of_all, row, type_obj);
+		acl_case(rt, row, type_obj);
 	// if (type_obj == CAMERA)
-	// 	printf("l id est : %f\n", head_of_all->C->vector[2]);
+	// 	printf("l id est : %f\n", rt->C->vector[2]);
 	// if (type_obj == LIGHT)
-	// 	printf("LIGHT = ratio %f\n", head_of_all->L->ratio);
+	// 	printf("LIGHT = ratio %f\n", rt->L->ratio);
 	else
-		other_case(head_of_all, row, type_obj);
-	if (head_of_all->err == 1)
+		other_case(rt, row, type_obj);
+	if (rt->err == 1)
 		return ; //mettre les bons free
 }

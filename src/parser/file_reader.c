@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 17:41:34 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/22 20:23:10 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**extract_line(int fd, int *error)
 	return (row);
 }
 
-static int	has_ACL(t_head_objects *head)
+static int	has_ACL(t_rt *head)
 {
 	if (!head->A || !head->C || !head->L)
 	{
@@ -56,7 +56,7 @@ static int	has_ACL(t_head_objects *head)
 	return (1);
 }
 
-int	extract_file(int fd, t_head_objects *head_of_all)
+int	extract_file(int fd, t_rt *rt)
 {
 	int		error;
 	char	**row;
@@ -77,16 +77,38 @@ int	extract_file(int fd, t_head_objects *head_of_all)
 		}
 		if (!is_correct(row))
 		{
-			free_hoa(head_of_all);
+			free_hoa(rt);
 			free_tab(row);
 			return (1);
 		}
-		parser(row, head_of_all);
+		parse_line(row, rt);
 		free_tab(row);
-		if (head_of_all->err)
-			return (free_hoa(head_of_all), 1);
+		if (rt->err)
+			return (free_hoa(rt), 1);
 	}
-	if (!has_ACL(head_of_all))
-		return (free_hoa(head_of_all), 1);
+	return (0);
+}
+
+
+int	parse(int fd, t_rt *rt)
+{
+	if (extract_file(fd, rt))
+	{
+		close(fd);
+		get_next_line(fd);
+		return (1);
+	}
+	if (!has_ACL(rt))
+	{
+		close(fd);
+		free_hoa(rt);
+		return (1);		
+	}
+	if (parse_viewport(rt))
+	{
+		close(fd);
+		free_hoa(rt);
+		return (1);		
+	}
 	return (0);
 }

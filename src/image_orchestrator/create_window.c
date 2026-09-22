@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 18:28:21 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/16 16:05:33 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/22 20:48:03 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-char	*attrib_color(t_head_objects *head_of_all)
+char	*attrib_color(t_rt *rt)
 {
 	int			pixel;
 	int			color;
@@ -29,61 +29,61 @@ char	*attrib_color(t_head_objects *head_of_all)
 		while (x < X_MAX)
 		{
 			color = (x * x) + (y * y); //juste un exemple
-			head_of_all->mlx->addr[pixel++] = (color);
-			head_of_all->mlx->addr[pixel++] = (color >> 8) & 0xFF;
-			head_of_all->mlx->addr[pixel++] = (color >> 16) & 0xFF;
-			head_of_all->mlx->addr[pixel++] = (color >> 24);
+			rt->mlx->addr[pixel++] = (color);
+			rt->mlx->addr[pixel++] = (color >> 8) & 0xFF;
+			rt->mlx->addr[pixel++] = (color >> 16) & 0xFF;
+			rt->mlx->addr[pixel++] = (color >> 24);
 			x++;
 		}
 		y++;
 		x = 0;
 	}
-	return (head_of_all->mlx->addr);
+	return (rt->mlx->addr);
 }
 
-int	close_window_redcross(void *head_of_all_tmp)
+int	close_window_redcross(void *rt_tmp)
 {
-	t_head_objects	*head_of_all;
+	t_rt	*rt_tmp;
 
-	head_of_all = (t_head_objects *)head_of_all_tmp;
-	mlx_loop_end(head_of_all->mlx->mlx);
+	rt_tmp = (t_rt *)rt_tmp;
+	mlx_loop_end(rt_tmp->mlx->mlx);
 	return (0);
 }
 
-int	close_window_prop(int keypress, void *head_of_all_tmp)
+int	close_window_prop(int keypress, void *rt_tmp)
 {
-	t_head_objects	*head_of_all;
+	t_rt	*rt;
 
-	head_of_all = (t_head_objects *)head_of_all_tmp;
+	rt = (t_rt *)rt_tmp;
 	if (keypress == 65307)
-		mlx_loop_end(head_of_all->mlx->mlx);
+		mlx_loop_end(rt->mlx->mlx);
 	return (0);
 }
 
-void	mlx_hook_orchestrator(t_head_objects *head_of_all)
+void	mlx_hook_orchestrator(t_rt *rt)
 {
-	mlx_key_hook(head_of_all->mlx->mlx_win, close_window_prop, head_of_all);
-	// mlx_hook(head_of_all->mlx->mlx_win, 17, 1L << 0, ((int (*)(void *))close_window_redcross), head_of_all); //CA marche pas sfaut trouver un truc
+	mlx_key_hook(rt->mlx->mlx_win, close_window_prop, rt);
+	// mlx_hook(rt->mlx->mlx_win, 17, 1L << 0, ((int (*)(void *))close_window_redcross), rt); //CA marche pas sfaut trouver un truc
 
 }
 
-void	window_orchestrator(t_head_objects *head_of_all) //en vrai je vais devoir corriger pour que ce soit plus propre
+void	window_orchestrator(t_rt *rt) //en vrai je vais devoir corriger pour que ce soit plus propre
 {
 	t_data_mlx	*data_mlx;
 
 	data_mlx = malloc (sizeof(t_data_mlx));
 	if (!data_mlx)
-		return ((void)(head_of_all->err = 1));
-	head_of_all->mlx = data_mlx;
+		return ((void)(rt->err = 1));
+	rt->mlx = data_mlx;
 	data_mlx->mlx = mlx_init();
 	data_mlx->img = mlx_new_image(data_mlx->mlx, X_MAX, Y_MAX);
 	data_mlx->mlx_win = mlx_new_window(data_mlx->mlx, X_MAX, Y_MAX, "TEST");
 	data_mlx->addr = mlx_get_data_addr(data_mlx->img, &data_mlx->bits_per_pixel,
 						&data_mlx->line_lenght, &data_mlx->endian);
 
-	data_mlx->addr = attrib_color(head_of_all);
+	data_mlx->addr = attrib_color(rt);
 	mlx_put_image_to_window(data_mlx->mlx, data_mlx->mlx_win, data_mlx->img, 0, 0);
-	mlx_hook_orchestrator(head_of_all);
+	mlx_hook_orchestrator(rt);
 
 	mlx_loop(data_mlx->mlx);
 	mlx_destroy_window(data_mlx->mlx, data_mlx->mlx_win);
