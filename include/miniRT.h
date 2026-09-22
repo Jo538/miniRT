@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 19:18:13 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 19:33:58 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_ray
 int	extract_file(int fd, t_head_objects *head_of_all);
 int	recognize_obj_type(char **info);
 void	normalise(double *vector);
+int	parse_viewport(t_head_objects *rt);
 
 // CHECKER
 int	is_correct(char **row);
