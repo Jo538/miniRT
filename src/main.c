@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:21:11 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	open_scene(char *file, int *fd)
 int	main(int argc, char **argv)
 {
 	int	fd;
-	t_rt	*head_of_all;
+	t_rt	*rt;
 
 	if (argc != 2)
 	{
@@ -36,12 +36,14 @@ int	main(int argc, char **argv)
 	}
 	if (open_scene(argv[1], &fd))
 		return (1);
-	if (rt_init(&head_of_all))
+	if (rt_init(&rt))
 		return (1);
-	if (parse(fd, head_of_all))
+	if (parse(fd, rt))
 		return (1);
+	if (run_engine(rt))
+		return (1); // + close fd + free_hoa
 	// mlx
-	free_hoa(head_of_all);
+	free_hoa(rt);
 	return (0);
 }
 

@@ -6,13 +6,13 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:22:41 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	run_engine(t_rt *rt)
+int	run_engine(t_rt *rt)
 {
 	int		col;
 	int		row;
@@ -30,4 +30,5 @@ void	run_engine(t_rt *rt)
 		}
 		row++;
 	}
+	return (0);
 }

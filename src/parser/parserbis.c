@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 13:29:51 by benji             #+#    #+#             */
-/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/22 20:23:10 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,20 @@ t_object	*create_init_objects(char **row, int type_obj)
 	return (to_return);
 }
 
-void	other_case(t_rt *head_of_all, char **row, int type_obj)
+void	other_case(t_rt *rt, char **row, int type_obj)
 {
 	t_object *trot;
 
-	if (head_of_all->first_object == NULL)
+	if (rt->first_object == NULL)
 	{
-		head_of_all->first_object = create_init_objects(row, type_obj);
+		rt->first_object = create_init_objects(row, type_obj);
 		return ;
 	}
-	trot = head_of_all->first_object;
+	trot = rt->first_object;
 	while (trot->next)
 			trot = trot->next;
 	trot->next = create_init_objects(row, type_obj);
 	if (!trot->next)
-		return ((void)(head_of_all->err = 1));
-	// fonction qui free la liste chainee ou alors peut etre une variable d erreur dans head_of_all
+		return ((void)(rt->err = 1));
+	// fonction qui free la liste chainee ou alors peut etre une variable d erreur dans rt
 }

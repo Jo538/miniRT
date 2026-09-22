@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/22 20:16:24 by admin            ###   ########.fr        #
+#    Updated: 2026/09/22 20:23:50 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ VPATH = $(SRC_DIR):$(GNL_DIR):src/parser:src/checker:src/image_orchestrator:src/
 SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c \
           line.c line_bis.c nested_items.c utils_bis.c utils.c \
 		  init.c parser_utils.c parser.c parserbis.c create_window.c \
-		  direction.c viewport.c
+		  direction.c viewport.c engine.c
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a
 
