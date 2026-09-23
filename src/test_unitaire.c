@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 16:40:44 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/18 17:08:33 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/23 15:54:41 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,33 @@
 
 void	test_make_dot_product(void)
 {
-	float	first[3] = {1.5, 3, 5};
-	float	second[3] = {2, 4.5, 6};
+	double	first[3] = {1.5, 3, 5};
+	double	second[3] = {2, 4.5, 6};
 
 	if (make_dot_product(first, second) == 46.5)
 		printf("\033[32;01m{1.5, 3, 5}.{2, 4.5, 6} GOOD\033[00m\n");
 	else
 		printf("\033[31;01m{1.5, 3, 5}.{2, 4.5, 6} WRONG\033[00m\n");
-	float first1[3] = {1.5, 3, 5};
-	float second1[3] = {-2, -4.5, -6};
+	double first1[3] = {1.5, 3, 5};
+	double second1[3] = {-2, -4.5, -6};
 	if (make_dot_product(first1, second1) == -46.5)
 		printf("\033[32;01m{1.5, 3, 5}.{-2, -4.5, -6} GOOD\033[00m\n");
 	else
 		printf("\033[31;01m{1.5, 3, 5}.{-2, -4.5, -6} WRONG\033[00m\n");
-	float	first2[3] = {0, 0, 0};
-	float	second2[3] = {-2, -4.5, -6};
+	double	first2[3] = {0, 0, 0};
+	double	second2[3] = {-2, -4.5, -6};
 	if (make_dot_product(first2, second2) == 0)
 		printf("\033[32;01m TEST03 GOOD\033[00m\n");
 	else
 		printf("\033[31;01m TEST03 WRONG\033[00m\n");
-	float	first3[3] = {0, 5, 0};
-	float	second3[3] = {-2, 0, -6};
+	double	first3[3] = {0, 5, 0};
+	double	second3[3] = {-2, 0, -6};
 	if (make_dot_product(first3, second3) == 0)
 		printf("\033[32;01m TEST04 GOOD\033[00m\n");
 	else
 		printf("\033[31;01m TEST04 WRONG\033[00m\n");
-	float	first4[3] = {-2, -2, -2};
-	float	second4[3] = {-2, -2, -2};
+	double	first4[3] = {-2, -2, -2};
+	double	second4[3] = {-2, -2, -2};
 	if (make_dot_product(first4, second4) == 12)
 		printf("\033[32;01m TEST05 GOOD\033[00m\n");
 	else

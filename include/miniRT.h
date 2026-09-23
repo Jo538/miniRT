@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/18 16:45:48 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/23 16:02:01 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ typedef struct s_data_mlx
 
 typedef struct s_object
 {
-	t_id id; //peutetre changer a int si fonctionne pas avec t_id
-	float ratio;
+	t_id id; //peut etre changer a int si fonctionne pas avec t_id
+	double ratio;
 	int	rgb[3];
-	float coordinates[3];
-	float vector[3];
+	double coordinates[3];
+	double vector[3];
 	int fov;
-	float diameter;
-	float height;
+	double diameter;
+	double height;
 	struct s_object	*next;
 } t_object;
 
@@ -82,20 +82,12 @@ typedef struct	s_head_objects
 	int			err;
 }				t_head_objects;
 
-typedef struct s_solutions //j ai pas eu de meilleurs idees de struct qui renvoie les solutions, mais je pense qu il y a mieux
+typedef	struct	s_tridouble
 {
-	float	sol_y;
-	float	sol_x;
-	float	sol_z;
-	struct	s_solutions *next;
-}				t_solutions;
-
-typedef	struct	s_trifloat
-{
-	float	a;
-	float	b;
-	float	c;
-}				t_trifloat;
+	double	a;
+	double	b;
+	double	c;
+}				t_tridouble;
 
 int	extract_file(int fd, t_head_objects *head_of_all);
 int	recognize_obj_type(char **info);
@@ -108,7 +100,7 @@ int	has_correct_colour_format(char *str);
 int	has_correct_vector_format(char *str);
 int	has_correct_float_formatting(char *str);
 int	has_correct_coordinates_format(char *str);
-int	is_in_range(char *str, float min, float max);
+int	is_in_range(char *str, double min, double max);
 int	has_right_number_of_cells(char **row, int expected);
 int	has_correct_number_of_items(char *str, int expected);
 int	has_correct_separator_formatting(char *str, char separator);
@@ -131,7 +123,7 @@ void	other_case(t_head_objects *head_of_all, char **row, int type_obj);
 void	free_hoa(t_head_objects *head);
 
 //CALCULATOR
-float	make_dot_product(float first[3], float second[3]);
+double	make_dot_product(double first[3], double second[3]);
 
 //MLX
 void	window_orchestrator(t_head_objects *head_of_all);

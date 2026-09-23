@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/18 16:51:47 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/23 11:16:21 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char **argv)
 	int	fd;
 	t_head_objects	*head_of_all;
 
-	return (test_unitaire());
+	// return (test_unitaire());
 
 	if (argc != 2)
 	{
