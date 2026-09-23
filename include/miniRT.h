@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 20:43:35 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/23 12:15:42 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	recognize_obj_type(char **info);
 void	normalise(double *vector);
 int	parse_viewport(t_rt *rt);
 void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray);
-int	run_engine(t_rt *rt);
+void	run_engine(t_rt *rt);
 
 // CHECKER
 int	is_correct(char **row);
@@ -136,7 +136,7 @@ void	other_case(t_rt *rt, char **row, int type_obj);
 void	free_hoa(t_rt *head);
 
 //MLX
-void	window_orchestrator(t_rt *rt);
-
+void	mlx_init(t_rt *rt);
+void	mlx_finish(t_rt *rt);
 
 #endif
