@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/23 12:20:33 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/23 12:22:18 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*attrib_color(t_rt *rt)
 	y = 0;
 	x = 0;
 	pixel = 0;
-				color = 1;
+	color = 1;
 	rt->mlx->addr[pixel++] = (color);
 	rt->mlx->addr[pixel++] = (color >> 8) & 0xFF;
 	rt->mlx->addr[pixel++] = (color >> 16) & 0xFF;
