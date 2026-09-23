@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_window.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 18:28:21 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/22 20:48:03 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/23 11:29:45 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*attrib_color(t_rt *rt)
 
 int	close_window_redcross(void *rt_tmp)
 {
-	t_rt	*rt_tmp;
+	t_rt	*rt;
 
-	rt_tmp = (t_rt *)rt_tmp;
-	mlx_loop_end(rt_tmp->mlx->mlx);
+	rt = (t_rt *)rt_tmp;
+	mlx_loop_end(rt->mlx->mlx);
 	return (0);
 }
 
