@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/23 12:15:42 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/23 16:08:00 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "mlx.h"
+
+int	test_unitaire(void);
 
 // DEFINITION DES TAILLES DE L ECRAN CENTRE EN 0
 
@@ -59,14 +61,14 @@ typedef struct s_data_mlx
 
 typedef struct s_object
 {
-	t_id id; //peutetre changer a int si fonctionne pas avec t_id
-	float ratio;
+	t_id id; //peut etre changer a int si fonctionne pas avec t_id
+	double ratio;
 	int	rgb[3];
-	float coordinates[3];
-	float vector[3];
+	double coordinates[3];
+	double vector[3];
 	int fov;
-	float diameter;
-	float height;
+	double diameter;
+	double height;
 	struct s_object	*next;
 } t_object;
 
@@ -96,6 +98,12 @@ typedef struct s_ray
 	double	direction[3];
 }	t_ray;
 
+typedef	struct	s_tridouble
+{
+	double	a;
+	double	b;
+	double	c;
+}				t_tridouble;
 
 int	extract_file(int fd, t_rt *rt);
 int	recognize_obj_type(char **info);
@@ -112,7 +120,7 @@ int	has_correct_colour_format(char *str);
 int	has_correct_vector_format(char *str);
 int	has_correct_float_formatting(char *str);
 int	has_correct_coordinates_format(char *str);
-int	is_in_range(char *str, float min, float max);
+int	is_in_range(char *str, double min, double max);
 int	has_right_number_of_cells(char **row, int expected);
 int	has_correct_number_of_items(char *str, int expected);
 int	has_correct_separator_formatting(char *str, char separator);
@@ -134,6 +142,9 @@ int	put_rgb_i_objects(char *to_split, t_object *obj);
 int	put_normalized_vector(char *to_split, t_object *obj);
 void	other_case(t_rt *rt, char **row, int type_obj);
 void	free_hoa(t_rt *head);
+
+//CALCULATOR
+double	make_dot_product(double first[3], double second[3]);
 
 //MLX
 void	mlx_init(t_rt *rt);
