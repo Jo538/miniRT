@@ -6,20 +6,20 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 18:28:21 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/23 12:15:36 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/23 15:43:33 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static int	close_window_redcross(void *rt_tmp)
-{
-	t_rt	*rt;
+// static int	close_window_redcross(void *rt_tmp)
+// {
+// 	t_rt	*rt;
 
-	rt = (t_rt *)rt_tmp;
-	mlx_loop_end(rt->mlx->mlx);
-	return (0);
-}
+// 	rt = (t_rt *)rt_tmp;
+// 	mlx_loop_end(rt->mlx->mlx);
+// 	return (0);
+// }
 
 static int	close_window_prop(int keypress, void *rt_tmp)
 {
@@ -34,11 +34,11 @@ static int	close_window_prop(int keypress, void *rt_tmp)
 static void	mlx_hook_orchestrator(t_rt *rt)
 {
 	mlx_key_hook(rt->mlx->mlx_win, close_window_prop, rt);
-	// mlx_hook(rt->mlx->mlx_win, 17, 1L << 0, ((int (*)(void *))close_window_redcross), rt); //CA marche pas sfaut trouver un truc
+	//mlx_hook(rt->mlx->mlx_win, 17, 1L << 0, ((int (*)(void *))close_window_redcross), rt); //CA marche pas sfaut trouver un truc
 
 }
 
-void	mlx_init(t_rt *rt)
+void	mlx_initialization(t_rt *rt)
 {
 	t_data_mlx	*data_mlx;
 

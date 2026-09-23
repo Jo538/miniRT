@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/23 12:15:42 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/23 15:40:23 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	other_case(t_rt *rt, char **row, int type_obj);
 void	free_hoa(t_rt *head);
 
 //MLX
-void	mlx_init(t_rt *rt);
+void	mlx_initialization(t_rt *rt);
 void	mlx_finish(t_rt *rt);
 
 #endif

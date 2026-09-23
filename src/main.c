@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/23 11:39:04 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/23 15:41:13 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ int	main(int argc, char **argv)
 	if (parse(fd, rt))
 		return (1);
 	close(fd);
-	if (run_engine(rt))
-		return (1); // + close fd + free_hoa
-	// mlx
-	window_orchestrator(rt);
+	run_engine(rt); // + close fd + free_hoa
 	free_hoa(rt);
 	return (0);
 }
