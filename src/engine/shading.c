@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 12:28:38 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 13:22:32 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,30 @@ static void	normal(double *intersection, t_rt *rt, double *normal)
 	sphere = rt->first_object;
 	vector_subst(sphere->coordinates, intersection, normal);
 	normalise(normal);
+}
+
+static void	reflection_vector(t_ray *ray, double *normal, double *reflection_vector)
+{
+	double	tmp_scalar;
+	double	tmp_vector[3];
+
+	tmp_scalar = 2 * make_dot_product(normal, ray->direction);
+	scalar_product(tmp_scalar, normal, tmp_vector);
+	vector_subst(ray->direction, tmp_vector, reflection_vector);
+}
+
+static void	ambient_light(t_rt *rt, double *ambient_light)
+{	
+	int			i;
+	t_object	*light;
+	double		normalised_colour[3];
+
+	i = 0;
+	light = rt->A;
+	while (i < 3)
+	{
+		normalised_colour[i] = (light->rgb)[i] / 255;
+		i++;
+	}
+	scalar_product(light->ratio, normalised_colour, ambient_light);
 }
