@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 09:14:00 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 09:15:21 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	main(int argc, char **argv)
 {
 	int	fd;
 	t_rt	*rt;
-
-	// return (test_unitaire());
 
 	if (argc != 2)
 	{

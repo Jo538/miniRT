@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 09:13:53 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 09:19:32 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	normalise(double *vector);
 int	parse_viewport(t_rt *rt);
 void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray);
 void	run_engine(t_rt *rt);
+double solver(t_ray *ray, t_rt *rt);
 
 // CHECKER
 int	is_correct(char **row);

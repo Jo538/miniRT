@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/23 15:52:25 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/24 09:18:47 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ double	find_lowest_soluc(double a, double b, double c)
 		return (sol2);
 }
 
-double solver(double x_dir, double y_dir, t_head_objects *head_of_all)
+double solver(t_ray *ray, t_rt *rt)
 {
 	double	CO[3];
 	double	D[3];
 	double	rayon;
 	t_tridouble	eq;
 
-	CO[0] = head_of_all->C->coordinates[0] - head_of_all->first_object->coordinates[0];
-	CO[1] = head_of_all->C->coordinates[1] - head_of_all->first_object->coordinates[1];
-	CO[2] = head_of_all->C->coordinates[2] - head_of_all->first_object->coordinates[2];
-	D[0] = x_dir;
-	D[1] = y_dir;
-	D[2] = 1;
-	rayon = (head_of_all->first_object->diameter / 2) * (head_of_all->first_object->diameter / 2);
+	CO[0] = rt->C->coordinates[0] - rt->first_object->coordinates[0];
+	CO[1] = rt->C->coordinates[1] - rt->first_object->coordinates[1];
+	CO[2] = rt->C->coordinates[2] - rt->first_object->coordinates[2];
+	D[0] = ray->direction[0];
+	D[1] = ray->direction[1];
+	D[2] = ray->direction[2];
+	rayon = (rt->first_object->diameter / 2) * (rt->first_object->diameter / 2);
 	eq.a = make_dot_product(D, D);
 	eq.b = make_dot_product(CO, D) * 2;
 	eq.c = make_dot_product(CO, CO) - rayon;
