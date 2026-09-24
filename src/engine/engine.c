@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 10:44:39 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 17:48:41 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	parse_image(t_rt *rt)
 		{
 			find_ray_direction(col, row, rt, &ray);
 			if (solver(&ray, rt) != -1000)
-				colour_pixel(rt, col, row);
+				colour_pixel(rt, col, row, intersection, &ray);
 			col++;
 		}
 		row++;

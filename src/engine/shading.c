@@ -6,18 +6,18 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 17:12:30 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 17:31:53 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	eye_vector(double *eye_vector, t_ray *ray)
+static void	compute_eye_vector(double *eye_vector, t_ray *ray)
 {
 	scalar_product(-1, ray->direction, eye_vector);
 }
 
-static void	light_vector(double *light_vector, double *intersection, t_rt *rt)
+static void	compute_light_vector(double *light_vector, double *intersection, t_rt *rt)
 {
 	t_object	*light;
 
@@ -25,7 +25,7 @@ static void	light_vector(double *light_vector, double *intersection, t_rt *rt)
 	vector_subst(light->coordinates, intersection, light_vector);
 }
 
-static void	normal(double *intersection, t_rt *rt, double *normal)
+static void	compute_normal(double *intersection, t_rt *rt, double *normal)
 {
 	t_object	*sphere;
 
@@ -34,7 +34,7 @@ static void	normal(double *intersection, t_rt *rt, double *normal)
 	normalise_vector(normal);
 }
 
-static void	reflection_vector(t_ray *ray, double *normal, double *reflection_vector)
+static void	compute_reflection_vector(t_ray *ray, double *normal, double *reflection_vector)
 {
 	double	tmp_scalar;
 	double	tmp_vector[3];
@@ -44,7 +44,7 @@ static void	reflection_vector(t_ray *ray, double *normal, double *reflection_vec
 	vector_subst(ray->direction, tmp_vector, reflection_vector);
 }
 
-static void	ambient_light(t_rt *rt, double *ambient_light)
+static void	compute_ambient_light(t_rt *rt, double *ambient_light)
 {	
 	t_object	*light;
 	double		normalised_colour[3];
@@ -54,7 +54,7 @@ static void	ambient_light(t_rt *rt, double *ambient_light)
 	scalar_product(light->ratio, normalised_colour, ambient_light);
 }
 
-static void	diffuse_light(t_rt *rt, double *diffuse_light, double *normal, double *light_vector)
+static void	compute_diffuse_light(t_rt *rt, double *diffuse_light, double *normal, double *light_vector)
 {
 	t_object	*light;
 	t_object	*sphere;
@@ -70,7 +70,7 @@ static void	diffuse_light(t_rt *rt, double *diffuse_light, double *normal, doubl
 	scalar_product(tmp2, tmp, diffuse_light);
 }
 
-static void	specular_light(double *specular_light, double *eye_vector, double *reflection_vector, t_rt *rt)
+static void	compute_specular_light(double *specular_light, double *eye_vector, double *reflection_vector, t_rt *rt)
 {
 	t_object	*light_source;
 	double	tmp1[3];
@@ -81,4 +81,28 @@ static void	specular_light(double *specular_light, double *eye_vector, double *r
 	tmp2 = make_dot_product(reflection_vector, eye_vector);
 	tmp2 = pow(tmp2, SHININESS_EXPONENT);
 	scalar_product(tmp2, tmp1, specular_light);
+}
+
+void	compute_shaded_colour(t_rt *rt, double *intersection, t_ray *ray, double *shaded_rgb)
+{
+	double	ambient_light[3];
+	double	diffuse_light[3];
+	double	specular_light[3];
+	
+	double	normal[3];
+	double	light_vector[3];
+	double	eye_vector[3];
+	double	reflection_vector[3];
+	
+	compute_normal(intersection, rt, normal);
+	compute_light_vector(light_vector, intersection, rt);
+	compute_eye_vector(eye_vector, ray);
+	compute_reflection_vector(ray, normal, reflection_vector);
+	
+	compute_ambient_light(rt, ambient_light);
+	compute_diffuse_light(rt, diffuse_light, normal, light_vector);
+	compute_specular_light(specular_light, eye_vector, reflection_vector, rt);
+	
+	add_vectors(ambient_light, diffuse_light, shaded_rgb);
+	add_vectors(shaded_rgb, specular_light, shaded_rgb);
 }

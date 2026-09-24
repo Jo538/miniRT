@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 17:05:35 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 17:48:52 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,13 @@ int	parse_viewport(t_rt *rt);
 void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray);
 void	run_engine(t_rt *rt);
 double solver(t_ray *ray, t_rt *rt);
-void	colour_pixel(t_rt *rt, int col, int row);
+void	colour_pixel(t_rt *rt, int col, int row, double *intersection, t_ray *ray);
 void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	vector_subst(double *vector_1, double *vector_2, double *to_fill);
 void	normalise_color(double *normalised_colour, t_object *src);
 void	component_wise_multiplication(double *vector_1, double *vector_2, double *to_fill);
+void	add_vectors(double *vector_1, double *vector_2, double *to_fill);
+void	compute_shaded_colour(t_rt *rt, double *intersection, t_ray *ray, double *shaded_rgb);
 
 // CHECKER
 int	is_correct(char **row);
