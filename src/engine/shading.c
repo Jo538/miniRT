@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 18:26:51 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 18:54:10 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,15 @@ static void	compute_reflection_vector(t_ray *ray, double *normal, double *reflec
 static void	compute_ambient_light(t_rt *rt, double *ambient_light)
 {	
 	t_object	*light;
+	t_object	*sphere;
 	double		normalised_colour[3];
 
 	light = rt->A;
+	sphere = rt->first_object;
 	normalise_color(normalised_colour, light);
 	scalar_product(light->ratio, normalised_colour, ambient_light);
+	normalise_color(normalised_colour, sphere);
+	component_wise_multiplication(normalised_colour, ambient_light, ambient_light);
 }
 
 static void	compute_diffuse_light(t_rt *rt, double *diffuse_light, double *normal, double *light_vector)
@@ -76,11 +80,13 @@ static void	compute_diffuse_light(t_rt *rt, double *diffuse_light, double *norma
 static void	compute_specular_light(double *specular_light, double *eye_vector, double *reflection_vector, t_rt *rt)
 {
 	t_object	*light_source;
+	double		normalised_rgb[3];
 	double	tmp1[3];
 	double	tmp2;
 
 	light_source = rt->L;
-	scalar_product(SPECULAR_REFLECTIVITY_COEFF, light_source->rgb, tmp1);
+	normalise_color(normalised_rgb, light_source);
+	scalar_product(SPECULAR_REFLECTIVITY_COEFF, normalised_rgb, tmp1);
 	tmp2 = make_dot_product(reflection_vector, eye_vector);
 	tmp2 = pow(tmp2, SHININESS_EXPONENT);
 	scalar_product(tmp2, tmp1, specular_light);
