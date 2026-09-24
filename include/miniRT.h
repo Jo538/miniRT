@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 16:38:01 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 17:05:35 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	test_unitaire(void);
 #  define KEY_ESC 65307
 # endif
 
+# define SPECULAR_REFLECTIVITY_COEFF 0.5
+# define SHININESS_EXPONENT 32
 
 typedef enum e_id
 {
@@ -123,7 +125,8 @@ double solver(t_ray *ray, t_rt *rt);
 void	colour_pixel(t_rt *rt, int col, int row);
 void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	vector_subst(double *vector_1, double *vector_2, double *to_fill);
-void	normalise_color(double *normalised_colour, t_object *light);
+void	normalise_color(double *normalised_colour, t_object *src);
+void	component_wise_multiplication(double *vector_1, double *vector_2, double *to_fill);
 
 // CHECKER
 int	is_correct(char **row);
