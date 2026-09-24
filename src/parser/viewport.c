@@ -6,28 +6,11 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 12:44:04 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 16:36:40 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-static void	cross_product(double *vector_1, double *vector_2, double *to_fill)
-{
-	to_fill[0] = vector_1[1] * vector_2[2] -  vector_1[2] * vector_2[1];
-	to_fill[1] = vector_1[2] * vector_2[0] -  vector_1[0] * vector_2[2];
-	to_fill[2] = vector_1[0] * vector_2[1] -  vector_1[1] * vector_2[0];
-}
-
-void	normalise(double *vector)
-{
-	double	length;
-
-	length = sqrt(pow(vector[0], 2) + pow(vector[1], 2) + pow(vector[2], 2));
-	vector[0] /= length;
-	vector[1] /= length;
-	vector[2] /= length;
-}
 
 static int	is_equal(double *vector_1, double *vector_2)
 {
@@ -57,7 +40,7 @@ static void	find_up_right(t_rt *rt)
 		cross_product((double []){0, 0, 1},viewport->forward, viewport->right);
 	else
 		cross_product((double []){0, 1, 0},viewport->forward, viewport->right);
-	normalise(viewport->right);
+	normalise_vector(viewport->right);
 	cross_product(viewport->forward, viewport->right, viewport->up);
 }
 

@@ -6,18 +6,11 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/24 09:18:47 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 16:34:52 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-double	make_dot_product(double first[3], double second[3])
-{
-	double	to_return;
-
-	to_return = first[0] * second[0] + first[1] * second[1] + first[2] * second[2];
-	return (to_return);
-}
 
 double	find_lowest_soluc(double a, double b, double c)
 {
