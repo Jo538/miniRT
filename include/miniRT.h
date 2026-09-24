@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 17:48:52 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 18:05:00 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_object
 {
 	t_id id; //peut etre changer a int si fonctionne pas avec t_id
 	double ratio;
-	int	rgb[3];
+	double	rgb[3];
 	double coordinates[3];
 	double vector[3];
 	int fov;
@@ -121,7 +121,7 @@ void	normalise_vector(double *vector);
 int	parse_viewport(t_rt *rt);
 void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray);
 void	run_engine(t_rt *rt);
-double solver(t_ray *ray, t_rt *rt);
+int	solver(t_ray *ray, t_rt *rt, double *intersection);
 void	colour_pixel(t_rt *rt, int col, int row, double *intersection, t_ray *ray);
 void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	vector_subst(double *vector_1, double *vector_2, double *to_fill);

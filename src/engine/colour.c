@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 17:47:02 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 18:14:34 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static void	attrib_color(t_rt *rt, int colour, int position)
 	rt->mlx->addr[position++] = (colour >> 24);
 }
 
-static int	rgb_to_int(int *rgb)
+static int	rgb_to_int(double *rgb)
 {
 
 	int	colour;
 
-	colour = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	colour = ((int)rgb[0] << 16) | ((int)rgb[1] << 8) | (int)rgb[2];
 	return (colour);
 }
 
@@ -46,6 +46,6 @@ void	colour_pixel(t_rt *rt, int col, int row, double *intersection, t_ray *ray)
 	position = find_position(rt, col, row);
 	compute_shaded_colour(rt, intersection, ray, shaded_rgb);
 	scalar_product(255, shaded_rgb, shaded_rgb);
-	colour = rgb_to_int((int *)shaded_rgb);
+	colour = rgb_to_int(shaded_rgb);
 	attrib_color(rt, colour, position);
 }

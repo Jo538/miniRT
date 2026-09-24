@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 17:31:53 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 18:26:51 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ static void	compute_eye_vector(double *eye_vector, t_ray *ray)
 
 static void	compute_light_vector(double *light_vector, double *intersection, t_rt *rt)
 {
-	t_object	*light;
+	t_object	*light_source;
 
-	light = rt->L;
-	vector_subst(light->coordinates, intersection, light_vector);
+	light_source = rt->L;
+	vector_subst(light_source->coordinates, intersection, light_vector);
+	normalise_vector(light_vector);
 }
 
 static void	compute_normal(double *intersection, t_rt *rt, double *normal)
@@ -56,16 +57,18 @@ static void	compute_ambient_light(t_rt *rt, double *ambient_light)
 
 static void	compute_diffuse_light(t_rt *rt, double *diffuse_light, double *normal, double *light_vector)
 {
-	t_object	*light;
+	t_object	*light_source;
 	t_object	*sphere;
 	double		tmp[3];
 	double		reflectivity_sphere[3];
+	double		normalised_rgb[3];
 	double		tmp2;
 
-	light = rt->L;
+	light_source = rt->L;
 	sphere = rt->first_object;
 	normalise_color(reflectivity_sphere, sphere);
-	component_wise_multiplication(reflectivity_sphere, light, tmp);
+	normalise_color(normalised_rgb, light_source);
+	component_wise_multiplication(reflectivity_sphere, normalised_rgb, tmp);
 	tmp2 = make_dot_product(normal, light_vector);
 	scalar_product(tmp2, tmp, diffuse_light);
 }

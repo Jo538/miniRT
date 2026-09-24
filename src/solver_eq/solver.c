@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/24 16:34:52 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 18:00:39 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,25 @@ double	find_lowest_soluc(double a, double b, double c)
 		return (sol2);
 }
 
-double solver(t_ray *ray, t_rt *rt)
+static int	find_intersection(double *intersection, t_rt *rt, t_ray *ray, double t)
+{
+	// P(t) = O + tD      camera coords, t returned from quadratic equation, ray direction
+	double	tmp1[3];
+	
+	if (t == -1000)
+		return (1);
+	scalar_product(t, ray->direction, tmp1);
+	add_vectors(rt->C->coordinates, tmp1, intersection);
+	return (0);
+}	
+
+int	solver(t_ray *ray, t_rt *rt, double *intersection)
 {
 	double	CO[3];
 	double	D[3];
 	double	rayon;
 	t_tridouble	eq;
+	double	t;
 
 	CO[0] = rt->C->coordinates[0] - rt->first_object->coordinates[0];
 	CO[1] = rt->C->coordinates[1] - rt->first_object->coordinates[1];
@@ -47,5 +60,6 @@ double solver(t_ray *ray, t_rt *rt)
 	eq.a = make_dot_product(D, D);
 	eq.b = make_dot_product(CO, D) * 2;
 	eq.c = make_dot_product(CO, CO) - rayon;
-	return (find_lowest_soluc(eq.a, eq.b, eq.c));
+	t = find_lowest_soluc(eq.a, eq.b, eq.c);
+	return (find_intersection(intersection, rt, ray, t));
 }
