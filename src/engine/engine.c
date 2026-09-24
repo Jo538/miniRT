@@ -3,32 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/23 12:22:18 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/09/24 09:11:47 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-char	*attrib_color(t_rt *rt)
+static void	attrib_color(t_rt *rt, int colour, int position)
 {
-	int			pixel;
-	int			color;
-	int			x;
-	int			y;
+	rt->mlx->addr[position++] = (colour);
+	rt->mlx->addr[position++] = (colour >> 8);
+	rt->mlx->addr[position++] = (colour >> 16);
+	rt->mlx->addr[position++] = (colour >> 24);
+}
 
-	y = 0;
-	x = 0;
-	pixel = 0;
-	color = 1;
-	rt->mlx->addr[pixel++] = (color);
-	rt->mlx->addr[pixel++] = (color >> 8) & 0xFF;
-	rt->mlx->addr[pixel++] = (color >> 16) & 0xFF;
-	rt->mlx->addr[pixel++] = (color >> 24);
+static int	rgb_to_int(t_rt *rt)
+{
+	int	*rgb;
+	int	colour;
 
-	return (rt->mlx->addr);
+	rgb = rt->first_object->rgb;
+	colour = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+	return (colour);
+}
+
+static int	find_position(t_rt *rt, int col, int row)
+{
+	t_data_mlx	*mlx;
+
+	mlx = rt->mlx;
+	return (row * mlx->line_length + col * (mlx->bits_per_pixel / 8));
+}
+
+static void	colour_pixel(t_rt *rt, int col, int row)
+{
+	int	colour;
+	int position;
+
+	position = find_position(rt, col, row);
+	colour = rgb_to_int(rt);
+	attrib_color(rt, colour, position);
 }
 
 static int	parse_image(t_rt *rt)
@@ -55,7 +72,7 @@ static int	parse_image(t_rt *rt)
 
 void	run_engine(t_rt *rt) //en vrai je vais devoir corriger pour que ce soit plus propre
 {
-	mlx_init(rt);
+	mlx_initialization(rt);
 	parse_image(rt);
 	mlx_finish(rt);
 }

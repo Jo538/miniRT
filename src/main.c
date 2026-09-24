@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/23 16:08:10 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/24 09:14:00 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int	main(int argc, char **argv)
 	if (parse(fd, rt))
 		return (1);
 	close(fd);
-	if (run_engine(rt))
-		return (1); // + close fd + free_hoa
-	// mlx
-	window_orchestrator(rt);
+	run_engine(rt); // + close fd + free_hoa
 	free_hoa(rt);
 	return (0);
 }

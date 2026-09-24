@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/23 16:08:00 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/24 09:13:53 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_data_mlx
 	void	*mlx_win;
 	char	*addr;
 	int		bits_per_pixel;
-	int		line_lenght;
+	int		line_length;
 	int		endian;
 }				t_data_mlx;
 
@@ -147,7 +147,7 @@ void	free_hoa(t_rt *head);
 double	make_dot_product(double first[3], double second[3]);
 
 //MLX
-void	mlx_init(t_rt *rt);
+void	mlx_initialization(t_rt *rt);
 void	mlx_finish(t_rt *rt);
 
 #endif
