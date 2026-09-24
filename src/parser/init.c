@@ -25,6 +25,7 @@ int	rt_init(t_rt **rt)
 	(*rt)->L = NULL;
 	(*rt)->first_object = NULL;
 	(*rt)->viewport = NULL;
+	(*rt)->mlx = NULL;
 	(*rt)->err = 0;
 	return (0);
 }

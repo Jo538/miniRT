@@ -37,7 +37,7 @@ INCLUDES += -Iinclude -I$(LIBFT_DIR) -I$(GNL_DIR)
 VPATH = $(SRC_DIR):$(GNL_DIR):src/parser:src/checker:src/engine:src/solver_eq
 SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c \
           line.c line_bis.c nested_items.c utils_bis.c utils.c \
-		  init.c parser_utils.c parser.c parserbis.c mlx.c \
+		  init.c parser_utils.c parser.c parserbis.c mlx.c mlx_close.c \
 		  direction.c viewport.c engine.c solver.c
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a

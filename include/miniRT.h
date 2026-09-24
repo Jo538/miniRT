@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 09:19:32 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 09:23:31 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,14 @@ int	test_unitaire(void);
 
 # ifndef Y_MAX
 #  define Y_MAX 1080
+# endif
+
+// LE KEYCODE D ESC DEPEND DE L OS :
+// keysym X11 sous Linux, virtual key code Cocoa sous macOS
+# ifdef __APPLE__
+#  define KEY_ESC 53
+# else
+#  define KEY_ESC 65307
 # endif
 
 
@@ -121,7 +129,7 @@ int	has_correct_colour_format(char *str);
 int	has_correct_vector_format(char *str);
 int	has_correct_float_formatting(char *str);
 int	has_correct_coordinates_format(char *str);
-int	is_in_range(char *str, double min, double max);
+int	is_in_range(char *str, float min, float max);
 int	has_right_number_of_cells(char **row, int expected);
 int	has_correct_number_of_items(char *str, int expected);
 int	has_correct_separator_formatting(char *str, char separator);
@@ -149,6 +157,9 @@ double	make_dot_product(double first[3], double second[3]);
 
 //MLX
 void	mlx_initialization(t_rt *rt);
-void	mlx_finish(t_rt *rt);
+void	mlx_run(t_rt *rt);
+void	free_mlx(t_rt *rt);
+int		close_window(void *rt_tmp);
+int		close_window_key(int keypress, void *rt_tmp);
 
 #endif
