@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 13:22:32 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 13:37:01 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,18 +51,30 @@ static void	reflection_vector(t_ray *ray, double *normal, double *reflection_vec
 	vector_subst(ray->direction, tmp_vector, reflection_vector);
 }
 
-static void	ambient_light(t_rt *rt, double *ambient_light)
-{	
+static void	normalise_color(double *normalised_colour, t_object *light)
+{
 	int			i;
-	t_object	*light;
 	double		normalised_colour[3];
 
 	i = 0;
-	light = rt->A;
 	while (i < 3)
 	{
 		normalised_colour[i] = (light->rgb)[i] / 255;
 		i++;
-	}
+	}	
+}
+
+static void	ambient_light(t_rt *rt, double *ambient_light)
+{	
+	t_object	*light;
+	double		normalised_colour[3];
+
+	light = rt->A;
+	normalise_color(normalised_colour, light);
 	scalar_product(light->ratio, normalised_colour, ambient_light);
+}
+
+static void	diffuse_light()
+{
+
 }
