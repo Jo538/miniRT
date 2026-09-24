@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/22 20:27:16 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 11:56:01 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	find_viewport_coordinates(double *normalised_coord, t_rt *rt, double
 	viewport_coord[1] = viewport->height / 2 - normalised_coord[1] * viewport->height;
 }
 
-static void	scalar_product(double scalar, double *vector_2, double *to_fill)
+void	scalar_product(double scalar, double *vector_2, double *to_fill)
 {
 	to_fill[0] = scalar * vector_2[0];
 	to_fill[1] = scalar * vector_2[1];

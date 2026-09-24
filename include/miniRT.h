@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 10:44:28 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 11:56:12 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ void	free_hoa(t_rt *head);
 
 //CALCULATOR
 double	make_dot_product(double first[3], double second[3]);
+void	scalar_product(double scalar, double *vector_2, double *to_fill);
 
 //MLX
 void	mlx_initialization(t_rt *rt);
