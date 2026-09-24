@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 09:23:31 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 10:44:28 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ int	parse_viewport(t_rt *rt);
 void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray);
 void	run_engine(t_rt *rt);
 double solver(t_ray *ray, t_rt *rt);
+void	colour_pixel(t_rt *rt, int col, int row);
 
 // CHECKER
 int	is_correct(char **row);

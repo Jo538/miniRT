@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 09:15:21 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/24 10:35:42 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	if (parse(fd, rt))
 		return (1);
 	close(fd);
-	run_engine(rt); // + close fd + free_hoa
+	run_engine(rt);
 	free_hoa(rt);
 	return (0);
 }
