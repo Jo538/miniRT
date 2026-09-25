@@ -6,20 +6,20 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 17:47:30 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/25 15:08:33 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	normalise_color(double *normalised_colour, t_object *src)
+void	normalise_color(double *normalised_colour, double *src)
 {
 	int			i;
 
 	i = 0;
 	while (i < 3)
 	{
-		normalised_colour[i] = (src->rgb)[i] / 255;
+		normalised_colour[i] = src[i] / 255;
 		i++;
 	}	
 }

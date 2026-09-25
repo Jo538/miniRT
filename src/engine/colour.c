@@ -29,6 +29,19 @@ static int	rgb_to_int(double *rgb)
 	return (colour);
 }
 
+static void	clamp_colour(double *rgb)
+{
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		if (rgb[i] > 255)
+			rgb[i] = 255;
+		i++;
+	}
+}
+
 static int	find_position(t_rt *rt, int col, int row)
 {
 	t_data_mlx	*mlx;
@@ -46,6 +59,7 @@ void	colour_pixel(t_rt *rt, int col, int row, double *intersection, t_ray *ray)
 	position = find_position(rt, col, row);
 	compute_shaded_colour(rt, intersection, ray, shaded_rgb);
 	scalar_product(255, shaded_rgb, shaded_rgb);
+	clamp_colour(shaded_rgb);
 	colour = rgb_to_int(shaded_rgb);
 	attrib_color(rt, colour, position);
 }

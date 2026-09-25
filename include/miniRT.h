@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 18:05:00 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/25 15:08:52 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int	solver(t_ray *ray, t_rt *rt, double *intersection);
 void	colour_pixel(t_rt *rt, int col, int row, double *intersection, t_ray *ray);
 void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	vector_subst(double *vector_1, double *vector_2, double *to_fill);
-void	normalise_color(double *normalised_colour, t_object *src);
+void	normalise_color(double *normalised_colour, double *src);
 void	component_wise_multiplication(double *vector_1, double *vector_2, double *to_fill);
 void	add_vectors(double *vector_1, double *vector_2, double *to_fill);
 void	compute_shaded_colour(t_rt *rt, double *intersection, t_ray *ray, double *shaded_rgb);

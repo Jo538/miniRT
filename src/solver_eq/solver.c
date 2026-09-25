@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/24 18:00:39 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/25 16:33:37 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ double	find_lowest_soluc(double a, double b, double c)
 	rc = (b * b) - (4 * a * c);
 	if (rc < 0)
 		return (-1000); // sert a se rendre compte q il n y a pas de solutions
-	sol1 = (-b + rc) / (2 * a);
-	sol2 = (-b - rc) / (2 * a);
+	sol1 = (-b + sqrt(rc)) / (2 * a);
+	sol2 = (-b - sqrt(rc)) / (2 * a);
 
-	if (sol1 <= sol2)
+	if (sol1 >= 0 && sol1 <= sol2)
 		return (sol1);
-	else
+	else if (sol2 >= 0 && sol2 <= sol2)
 		return (sol2);
+	else
+		return (-1000);
 }
 
 static int	find_intersection(double *intersection, t_rt *rt, t_ray *ray, double t)
