@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/25 16:33:37 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/25 16:39:17 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ double	find_lowest_soluc(double a, double b, double c)
 
 static int	find_intersection(double *intersection, t_rt *rt, t_ray *ray, double t)
 {
-	// P(t) = O + tD      camera coords, t returned from quadratic equation, ray direction
 	double	tmp1[3];
 	
 	if (t == -1000)

@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/25 15:08:52 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/25 16:41:53 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,17 @@ typedef	struct	s_tridouble
 	double	b;
 	double	c;
 }				t_tridouble;
+
+typedef struct s_shade
+{
+	double	ambient_light[3];
+	double	diffuse_light[3];
+	double	specular_light[3];
+	double	normal[3];
+	double	light_vector[3];
+	double	eye_vector[3];
+	double	reflection_vector[3];
+}	t_shade;
 
 int	extract_file(int fd, t_rt *rt);
 int	recognize_obj_type(char **info);
