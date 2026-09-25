@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/25 16:41:53 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/25 16:53:18 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,9 @@ void	normalise_color(double *normalised_colour, double *src);
 void	component_wise_multiplication(double *vector_1, double *vector_2, double *to_fill);
 void	add_vectors(double *vector_1, double *vector_2, double *to_fill);
 void	compute_shaded_colour(t_rt *rt, double *intersection, t_ray *ray, double *shaded_rgb);
+void	compute_specular_light(t_rt *rt, t_shade *shade);
+void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
+void	compute_ambient_light(t_rt *rt, t_shade *shade);
 
 // CHECKER
 int	is_correct(char **row);
