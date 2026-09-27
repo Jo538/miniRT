@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/27 17:17:37 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/27 21:01:58 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	normalise_vector(double *vector);
 int	parse_viewport(t_rt *rt);
 void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_hit *hit);
 void	run_engine(t_rt *rt);
-int	solver(t_rt *rt, t_hit *hit);
+int	solver_sphere(t_rt *rt, t_hit *hit);
 void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit);
 void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	vector_subst(double *vector_1, double *vector_2, double *to_fill);

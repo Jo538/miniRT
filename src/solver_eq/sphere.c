@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/27 17:13:09 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/27 21:01:45 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	find_intersection(t_rt *rt, t_hit *hit, double t)
 	return (0);
 }	
 
-int	solver(t_rt *rt, t_hit *hit)
+int	solver_sphere(t_rt *rt, t_hit *hit)
 {
 	double	CO[3];
 	double	D[3];
