@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 18:14:34 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/27 17:02:03 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static int	find_position(t_rt *rt, int col, int row)
 	return (row * mlx->line_length + col * (mlx->bits_per_pixel / 8));
 }
 
-void	colour_pixel(t_rt *rt, int col, int row, double *intersection, t_ray *ray)
+void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit)
 {
 	int	colour;
 	int position;
 	double	shaded_rgb[3];
 
 	position = find_position(rt, col, row);
-	compute_shaded_colour(rt, intersection, ray, shaded_rgb);
+	compute_shaded_colour(rt, hit, shaded_rgb);
 	scalar_product(255, shaded_rgb, shaded_rgb);
 	clamp_colour(shaded_rgb);
 	colour = rgb_to_int(shaded_rgb);
