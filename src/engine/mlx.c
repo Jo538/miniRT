@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 18:28:21 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/24 09:23:01 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/27 15:19:35 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	mlx_hook_orchestrator(t_rt *rt)
 {
 	mlx_key_hook(rt->mlx->mlx_win, close_window_key, rt);
-	mlx_hook(rt->mlx->mlx_win, 17, 1L << 0, close_window, rt);
+	// mlx_hook(rt->mlx->mlx_win, 17, 1L << 0, close_window, rt);
 }
 
 void	mlx_initialization(t_rt *rt)

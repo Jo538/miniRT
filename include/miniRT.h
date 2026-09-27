@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 16:38:01 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/27 15:19:02 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void	scalar_product(double scalar, double *vector_2, double *to_fill);
 void	mlx_initialization(t_rt *rt);
 void	mlx_run(t_rt *rt);
 void	free_mlx(t_rt *rt);
-int		close_window(void *rt_tmp);
+// int		close_window(void *rt_tmp);
 int		close_window_key(int keypress, void *rt_tmp);
 
 #endif

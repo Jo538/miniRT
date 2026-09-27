@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
+#    By: bribot <bribot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/24 16:39:23 by admin            ###   ########.fr        #
+#    Updated: 2026/09/27 15:18:37 by bribot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compiler
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -g3 -O0
+# CFLAGS = -Wall -Wextra -Werror -g3 -O0 -Wno-cast-function-type
 NAME = miniRT
 
 # Directories
