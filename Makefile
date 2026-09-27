@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bribot <bribot@student.42.fr>              +#+  +:+       +#+         #
+#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/27 15:18:37 by bribot           ###   ########.fr        #
+#    Updated: 2026/09/27 17:17:29 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Compiler
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror -g3 -O0 -Wno-cast-function-type
+CFLAGS = -Wall -Wextra -Werror -g3 -O0 -Wno-cast-function-type
 NAME = miniRT
 
 # Directories
@@ -38,7 +38,8 @@ VPATH = $(SRC_DIR):$(GNL_DIR):src/parser:src/checker:src/engine:src/solver_eq:sr
 SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c \
           line.c line_bis.c nested_items.c utils_bis.c utils.c \
 		  init.c parser_utils.c parser.c parserbis.c mlx.c mlx_close.c \
-		  direction.c viewport.c engine.c solver.c colour.c operations.c operations_bis.c
+		  direction.c viewport.c engine.c solver.c colour.c operations.c operations_bis.c \
+		  shading.c shading_bis.c
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a
 

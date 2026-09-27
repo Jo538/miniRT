@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/27 15:19:02 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/27 17:17:37 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	test_unitaire(void);
 #  define KEY_ESC 65307
 # endif
 
+# define SPECULAR_REFLECTIVITY_COEFF 0.5
+# define SHININESS_EXPONENT 32
 
 typedef enum e_id
 {
@@ -71,7 +73,7 @@ typedef struct s_object
 {
 	t_id id; //peut etre changer a int si fonctionne pas avec t_id
 	double ratio;
-	int	rgb[3];
+	double	rgb[3];
 	double coordinates[3];
 	double vector[3];
 	int fov;
@@ -100,12 +102,6 @@ typedef struct	s_rt
 	int			err;
 }				t_rt;
 
-typedef struct s_ray
-{
-	double	origin[3];
-	double	direction[3];
-}	t_ray;
-
 typedef	struct	s_tridouble
 {
 	double	a;
@@ -113,17 +109,40 @@ typedef	struct	s_tridouble
 	double	c;
 }				t_tridouble;
 
+typedef struct s_shade
+{
+	double	ambient_light[3];
+	double	diffuse_light[3];
+	double	specular_light[3];
+	double	normal[3];
+	double	light_vector[3];
+	double	eye_vector[3];
+	double	reflection_vector[3];
+}	t_shade;
+
+typedef struct s_hit
+{
+	double	ray_direction[3];
+	double	intersection[3];
+}	t_hit;
+
 int	extract_file(int fd, t_rt *rt);
 int	recognize_obj_type(char **info);
 void	normalise_vector(double *vector);
 int	parse_viewport(t_rt *rt);
-void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray);
+void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_hit *hit);
 void	run_engine(t_rt *rt);
-double solver(t_ray *ray, t_rt *rt);
-void	colour_pixel(t_rt *rt, int col, int row);
+int	solver(t_rt *rt, t_hit *hit);
+void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit);
 void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	vector_subst(double *vector_1, double *vector_2, double *to_fill);
-void	normalise_color(double *normalised_colour, t_object *light);
+void	normalise_color(double *normalised_colour, double *src);
+void	component_wise_multiplication(double *vector_1, double *vector_2, double *to_fill);
+void	add_vectors(double *vector_1, double *vector_2, double *to_fill);
+void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb);
+void	compute_specular_light(t_rt *rt, t_shade *shade);
+void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
+void	compute_ambient_light(t_rt *rt, t_shade *shade);
 
 // CHECKER
 int	is_correct(char **row);

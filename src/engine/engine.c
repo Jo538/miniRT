@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 10:44:39 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/27 17:01:20 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	parse_image(t_rt *rt)
 {
 	int		col;
 	int		row;
-	t_ray	ray;
+	t_hit	hit;
 
 	row = 0;
 	while (row < Y_MAX)
@@ -24,9 +24,9 @@ static int	parse_image(t_rt *rt)
 		col = 0;
 		while (col < X_MAX)
 		{
-			find_ray_direction(col, row, rt, &ray);
-			if (solver(&ray, rt) != -1000)
-				colour_pixel(rt, col, row);
+			find_ray_direction(col, row, rt, &hit);
+			if (!solver(rt, &hit))
+				colour_pixel(rt, col, row, &hit);
 			col++;
 		}
 		row++;
