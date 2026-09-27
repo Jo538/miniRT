@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/27 15:19:02 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/27 19:29:51 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,9 +156,10 @@ int	put_normalized_vector(char *to_split, t_object *obj);
 void	other_case(t_rt *rt, char **row, int type_obj);
 void	free_hoa(t_rt *head);
 
-//CALCULATOR
+//CALCULATOR/SOLVER
 double	make_dot_product(double first[3], double second[3]);
 void	scalar_product(double scalar, double *vector_2, double *to_fill);
+double	solver_pl(t_ray *ray, t_rt *rt);
 
 //MLX
 void	mlx_initialization(t_rt *rt);

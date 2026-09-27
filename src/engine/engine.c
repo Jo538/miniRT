@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 10:44:39 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/27 19:25:26 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	parse_image(t_rt *rt)
 		while (col < X_MAX)
 		{
 			find_ray_direction(col, row, rt, &ray);
-			if (solver(&ray, rt) != -1000)
+			if (solver_pl(&ray, rt) != -1000)
 				colour_pixel(rt, col, row);
 			col++;
 		}
