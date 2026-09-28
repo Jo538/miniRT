@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   direction.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 16:36:30 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/28 17:25:30 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ static void	find_D(double *viewport_coord, t_ray *ray, t_rt *rt)
 {
 	double u_right[3];
 	double v_up[3];
-	
+
 	scalar_product(viewport_coord[0], rt->viewport->right, u_right);
 	scalar_product(viewport_coord[1], rt->viewport->up, v_up);
-	
-	ray->direction[0] = rt->viewport->forward[0] + u_right[0] + v_up[0]; 
-	ray->direction[1] = rt->viewport->forward[1] + u_right[1] + v_up[1]; 
-	ray->direction[2] = rt->viewport->forward[2] + u_right[2] + v_up[2]; 
+
+	ray->direction[0] = rt->viewport->forward[0] + u_right[0] + v_up[0];
+	ray->direction[1] = rt->viewport->forward[1] + u_right[1] + v_up[1];
+	ray->direction[2] = rt->viewport->forward[2] + u_right[2] + v_up[2];
 	normalise_vector(ray->direction);
 }
 
@@ -44,7 +44,10 @@ void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray)
 {
 	double	normalised_coord[2];
 	double	viewport_coord[2];
-	
+
+	ray->origin[0] = rt->C->coordinates[0];
+	ray->origin[1] = rt->C->coordinates[1];
+	ray->origin[2] = rt->C->coordinates[2];
 	normalise_pixel(pixel_x, pixel_y, normalised_coord);
 	find_viewport_coordinates(normalised_coord, rt, viewport_coord);
 	find_D(viewport_coord, ray, rt);

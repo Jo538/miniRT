@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/27 19:29:51 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/28 17:01:51 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	parse_viewport(t_rt *rt);
 void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_ray *ray);
 void	run_engine(t_rt *rt);
 double solver(t_ray *ray, t_rt *rt);
-void	colour_pixel(t_rt *rt, int col, int row);
+void	colour_pixel(t_rt *rt, int col, int row, t_object *obj);
 void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	vector_subst(double *vector_1, double *vector_2, double *to_fill);
 void	normalise_color(double *normalised_colour, t_object *light);
@@ -159,7 +159,10 @@ void	free_hoa(t_rt *head);
 //CALCULATOR/SOLVER
 double	make_dot_product(double first[3], double second[3]);
 void	scalar_product(double scalar, double *vector_2, double *to_fill);
-double	solver_pl(t_ray *ray, t_rt *rt);
+double	solver_pl(t_ray *ray, t_object *obj);
+int	solver_main(t_ray *ray, t_rt *rt, t_object **closest);
+double solver_sp(t_ray *ray, t_object *obj);
+
 
 //MLX
 void	mlx_initialization(t_rt *rt);
