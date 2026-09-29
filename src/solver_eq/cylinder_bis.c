@@ -6,22 +6,21 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 13:16:49 by admin             #+#    #+#             */
-/*   Updated: 2026/09/29 13:17:43 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 20:32:50 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	find_intersection(double t, t_rt *rt, t_hit *hit)
+void	find_intersection(double t, t_rt *rt, t_hit *hit)
 {
 	double	tmp1[3];
 	
 	scalar_product(t, hit->ray_direction, tmp1);
 	add_vectors(rt->C->coordinates, tmp1, hit->intersection);
-	return (0);	
 }
 
-static int	pass_height_check(t_rt *rt, t_hit *hit, double y_min, double y_max, double t)
+int	pass_height_check(t_rt *rt, t_hit *hit, double y_min, double y_max, double t)
 {
 	double	y;
 
@@ -31,7 +30,7 @@ static int	pass_height_check(t_rt *rt, t_hit *hit, double y_min, double y_max, d
 	return (1);
 }
 
-static int	pass_cap_check(t_rt *rt, t_hit *hit, double y)
+int	pass_cap_check(t_rt *rt, t_hit *hit, double y)
 {
 	double	t;
 	double	x;

@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/29 12:27:43 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 20:33:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,12 +135,6 @@ typedef struct s_hit
 	double			intersection[3];
 }	t_hit;
 
-typedef struct s_solution
-{
-	double	t;
-	double	*next_t;	
-}	t_solution;
-
 int	extract_file(int fd, t_rt *rt);
 int	recognize_obj_type(char **info);
 void	normalise_vector(double *vector);
@@ -160,6 +154,9 @@ void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
 void	compute_ambient_light(t_rt *rt, t_shade *shade);
 int	solver_cylinder(t_rt *rt, t_hit *hit);
 int	solver(t_rt *rt, t_hit *hit);
+void	find_intersection(double t, t_rt *rt, t_hit *hit);
+int	pass_height_check(t_rt *rt, t_hit *hit, double y_min, double y_max, double t);
+int	pass_cap_check(t_rt *rt, t_hit *hit, double y);
 
 // CHECKER
 int	is_correct(char **row);

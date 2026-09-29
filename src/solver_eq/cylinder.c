@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 20:21:55 by admin             #+#    #+#             */
-/*   Updated: 2026/09/29 13:19:13 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 20:38:09 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,59 +31,55 @@ static double	compute_delta(t_rt *rt, t_hit *hit, t_tridouble *eq)
 	return (delta);
 }
 
-static void	positive_delta(t_tridouble *eq, double delta, t_solution *t)
+static void	positive_delta(double delta, t_tridouble *eq, double *t, t_rt *rt, t_hit *hit, double y_min, double y_max)
 {
-	double	tmp_t[2];
+	double	new_t;
 
-	tmp_t[0] = (-eq->b - sqrt(delta)) / (2 * eq->a);
- 	tmp_t[1] = (-eq->b + sqrt(delta)) / (2 * eq->a);
-	if (pass_height_check(rt, hit, y_min, y_max, tmp_t[0]))
-		// add to t_sol
-	if (pass_height_check(rt, hit, y_min, y_max, tmp_t[1]))
-		// add to t_sol
+	new_t = (-eq->b - sqrt(delta)) / (2 * eq->a);
+	if (pass_height_check(rt, hit, y_min, y_max, new_t))
+		*t = new_t;
+			
+ 	new_t = (-eq->b + sqrt(delta)) / (2 * eq->a);
+
+	if (new_t < *t && pass_height_check(rt, hit, y_min, y_max, new_t))
+		*t = new_t;
 }
 
-static int	parse_t(double delta, t_tridouble *eq, t_solution *t_sol, t_rt *rt, t_hit *hit, double y_min, double y_max)
+static void	zero_delta(double delta, t_tridouble *eq, double *t, t_rt *rt, t_hit *hit, double y_min, double y_max)
 {
-	double	t;
+	double	new_t;
 
-	if (delta < 0)
-		return (1);
-	if (delta == 0)
-	{
-		t = -eq->b / (2 * eq->a);
-		if (pass_height_check(rt, hit, y_min, y_max, t))
-			// add to list of t_sol
-	}
-	if (delta > 0)
-		positive_delta(eq, delta, t_sol);
-	return (0);
+	new_t = -eq->b / (2 * eq->a);
+	if (pass_height_check(rt, hit, y_min, y_max, new_t))
+		*t = new_t;
 }
 
-static int	solve_quadratic(t_rt *rt, t_hit *hit, t_solution *t)
+static int	solve_quadratic(t_rt *rt, t_hit *hit, double *t, double y_min, double y_max)
 {
 	double	delta;
 	t_tridouble	eq;
 	
 	delta = compute_delta(rt, hit, &eq);
-	if (parse_t(delta, &eq, &t))
-		return (1);	
+	if (delta < 0)
+		return (1);
+	if (delta == 0)
+		zero_delta(delta, &eq, t, rt, hit, y_min, y_max);
+	if (delta > 0)
+		positive_delta(delta, &eq, t, rt, hit, y_min, y_max);
+	return (0);
 }
 
 int	solver_cylinder(t_rt *rt, t_hit *hit)
 {
-	t_solution	*t;
+	double	t;
 	double	y_min; // eventually create 3 structures for sphere, plane and cylinder and add y_min and y_max at initialisation as never changes
 	double	y_max;
 
 	y_min = -rt->first_object->height / 2;
 	y_max = rt->first_object->height / 2;
 
-	t = NULL;
-
-	if (solve_quadratic(rt, hit, t))
+	if (solve_quadratic(rt, hit, &t, y_min, y_max))
 		return (1);
-	pass_height_check(rt, hit, y_min, y_max, t);
 	pass_cap_check(rt, hit, y_max);
 	pass_cap_check(rt, hit, y_min);
 	find_intersection(t, rt, hit);
