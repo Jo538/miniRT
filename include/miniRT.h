@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/29 11:28:49 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 12:27:43 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,12 @@ typedef struct s_hit
 	double			ray_direction[3];
 	double			intersection[3];
 }	t_hit;
+
+typedef struct s_solution
+{
+	double	t;
+	double	*next_t;	
+}	t_solution;
 
 int	extract_file(int fd, t_rt *rt);
 int	recognize_obj_type(char **info);
