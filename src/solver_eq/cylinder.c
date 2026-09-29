@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 20:21:55 by admin             #+#    #+#             */
-/*   Updated: 2026/09/29 20:50:36 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 20:55:38 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	positive_delta(double delta, t_tridouble *eq, double *t, t_rt *rt, t
 	}
 }
 
-static void	zero_delta(double delta, t_tridouble *eq, double *t, t_rt *rt, t_hit *hit, double y_min, double y_max)
+static void	zero_delta(t_tridouble *eq, double *t, t_rt *rt, t_hit *hit, double y_min, double y_max)
 {
 	double	new_t;
 
@@ -72,7 +72,7 @@ static int	solve_quadratic(t_rt *rt, t_hit *hit, double *t, double y_min, double
 	if (delta < 0)
 		return (1);
 	if (delta == 0)
-		zero_delta(delta, &eq, t, rt, hit, y_min, y_max);
+		zero_delta(&eq, t, rt, hit, y_min, y_max);
 	if (delta > 0)
 		positive_delta(delta, &eq, t, rt, hit, y_min, y_max);
 	return (0);
@@ -83,14 +83,14 @@ static void	solve_cap(t_rt *rt, t_hit *hit, double *t, double y_min, double y_ma
 	double	new_t;
 	
 	new_t = (y_max - rt->C->coordinates[1]) / hit->ray_direction[1];
-	if (new_t < *t && pass_cap_check(rt, hit, y_max, new_t))
+	if (new_t < *t && pass_cap_check(rt, hit, new_t))
 	{
 		*t = new_t;
 		hit->surface = TOP_CAP;
 	}
 
 	new_t = (y_min - rt->C->coordinates[1]) / hit->ray_direction[1];
-	if (new_t < *t && pass_cap_check(rt, hit, y_min, new_t))
+	if (new_t < *t && pass_cap_check(rt, hit, new_t))
 	{
 		*t = new_t;
 		hit->surface = BOTTOM_CAP;

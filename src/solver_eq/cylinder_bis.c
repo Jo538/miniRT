@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 13:16:49 by admin             #+#    #+#             */
-/*   Updated: 2026/09/29 20:41:59 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 21:13:02 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ int	pass_height_check(t_rt *rt, t_hit *hit, double y_min, double y_max, double t
 {
 	double	y;
 
-	y = rt->C->coordinates[1] + t * hit->intersection[1];
+	y = rt->C->coordinates[1] + t * hit->ray_direction[1];
 	if (y < y_min || y > y_max)
 		return (0);
 	return (1);
 }
 
-int	pass_cap_check(t_rt *rt, t_hit *hit, double y, double t)
+int	pass_cap_check(t_rt *rt, t_hit *hit, double t)
 {
 	double	x;
 	double	z;

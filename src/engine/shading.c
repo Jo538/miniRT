@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/29 11:47:58 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 21:20:12 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	compute_normal(t_rt *rt, t_hit *hit, t_shade *shade)
 
 	object = rt->first_object;
 	
-	if (object == SPHERE)
+	if (object->id == SPHERE)
 	{
 		vector_subst(hit->intersection, object->coordinates, shade->normal);
 		normalise_vector(shade->normal);		
@@ -47,11 +47,12 @@ static void	compute_normal(t_rt *rt, t_hit *hit, t_shade *shade)
 	else
 	{
 		if (hit->surface == SIDE_WALL)
-			make_vector((double []){hit->intersection[0], 0, hit->intersection[1]}, shade->normal);
+			make_vector((double []){hit->intersection[0], 0, hit->intersection[2]}, shade->normal);
 		if (hit->surface == TOP_CAP)
 			make_vector((double []){0, 1, 0}, shade->normal);
 		if (hit->surface == BOTTOM_CAP)
 			make_vector((double []){0, -1, 0}, shade->normal);	
+		normalise_vector(shade->normal);
 	}
 }
 
