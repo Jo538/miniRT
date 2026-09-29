@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/29 10:41:43 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 11:28:49 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,19 @@ typedef struct s_shade
 	double	reflection_vector[3];
 }	t_shade;
 
+typedef enum e_surface
+{
+	DEFAULT,
+	SIDE_WALL,
+	TOP_CAP,
+	BOTTOM_CAP
+} t_surface;
+
 typedef struct s_hit
 {
-	double	ray_direction[3];
-	double	intersection[3];
+	t_surface		surface;
+	double			ray_direction[3];
+	double			intersection[3];
 }	t_hit;
 
 int	extract_file(int fd, t_rt *rt);
@@ -143,6 +152,8 @@ void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb);
 void	compute_specular_light(t_rt *rt, t_shade *shade);
 void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
 void	compute_ambient_light(t_rt *rt, t_shade *shade);
+int	solver_cylinder(t_rt *rt, t_hit *hit);
+int	solver(t_rt *rt, t_hit *hit);
 
 // CHECKER
 int	is_correct(char **row);
