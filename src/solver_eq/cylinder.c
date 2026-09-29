@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 20:21:55 by admin             #+#    #+#             */
-/*   Updated: 2026/09/29 20:38:09 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 20:50:36 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,18 @@ static void	positive_delta(double delta, t_tridouble *eq, double *t, t_rt *rt, t
 
 	new_t = (-eq->b - sqrt(delta)) / (2 * eq->a);
 	if (pass_height_check(rt, hit, y_min, y_max, new_t))
+	{
 		*t = new_t;
+		hit->surface = SIDE_WALL;
+	}
 			
  	new_t = (-eq->b + sqrt(delta)) / (2 * eq->a);
 
 	if (new_t < *t && pass_height_check(rt, hit, y_min, y_max, new_t))
+	{
 		*t = new_t;
+		hit->surface = SIDE_WALL;
+	}
 }
 
 static void	zero_delta(double delta, t_tridouble *eq, double *t, t_rt *rt, t_hit *hit, double y_min, double y_max)
@@ -51,7 +57,10 @@ static void	zero_delta(double delta, t_tridouble *eq, double *t, t_rt *rt, t_hit
 
 	new_t = -eq->b / (2 * eq->a);
 	if (pass_height_check(rt, hit, y_min, y_max, new_t))
+	{
 		*t = new_t;
+		hit->surface = SIDE_WALL;
+	}
 }
 
 static int	solve_quadratic(t_rt *rt, t_hit *hit, double *t, double y_min, double y_max)
@@ -69,6 +78,25 @@ static int	solve_quadratic(t_rt *rt, t_hit *hit, double *t, double y_min, double
 	return (0);
 }
 
+static void	solve_cap(t_rt *rt, t_hit *hit, double *t, double y_min, double y_max)
+{
+	double	new_t;
+	
+	new_t = (y_max - rt->C->coordinates[1]) / hit->ray_direction[1];
+	if (new_t < *t && pass_cap_check(rt, hit, y_max, new_t))
+	{
+		*t = new_t;
+		hit->surface = TOP_CAP;
+	}
+
+	new_t = (y_min - rt->C->coordinates[1]) / hit->ray_direction[1];
+	if (new_t < *t && pass_cap_check(rt, hit, y_min, new_t))
+	{
+		*t = new_t;
+		hit->surface = BOTTOM_CAP;
+	}
+}
+
 int	solver_cylinder(t_rt *rt, t_hit *hit)
 {
 	double	t;
@@ -78,11 +106,12 @@ int	solver_cylinder(t_rt *rt, t_hit *hit)
 	y_min = -rt->first_object->height / 2;
 	y_max = rt->first_object->height / 2;
 
+	t = -1;
 	if (solve_quadratic(rt, hit, &t, y_min, y_max))
 		return (1);
-	pass_cap_check(rt, hit, y_max);
-	pass_cap_check(rt, hit, y_min);
+	solve_cap(rt, hit, &t, y_min, y_max);
+	if (t == -1)
+		return (1);
 	find_intersection(t, rt, hit);
-	hit->surface = SIDE_WALL;
 	return (0);
 }
