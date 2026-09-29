@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 20:21:55 by admin             #+#    #+#             */
-/*   Updated: 2026/09/29 13:15:39 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 13:17:39 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ static double	compute_delta(t_rt *rt, t_hit *hit, t_tridouble *eq)
 	return (delta);
 }
 
-static void	find_intersection(double t, t_rt *rt, t_hit *hit)
-{
-	double	tmp1[3];
-	
-	scalar_product(t, hit->ray_direction, tmp1);
-	add_vectors(rt->C->coordinates, tmp1, hit->intersection);
-	return (0);	
-}
-
 static void	positive_delta(t_tridouble *eq, double delta, t_solution *t)
 {
 	double	tmp_t[2];
@@ -50,31 +41,6 @@ static void	positive_delta(t_tridouble *eq, double delta, t_solution *t)
 		// add to t_sol
 	if (pass_height_check(rt, hit, y_min, y_max, tmp_t[1]))
 		// add to t_sol
-}
-
-static int	pass_height_check(t_rt *rt, t_hit *hit, double y_min, double y_max, double t)
-{
-	double	y;
-
-	y = rt->C->coordinates[1] + t * hit->intersection[1];
-	if (y < y_min || y > y_max)
-		return (0);
-	return (1);
-}
-
-static int	pass_cap_check(t_rt *rt, t_hit *hit, double y)
-{
-	double	t;
-	double	x;
-	double	z;
-
-	t = (y - rt->C->coordinates[1]) / hit->ray_direction[1];
-	x = rt->C->coordinates[0] + t * hit->intersection[0];
-	z = rt->C->coordinates[2] + t * hit->intersection[2];
-	
-	if ((pow(x, 2) + pow(z, 2)) > pow(rt->first_object->diameter / 2, 2))
-		return (0);
-	return (1);
 }
 
 static int	parse_t(double delta, t_tridouble *eq, t_solution *t_sol, t_rt *rt, t_hit *hit, double y_min, double y_max)
