@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 20:21:55 by admin             #+#    #+#             */
-/*   Updated: 2026/09/29 13:17:39 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 13:19:13 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static int	solve_quadratic(t_rt *rt, t_hit *hit, t_solution *t)
 int	solver_cylinder(t_rt *rt, t_hit *hit)
 {
 	t_solution	*t;
-	double	delta;
 	double	y_min; // eventually create 3 structures for sphere, plane and cylinder and add y_min and y_max at initialisation as never changes
 	double	y_max;
 
@@ -82,7 +81,7 @@ int	solver_cylinder(t_rt *rt, t_hit *hit)
 
 	t = NULL;
 
-	if (solve_quadratic(rt, hit, &eq, t))
+	if (solve_quadratic(rt, hit, t))
 		return (1);
 	pass_height_check(rt, hit, y_min, y_max, t);
 	pass_cap_check(rt, hit, y_max);
