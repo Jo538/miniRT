@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 16:20:16 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/30 21:19:08 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,9 @@ typedef enum e_surface
 
 typedef struct s_hit
 {
+	double			right[3];
+	double			up[3];
+	double			forward[3];
 	t_object		*closest;
 	double			t;
 	t_surface		surface;
@@ -174,6 +177,7 @@ int	has_correct_separator_formatting(char *str, char separator);
 int	has_correct_sign_formatting(char *str, bool check_negative, bool check_positive);
 int	has_valid_char(char *str, char *expected);
 int	is_new_best(double new_t, t_hit *hit, t_rt *rt, int(*check)(t_rt *, t_hit *, double));
+void	make_vector(double *vector, double *to_fill);
 
 // UTILS
 void	free_tab(char **tab);

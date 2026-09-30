@@ -6,18 +6,11 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/29 21:20:12 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/30 20:51:18 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-void	make_vector(double *vector, double *to_fill)
-{
-	to_fill[0] = vector[0];
-	to_fill[1] = vector[1];
-	to_fill[2] = vector[2];
-}
 
 static void	compute_eye_vector(t_hit *hit, t_shade *shade)
 {
