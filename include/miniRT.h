@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/27 17:17:37 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/30 15:24:14 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include "libft.h"
 # include "get_next_line.h"
 # include "mlx.h"
-
-int	test_unitaire(void);
 
 // DEFINITION DES TAILLES DE L ECRAN CENTRE EN 0
 
@@ -175,9 +173,13 @@ int	put_normalized_vector(char *to_split, t_object *obj);
 void	other_case(t_rt *rt, char **row, int type_obj);
 void	free_hoa(t_rt *head);
 
-//CALCULATOR
+//CALCULATOR/SOLVER
 double	make_dot_product(double first[3], double second[3]);
 void	scalar_product(double scalar, double *vector_2, double *to_fill);
+double	solver_pl(t_ray *ray, t_object *obj);
+int	solver_main(t_ray *ray, t_rt *rt, t_object **closest);
+double solver_sp(t_ray *ray, t_object *obj);
+
 
 //MLX
 void	mlx_initialization(t_rt *rt);

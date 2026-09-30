@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
+#    By: bribot <bribot@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/09/07 14:27:05 by jchartie          #+#    #+#              #
-#    Updated: 2026/09/27 17:17:29 by admin            ###   ########.fr        #
+#    Updated: 2026/09/30 15:20:32 by bribot           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SOURCES = main.c file_reader.c get_next_line.c get_next_line_utils.c \
           line.c line_bis.c nested_items.c utils_bis.c utils.c \
 		  init.c parser_utils.c parser.c parserbis.c mlx.c mlx_close.c \
 		  direction.c viewport.c engine.c solver.c colour.c operations.c operations_bis.c \
-		  shading.c shading_bis.c
+		  shading.c shading_bis.c solver_pl.c solver_main.c
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 LIB_OBJ = $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a
 

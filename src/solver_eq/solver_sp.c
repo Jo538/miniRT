@@ -1,67 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solver.c                                           :+:      :+:    :+:   */
+/*   solver_sp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/30 15:27:40 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/27 19:28:50 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+double	make_dot_product(double first[3], double second[3])
+{
+	double	to_return;
+
+	to_return = first[0] * second[0] + first[1] * second[1] + first[2] * second[2];
+	return (to_return);
+}
 
 double	find_lowest_soluc(double a, double b, double c)
 {
-	double discriminant;
+	double rc;
 	double	sol1;
 	double	sol2;
-	double	rc;
 
 	rc = (b * b) - (4 * a * c);
 	if (rc < 0)
 		return (-1000); // sert a se rendre compte q il n y a pas de solutions
-	sol1 = (-b + sqrt(rc)) / (2 * a);
-	sol2 = (-b - sqrt(rc)) / (2 * a);
+	sol1 = (-b + rc) / (2 * a);
+	sol2 = (-b - rc) / (2 * a);
 
-	if (sol1 >= 0 && sol1 <= sol2)
+	if (sol1 <= sol2)
 		return (sol1);
-	else if (sol2 >= 0 && sol2 <= sol2)
-		return (sol2);
 	else
-		return (-1000);
+		return (sol2);
 }
 
-static int	find_intersection(t_rt *rt, t_hit *hit, double t)
-{
-	double	tmp1[3];
-
-	if (t == -1000)
-		return (1);
-	scalar_product(t, hit->ray_direction, tmp1);
-	add_vectors(rt->C->coordinates, tmp1, hit->intersection);
-	return (0);
-}
-
-int	solver(t_rt *rt, t_hit *hit)
+double solver_sp(double x_dir, double y_dir, t_rt *head_of_all)
 {
 	double	CO[3];
 	double	D[3];
 	double	rayon;
 	t_tridouble	eq;
-	double	t;
 
-	CO[0] = rt->C->coordinates[0] - rt->first_object->coordinates[0];
-	CO[1] = rt->C->coordinates[1] - rt->first_object->coordinates[1];
-	CO[2] = rt->C->coordinates[2] - rt->first_object->coordinates[2];
-	D[0] = hit->ray_direction[0];
-	D[1] = hit->ray_direction[1];
-	D[2] = hit->ray_direction[2];
-	rayon = (rt->first_object->diameter / 2) * (rt->first_object->diameter / 2);
+	CO[0] = head_of_all->C->coordinates[0] - head_of_all->first_object->coordinates[0];
+	CO[1] = head_of_all->C->coordinates[1] - head_of_all->first_object->coordinates[1];
+	CO[2] = head_of_all->C->coordinates[2] - head_of_all->first_object->coordinates[2];
+	D[0] = x_dir;
+	D[1] = y_dir;
+	D[2] = 1;
+	rayon = (head_of_all->first_object->diameter / 2) * (head_of_all->first_object->diameter / 2);
 	eq.a = make_dot_product(D, D);
 	eq.b = make_dot_product(CO, D) * 2;
 	eq.c = make_dot_product(CO, CO) - rayon;
-	t = find_lowest_soluc(eq.a, eq.b, eq.c);
-	return (find_intersection(rt, hit, t));
+	return (find_lowest_soluc(eq.a, eq.b, eq.c));
 }
