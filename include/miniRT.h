@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 15:24:14 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/30 15:46:16 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ typedef	struct	s_tridouble
 	double	a;
 	double	b;
 	double	c;
-}				t_tridouble;
+	double	delta;
+}				t_quadratic;
 
 typedef struct s_shade
 {
@@ -118,10 +119,20 @@ typedef struct s_shade
 	double	reflection_vector[3];
 }	t_shade;
 
+typedef enum e_surface
+{
+	DEFAULT,
+	SIDE_WALL,
+	TOP_CAP,
+	BOTTOM_CAP
+} t_surface;
+
 typedef struct s_hit
 {
-	double	ray_direction[3];
-	double	intersection[3];
+	double			t;
+	t_surface		surface;
+	double			ray_direction[3];
+	double			intersection[3];
 }	t_hit;
 
 int	extract_file(int fd, t_rt *rt);
@@ -130,7 +141,7 @@ void	normalise_vector(double *vector);
 int	parse_viewport(t_rt *rt);
 void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_hit *hit);
 void	run_engine(t_rt *rt);
-int	solver(t_rt *rt, t_hit *hit);
+int	solver_sphere(t_rt *rt, t_hit *hit);
 void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit);
 void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	vector_subst(double *vector_1, double *vector_2, double *to_fill);
@@ -141,6 +152,11 @@ void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb);
 void	compute_specular_light(t_rt *rt, t_shade *shade);
 void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
 void	compute_ambient_light(t_rt *rt, t_shade *shade);
+int	solver_cylinder(t_rt *rt, t_hit *hit);
+int	solver(t_rt *rt, t_hit *hit);
+void	find_intersection(t_rt *rt, t_hit *hit);
+int	pass_height_check(t_rt *rt, t_hit *hit, double t);
+int	pass_cap_check(t_rt *rt, t_hit *hit, double t);
 
 // CHECKER
 int	is_correct(char **row);
@@ -156,6 +172,7 @@ int	has_correct_number_of_items(char *str, int expected);
 int	has_correct_separator_formatting(char *str, char separator);
 int	has_correct_sign_formatting(char *str, bool check_negative, bool check_positive);
 int	has_valid_char(char *str, char *expected);
+int	is_new_best(double new_t, t_hit *hit, t_rt *rt, int(*check)(t_rt *, t_hit *, double));
 
 // UTILS
 void	free_tab(char **tab);

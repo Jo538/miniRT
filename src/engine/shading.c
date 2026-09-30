@@ -6,11 +6,18 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/27 17:11:30 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/29 21:20:12 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	make_vector(double *vector, double *to_fill)
+{
+	to_fill[0] = vector[0];
+	to_fill[1] = vector[1];
+	to_fill[2] = vector[2];
+}
 
 static void	compute_eye_vector(t_hit *hit, t_shade *shade)
 {
@@ -28,11 +35,25 @@ static void	compute_light_vector(t_rt *rt, t_hit *hit, t_shade *shade)
 
 static void	compute_normal(t_rt *rt, t_hit *hit, t_shade *shade)
 {
-	t_object	*sphere;
+	t_object	*object;
 
-	sphere = rt->first_object;
-	vector_subst(hit->intersection, sphere->coordinates, shade->normal);
-	normalise_vector(shade->normal);
+	object = rt->first_object;
+	
+	if (object->id == SPHERE)
+	{
+		vector_subst(hit->intersection, object->coordinates, shade->normal);
+		normalise_vector(shade->normal);		
+	}
+	else
+	{
+		if (hit->surface == SIDE_WALL)
+			make_vector((double []){hit->intersection[0], 0, hit->intersection[2]}, shade->normal);
+		if (hit->surface == TOP_CAP)
+			make_vector((double []){0, 1, 0}, shade->normal);
+		if (hit->surface == BOTTOM_CAP)
+			make_vector((double []){0, -1, 0}, shade->normal);	
+		normalise_vector(shade->normal);
+	}
 }
 
 static void	compute_reflection_vector(t_shade *shade)
