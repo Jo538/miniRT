@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/29 20:52:45 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/30 12:02:30 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	solver_sphere(t_rt *rt, t_hit *hit)
 	double	CO[3];
 	double	D[3];
 	double	rayon;
-	t_tridouble	eq;
+	t_quadratic	eq;
 	double	t;
 
 	CO[0] = rt->C->coordinates[0] - rt->first_object->coordinates[0];

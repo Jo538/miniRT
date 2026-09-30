@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/29 20:55:15 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/30 12:44:24 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ typedef	struct	s_tridouble
 	double	a;
 	double	b;
 	double	c;
-}				t_tridouble;
+	double	delta;
+}				t_quadratic;
 
 typedef struct s_shade
 {
@@ -130,6 +131,7 @@ typedef enum e_surface
 
 typedef struct s_hit
 {
+	double			t;
 	t_surface		surface;
 	double			ray_direction[3];
 	double			intersection[3];
@@ -154,8 +156,8 @@ void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
 void	compute_ambient_light(t_rt *rt, t_shade *shade);
 int	solver_cylinder(t_rt *rt, t_hit *hit);
 int	solver(t_rt *rt, t_hit *hit);
-void	find_intersection(double t, t_rt *rt, t_hit *hit);
-int	pass_height_check(t_rt *rt, t_hit *hit, double y_min, double y_max, double t);
+void	find_intersection(t_rt *rt, t_hit *hit);
+int	pass_height_check(t_rt *rt, t_hit *hit, double t);
 int	pass_cap_check(t_rt *rt, t_hit *hit, double t);
 
 // CHECKER
@@ -172,6 +174,7 @@ int	has_correct_number_of_items(char *str, int expected);
 int	has_correct_separator_formatting(char *str, char separator);
 int	has_correct_sign_formatting(char *str, bool check_negative, bool check_positive);
 int	has_valid_char(char *str, char *expected);
+int	is_new_best(double new_t, t_hit *hit, t_rt *rt, int(*check)(t_rt *, t_hit *, double));
 
 // UTILS
 void	free_tab(char **tab);

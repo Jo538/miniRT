@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/27 17:01:20 by admin            ###   ########.fr       */
+/*   Updated: 2026/09/30 12:30:47 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static int	parse_image(t_rt *rt)
 		col = 0;
 		while (col < X_MAX)
 		{
+			hit.t = INFINITY;
 			find_ray_direction(col, row, rt, &hit);
 			if (!solver(rt, &hit))
 				colour_pixel(rt, col, row, &hit);
