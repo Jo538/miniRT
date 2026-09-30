@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 15:46:16 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/30 16:20:16 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef enum e_surface
 
 typedef struct s_hit
 {
+	t_object		*closest;
 	double			t;
 	t_surface		surface;
 	double			ray_direction[3];

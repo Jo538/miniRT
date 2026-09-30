@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 15:58:35 by bribot           ###   ########.fr       */
+/*   Updated: 2026/09/30 16:20:59 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ static int	parse_image(t_rt *rt)
 		while (col < X_MAX)
 		{
 			hit.t = INFINITY;
+			hit.closest = NULL;
 			find_ray_direction(col, row, rt, &hit);
-			if (!solver(rt, &hit))
+			if (!solver_main(rt, &hit))
 				colour_pixel(rt, col, row, &hit);
 			col++;
 		}
