@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/30 12:02:30 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/01 15:25:55 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,19 @@ double	find_lowest_soluc(double a, double b, double c)
 		return (-1000);
 }
 
-static int	intersection(t_rt *rt, t_hit *hit, double t)
+static int	intersection(t_hit *hit, double t)
 {
 	double	tmp1[3];
-	
+
 	if (t == -1000)
 		return (1);
+	hit->t = t;
 	scalar_product(t, hit->ray_direction, tmp1);
-	add_vectors(rt->C->coordinates, tmp1, hit->intersection);
+	add_vectors(hit->origin, tmp1, hit->intersection);
 	return (0);
-}	
+}
 
-int	solver_sphere(t_rt *rt, t_hit *hit)
+int	solver_sphere(t_object *object, t_hit *hit)
 {
 	double	CO[3];
 	double	D[3];
@@ -51,16 +52,16 @@ int	solver_sphere(t_rt *rt, t_hit *hit)
 	t_quadratic	eq;
 	double	t;
 
-	CO[0] = rt->C->coordinates[0] - rt->first_object->coordinates[0];
-	CO[1] = rt->C->coordinates[1] - rt->first_object->coordinates[1];
-	CO[2] = rt->C->coordinates[2] - rt->first_object->coordinates[2];
+	CO[0] = hit->origin[0] - object->coordinates[0];
+	CO[1] = hit->origin[1] - object->coordinates[1];
+	CO[2] = hit->origin[2] - object->coordinates[2];
 	D[0] = hit->ray_direction[0];
 	D[1] = hit->ray_direction[1];
 	D[2] = hit->ray_direction[2];
-	rayon = (rt->first_object->diameter / 2) * (rt->first_object->diameter / 2);
+	rayon = (object->diameter / 2) * (object->diameter / 2);
 	eq.a = make_dot_product(D, D);
 	eq.b = make_dot_product(CO, D) * 2;
 	eq.c = make_dot_product(CO, CO) - rayon;
 	t = find_lowest_soluc(eq.a, eq.b, eq.c);
-	return (intersection(rt, hit, t));
+	return (intersection(hit, t));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/01 13:39:10 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/01 15:24:39 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ typedef struct s_hit
 	t_surface	surface;
 	double		ray_direction[3];
 	double		intersection[3];
+	double		origin[3];
 }	t_hit;
 
 typedef struct s_shade
@@ -215,7 +216,7 @@ void	normalise_color(double *normalised_colour, double *src);
 /*                                   SOLVERS                                  */
 /* ************************************************************************** */
 
-int		solver_sphere(t_rt *rt, t_hit *hit);
+int		solver_sphere(t_object *object, t_hit *hit);
 int		solver_cylinder(t_rt *rt, t_hit *hit);
 void	find_intersection(t_rt *rt, t_hit *hit);
 int		is_new_best(double new_t, t_hit *hit, t_rt *rt,
@@ -227,9 +228,8 @@ void	transform_cylinder(t_rt *rt, t_hit *hit, double *world_ray_origin,
 void	revert_to_world_frame(t_rt *rt, t_hit *hit, double *ray_origin,
 			double *ray_direction);
 
-double	solver_pl(t_ray *ray, t_object *obj);
-double	solver_sp(t_ray *ray, t_object *obj);
-int		solver_main(t_ray *ray, t_rt *rt, t_object **closest);
+double	solver_pl(t_hit *hit, t_object *obj);
+int		solver_main(t_rt *rt, t_hit *hit);
 
 /* ************************************************************************** */
 /*                                   ENGINE                                   */

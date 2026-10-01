@@ -3,45 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:30:10 by bribot            #+#    #+#             */
-/*   Updated: 2026/09/30 16:11:03 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/01 15:26:18 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	solver_main_bis(t_ray *ray, t_rt *rt, t_object *obj)
+static int	solver_main_bis(t_rt *rt, t_object *obj, t_hit *hit)
 {
-	(void)rt;
+	double	t;
+
 	if (obj->id == PLANE)
-		return (solver_pl(ray, obj));
-	if (obj->id == SPHERE)
-		return (solver_sp(ray, obj));
-	// if (obj->id == CYLINDER)
-		// return celui de CY
+	{
+		t = solver_pl(hit, obj);
+		if (t <= 0)
+			return (0);
+		hit->t = t;
+		find_intersection(rt, hit);
+	}
+	else if (obj->id == SPHERE)
+	{
+		if (solver_sphere(obj, hit))
+			return (0);
+	}
+	else if (obj->id == CYLINDER)
+	{
+		if (solver_cylinder(rt, hit))
+			return (0);
+	}
+	else
+		return (0);
+	hit->closest = obj;
+	return (1);
 }
 
-int	solver_main(t_ray *ray, t_rt *rt, t_object **closest)
+int	solver_main(t_rt *rt, t_hit *hit)
 {
 	t_object	*object_trot;
-	double			smallest;
-	double			t;
+	t_hit		candidate;
 
 	object_trot = rt->first_object;
-	smallest = 1500000;
 	while (object_trot != NULL)
 	{
-		t = solver_main_bis(ray, rt, object_trot);
-		if (t > 0.0001 && t < smallest)
-		{
-			smallest = t;
-			*closest = object_trot;
-		}
+		candidate = *hit;
+		candidate.t = INFINITY;
+		candidate.closest = NULL;
+		if (solver_main_bis(rt, object_trot, &candidate)
+			&& candidate.t < hit->t)
+			*hit = candidate;
 		object_trot = object_trot->next;
 	}
-	if (smallest == 1500000)
-		return (0);
-	return (1);
+	return (hit->closest != NULL);
 }

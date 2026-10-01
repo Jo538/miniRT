@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   direction.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 15:25:08 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/01 15:24:37 by benji            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_hit *hit)
 	double	normalised_coord[2];
 	double	viewport_coord[2];
 
-	ray->origin[0] = rt->C->coordinates[0];
-	ray->origin[1] = rt->C->coordinates[1];
-	ray->origin[2] = rt->C->coordinates[2];
+	hit->origin[0] = rt->C->coordinates[0];
+	hit->origin[1] = rt->C->coordinates[1];
+	hit->origin[2] = rt->C->coordinates[2];
 	normalise_pixel(pixel_x, pixel_y, normalised_coord);
 	find_viewport_coordinates(normalised_coord, rt, viewport_coord);
 	find_D(viewport_coord, hit, rt);
