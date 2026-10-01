@@ -6,21 +6,30 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/01 12:37:03 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/01 13:39:10 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <stdio.h>
-# include <fcntl.h>
+/* ************************************************************************** */
+/*                                  INCLUDES                                  */
+/* ************************************************************************** */
+
 # include <errno.h>
-# include <stdbool.h>
+# include <fcntl.h>
 # include <math.h>
-# include "libft.h"
+# include <stdbool.h>
+# include <stdio.h>
+
 # include "get_next_line.h"
+# include "libft.h"
 # include "mlx.h"
+
+/* ************************************************************************** */
+/*                                   WINDOW                                   */
+/* ************************************************************************** */
 
 // DEFINITION DES TAILLES DE L ECRAN CENTRE EN 0
 
@@ -40,8 +49,16 @@
 #  define KEY_ESC 65307
 # endif
 
+/* ************************************************************************** */
+/*                                   SHADING                                  */
+/* ************************************************************************** */
+
 # define SPECULAR_REFLECTIVITY_COEFF 0.5
 # define SHININESS_EXPONENT 32
+
+/* ************************************************************************** */
+/*                                    ENUMS                                   */
+/* ************************************************************************** */
 
 typedef enum e_id
 {
@@ -52,33 +69,32 @@ typedef enum e_id
 	PLANE,
 	CYLINDER,
 	INVALID
-} t_id;
+}	t_id;
 
-
-//dans le tab objects, ambient lighning prends la place 0, CAM la place 1 et LIGHT la 2
-typedef struct s_data_mlx
+typedef enum e_surface
 {
-	void	*mlx;
-	void	*img;
-	void	*mlx_win;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data_mlx;
+	DEFAULT,
+	SIDE_WALL,
+	TOP_CAP,
+	BOTTOM_CAP
+}	t_surface;
+
+/* ************************************************************************** */
+/*                                 SCENE DATA                                 */
+/* ************************************************************************** */
 
 typedef struct s_object
 {
-	t_id id; //peut etre changer a int si fonctionne pas avec t_id
-	double ratio;
-	double	rgb[3];
-	double coordinates[3];
-	double vector[3];
-	int fov;
-	double diameter;
-	double height;
+	t_id			id;
+	double			ratio;
+	double			rgb[3];
+	double			coordinates[3];
+	double			vector[3];
+	int				fov;
+	double			diameter;
+	double			height;
 	struct s_object	*next;
-} t_object;
+}	t_object;
 
 typedef struct s_viewport
 {
@@ -89,7 +105,18 @@ typedef struct s_viewport
 	double	up[3];
 }	t_viewport;
 
-typedef struct	s_rt
+typedef struct s_data_mlx
+{
+	void	*mlx;
+	void	*img;
+	void	*mlx_win;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data_mlx;
+
+typedef struct s_rt
 {
 	t_object	*A;
 	t_object	*L;
@@ -98,15 +125,23 @@ typedef struct	s_rt
 	t_data_mlx	*mlx;
 	t_viewport	*viewport;
 	int			err;
-}				t_rt;
+}	t_rt;
 
-typedef	struct	s_tridouble
+/* ************************************************************************** */
+/*                              PER-RAY WORK DATA                             */
+/* ************************************************************************** */
+
+typedef struct s_hit
 {
-	double	a;
-	double	b;
-	double	c;
-	double	delta;
-}				t_quadratic;
+	double		right[3];
+	double		up[3];
+	double		forward[3];
+	t_object	*closest;
+	double		t;
+	t_surface	surface;
+	double		ray_direction[3];
+	double		intersection[3];
+}	t_hit;
 
 typedef struct s_shade
 {
@@ -119,97 +154,116 @@ typedef struct s_shade
 	double	reflection_vector[3];
 }	t_shade;
 
-typedef enum e_surface
+typedef struct s_quadratic
 {
-	DEFAULT,
-	SIDE_WALL,
-	TOP_CAP,
-	BOTTOM_CAP
-} t_surface;
+	double	a;
+	double	b;
+	double	c;
+	double	delta;
+}	t_quadratic;
 
-typedef struct s_hit
-{
-	double			right[3];
-	double			up[3];
-	double			forward[3];
-	t_object		*closest;
-	double			t;
-	t_surface		surface;
-	double			ray_direction[3];
-	double			intersection[3];
-}	t_hit;
+/* ************************************************************************** */
+/*                                   PARSER                                   */
+/* ************************************************************************** */
 
-int	extract_file(int fd, t_rt *rt);
-int	recognize_obj_type(char **info);
-void	normalise_vector(double *vector);
-int	parse_viewport(t_rt *rt);
-void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_hit *hit);
-void	run_engine(t_rt *rt);
-int	solver_sphere(t_rt *rt, t_hit *hit);
-void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit);
-void	cross_product(double *vector_1, double *vector_2, double *to_fill);
-void	vector_subst(double *vector_1, double *vector_2, double *to_fill);
-void	normalise_color(double *normalised_colour, double *src);
-void	component_wise_multiplication(double *vector_1, double *vector_2, double *to_fill);
-void	add_vectors(double *vector_1, double *vector_2, double *to_fill);
-void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb);
-void	compute_specular_light(t_rt *rt, t_shade *shade);
-void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
-void	compute_ambient_light(t_rt *rt, t_shade *shade);
-int	solver_cylinder(t_rt *rt, t_hit *hit);
-int	solver(t_rt *rt, t_hit *hit);
-void	find_intersection(t_rt *rt, t_hit *hit);
-int	pass_height_check(t_rt *rt, t_hit *hit, double t);
-int	pass_cap_check(t_rt *rt, t_hit *hit, double t);
-void	transform_cylinder(t_rt *rt, t_hit *hit, double *world_ray_origin, double *world_ray_direction);
-void	revert_to_world_frame(t_rt *rt, t_hit *hit, double *ray_origin, double *ray_direction);
-
-// CHECKER
-int	is_correct(char **row);
-int	sphere(char ** row);
-int	cylinder(char ** row);
-int	has_correct_colour_format(char *str);
-int	has_correct_vector_format(char *str);
-int	has_correct_float_formatting(char *str);
-int	has_correct_coordinates_format(char *str);
-int	is_in_range(char *str, float min, float max);
-int	has_right_number_of_cells(char **row, int expected);
-int	has_correct_number_of_items(char *str, int expected);
-int	has_correct_separator_formatting(char *str, char separator);
-int	has_correct_sign_formatting(char *str, bool check_negative, bool check_positive);
-int	has_valid_char(char *str, char *expected);
-int	is_new_best(double new_t, t_hit *hit, t_rt *rt, int(*check)(t_rt *, t_hit *, double));
-void	make_vector(double *vector, double *to_fill);
-
-// UTILS
-void	free_tab(char **tab);
-
-
-
-//PARSER
-int	parse(int fd, t_rt *rt);
+int		rt_init(t_rt **rt);
+int		parse(int fd, t_rt *rt);
+int		extract_file(int fd, t_rt *rt);
 void	parse_line(char **row, t_rt *rt);
-int	rt_init(t_rt **rt);
-int	recognize_obj_type(char **info);
-int	put_coordinates_i_objects(char *to_split, t_object *obj);
-int	put_rgb_i_objects(char *to_split, t_object *obj);
-int	put_normalized_vector(char *to_split, t_object *obj);
+int		recognize_obj_type(char **info);
 void	other_case(t_rt *rt, char **row, int type_obj);
-void	free_hoa(t_rt *head);
+int		put_coordinates_i_objects(char *to_split, t_object *obj);
+int		put_rgb_i_objects(char *to_split, t_object *obj);
+int		put_normalized_vector(char *to_split, t_object *obj);
+int		parse_viewport(t_rt *rt);
 
-//CALCULATOR/SOLVER
-double	make_dot_product(double first[3], double second[3]);
+/* ************************************************************************** */
+/*                                   CHECKER                                  */
+/* ************************************************************************** */
+
+int		is_correct(char **row);
+int		sphere(char **row);
+int		cylinder(char **row);
+int		has_correct_colour_format(char *str);
+int		has_correct_vector_format(char *str);
+int		has_correct_coordinates_format(char *str);
+int		has_correct_float_formatting(char *str);
+int		has_correct_number_of_items(char *str, int expected);
+int		has_correct_separator_formatting(char *str, char separator);
+int		has_correct_sign_formatting(char *str, bool check_negative,
+			bool check_positive);
+int		has_right_number_of_cells(char **row, int expected);
+int		has_valid_char(char *str, char *expected);
+int		is_in_range(char *str, float min, float max);
+
+/* ************************************************************************** */
+/*                               VECTOR OPERATIONS                            */
+/* ************************************************************************** */
+
+void	make_vector(double *vector, double *to_fill);
+void	normalise_vector(double *vector);
+void	add_vectors(double *vector_1, double *vector_2, double *to_fill);
+void	vector_subst(double *vector_1, double *vector_2, double *to_fill);
 void	scalar_product(double scalar, double *vector_2, double *to_fill);
+double	make_dot_product(double first[3], double second[3]);
+void	cross_product(double *vector_1, double *vector_2, double *to_fill);
+void	component_wise_multiplication(double *vector_1, double *vector_2,
+			double *to_fill);
+void	normalise_color(double *normalised_colour, double *src);
+
+/* ************************************************************************** */
+/*                                   SOLVERS                                  */
+/* ************************************************************************** */
+
+int		solver_sphere(t_rt *rt, t_hit *hit);
+int		solver_cylinder(t_rt *rt, t_hit *hit);
+void	find_intersection(t_rt *rt, t_hit *hit);
+int		is_new_best(double new_t, t_hit *hit, t_rt *rt,
+			int (*check)(t_rt *, t_hit *, double));
+int		pass_height_check(t_rt *rt, t_hit *hit, double t);
+int		pass_cap_check(t_rt *rt, t_hit *hit, double t);
+void	transform_cylinder(t_rt *rt, t_hit *hit, double *world_ray_origin,
+			double *world_ray_direction);
+void	revert_to_world_frame(t_rt *rt, t_hit *hit, double *ray_origin,
+			double *ray_direction);
+
 double	solver_pl(t_ray *ray, t_object *obj);
-int	solver_main(t_ray *ray, t_rt *rt, t_object **closest);
-double solver_sp(t_ray *ray, t_object *obj);
+double	solver_sp(t_ray *ray, t_object *obj);
+int		solver_main(t_ray *ray, t_rt *rt, t_object **closest);
 
+/* ************************************************************************** */
+/*                                   ENGINE                                   */
+/* ************************************************************************** */
 
-//MLX
+void	run_engine(t_rt *rt);
+void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt,
+			t_hit *hit);
+void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit);
+
+/* ************************************************************************** */
+/*                                   SHADING                                  */
+/* ************************************************************************** */
+
+void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb);
+void	compute_ambient_light(t_rt *rt, t_shade *shade);
+void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
+void	compute_specular_light(t_rt *rt, t_shade *shade);
+
+/* ************************************************************************** */
+/*                                     MLX                                    */
+/* ************************************************************************** */
+
 void	mlx_initialization(t_rt *rt);
 void	mlx_run(t_rt *rt);
-void	free_mlx(t_rt *rt);
-// int		close_window(void *rt_tmp);
 int		close_window_key(int keypress, void *rt_tmp);
+// int		close_window(void *rt_tmp);
+
+/* ************************************************************************** */
+/*                                   CLEANUP                                  */
+/* ************************************************************************** */
+
+void	free_mlx(t_rt *rt);
+void	free_hoa(t_rt *head);
+void	free_tab(char **tab);
 
 #endif
