@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/29 13:16:49 by admin             #+#    #+#             */
-/*   Updated: 2026/09/30 21:23:48 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/01 12:35:32 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	is_new_best(double new_t, t_hit *hit, t_rt *rt, int(*check)(t_rt *, t_hit *,
 	return (1);
 }
 
-void	define_local_frame(t_rt *rt, t_hit *hit)
+static void	define_local_frame(t_rt *rt, t_hit *hit)
 {
 	double	helper[3];
 
@@ -76,23 +76,38 @@ void	define_local_frame(t_rt *rt, t_hit *hit)
 	cross_product(hit->right, hit->up, hit->forward);	
 }
 
-void	shift_cylinder(t_rt *rt)
+static void	shift_cylinder(t_rt *rt)
 {
-	double	new_ray_origin[3];
-
-	vector_subst(rt->C->coordinates, rt->first_object->coordinates, new_ray_origin);
+	vector_subst(rt->C->coordinates, rt->first_object->coordinates, rt->C->coordinates);
 }
 
-void	rotate_cylinder(t_rt *rt)
+static void	rotate_cylinder(t_rt *rt, t_hit *hit)
 {
-	double	new_ray_direction[3];
-	double	new_ray_origin[3];
+	rt->C->coordinates[0] = make_dot_product(rt->C->coordinates, hit->right);
+	rt->C->coordinates[1] = make_dot_product(rt->C->coordinates, hit->up);
+	rt->C->coordinates[2] = make_dot_product(rt->C->coordinates, hit->forward);
 
-	new_ray_origin[0] = make_dot_product(rt->C->coordinates, u);
-	new_ray_origin[1] = make_dot_product(rt->C->coordinates, a);
-	new_ray_origin[2] = make_dot_product(rt->C->coordinates, w);
+	hit->ray_direction[0] = make_dot_product(rt->C->vector, hit->right);
+	hit->ray_direction[1] = make_dot_product(rt->C->vector, hit->up);
+	hit->ray_direction[2] = make_dot_product(rt->C->vector, hit->forward);
+}
 
-	new_ray_direction[0] = make_dot_product(rt->C->vector, u);
-	new_ray_direction[1] = make_dot_product(rt->C->vector, a);
-	new_ray_direction[2] = make_dot_product(rt->C->vector, w);
+static void	save_world_frame(t_rt *rt, t_hit *hit, double *ray_origin, double *ray_direction)
+{
+	scalar_product(1, rt->C->coordinates, ray_origin);
+	scalar_product(1, hit->ray_direction, ray_direction);
+}
+
+void	revert_to_world_frame(t_rt *rt, t_hit *hit, double *ray_origin, double *ray_direction)
+{
+	make_vector(ray_origin, rt->C->coordinates);
+	make_vector(ray_direction, hit->ray_direction);
+}
+
+void	transform_cylinder(t_rt *rt, t_hit *hit, double *world_ray_origin, double *world_ray_direction)
+{	
+	save_world_frame(rt, hit, world_ray_origin, world_ray_direction);
+	define_local_frame(rt, hit);
+	shift_cylinder(rt);
+	rotate_cylinder(rt, hit);
 }

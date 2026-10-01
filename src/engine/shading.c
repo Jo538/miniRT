@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 20:51:18 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/01 12:55:39 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,27 @@ static void	compute_light_vector(t_rt *rt, t_hit *hit, t_shade *shade)
 	normalise_vector(shade->light_vector);
 }
 
+static void	compute_normal_cylinder(t_rt *rt, t_hit *hit, t_shade *shade)
+{
+	double	hit_point[3];
+	double	tmp;
+	double	tmp1[3];
+	
+	if (hit->surface == SIDE_WALL)
+	{
+		vector_subst(hit->intersection, rt->first_object->coordinates, hit_point);
+		tmp = make_dot_product(hit_point, rt->first_object->vector);
+		scalar_product(tmp, rt->first_object->vector, tmp1);
+		vector_subst(hit_point, tmp1, tmp1);
+		scalar_product(1 / (rt->first_object->diameter / 2), tmp1, shade->normal);		
+	}
+	if (hit->surface == TOP_CAP)
+		scalar_product(1, rt->first_object->vector, shade->normal);
+	if (hit->surface == BOTTOM_CAP)
+		scalar_product(-1, rt->first_object->vector, shade->normal);	
+	normalise_vector(shade->normal);	
+}
+
 static void	compute_normal(t_rt *rt, t_hit *hit, t_shade *shade)
 {
 	t_object	*object;
@@ -38,15 +59,7 @@ static void	compute_normal(t_rt *rt, t_hit *hit, t_shade *shade)
 		normalise_vector(shade->normal);		
 	}
 	else
-	{
-		if (hit->surface == SIDE_WALL)
-			make_vector((double []){hit->intersection[0], 0, hit->intersection[2]}, shade->normal);
-		if (hit->surface == TOP_CAP)
-			make_vector((double []){0, 1, 0}, shade->normal);
-		if (hit->surface == BOTTOM_CAP)
-			make_vector((double []){0, -1, 0}, shade->normal);	
-		normalise_vector(shade->normal);
-	}
+		compute_normal_cylinder(rt, hit, shade);
 }
 
 static void	compute_reflection_vector(t_shade *shade)

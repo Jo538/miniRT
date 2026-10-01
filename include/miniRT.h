@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 21:19:08 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/01 12:37:03 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,8 @@ int	solver(t_rt *rt, t_hit *hit);
 void	find_intersection(t_rt *rt, t_hit *hit);
 int	pass_height_check(t_rt *rt, t_hit *hit, double t);
 int	pass_cap_check(t_rt *rt, t_hit *hit, double t);
+void	transform_cylinder(t_rt *rt, t_hit *hit, double *world_ray_origin, double *world_ray_direction);
+void	revert_to_world_frame(t_rt *rt, t_hit *hit, double *ray_origin, double *ray_direction);
 
 // CHECKER
 int	is_correct(char **row);
