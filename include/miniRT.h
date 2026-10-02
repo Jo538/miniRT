@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/01 15:24:39 by benji            ###   ########.fr       */
+/*   Updated: 2026/10/02 11:11:10 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@
 // DEFINITION DES TAILLES DE L ECRAN CENTRE EN 0
 
 # ifndef X_MAX
-#  define X_MAX 1920
+#  define X_MAX 1920 / 2
 # endif
 
 # ifndef Y_MAX
-#  define Y_MAX 1080
+#  define Y_MAX 1080 / 2
 # endif
 
 // LE KEYCODE D ESC DEPEND DE L OS :
@@ -133,9 +133,6 @@ typedef struct s_rt
 
 typedef struct s_hit
 {
-	double		right[3];
-	double		up[3];
-	double		forward[3];
 	t_object	*closest;
 	double		t;
 	t_surface	surface;
@@ -143,6 +140,14 @@ typedef struct s_hit
 	double		intersection[3];
 	double		origin[3];
 }	t_hit;
+
+typedef struct s_frame
+{
+	double		right[3];
+	double		up[3];
+	double		forward[3];
+}	t_frame;
+
 
 typedef struct s_shade
 {
