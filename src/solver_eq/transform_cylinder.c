@@ -6,13 +6,13 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 13:26:58 by admin             #+#    #+#             */
-/*   Updated: 2026/10/02 11:19:15 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 11:42:13 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	define_local_frame(t_rt *rt, t_hit *hit, t_frame *local_frame)
+static void	define_local_frame(t_rt *rt, t_frame *local_frame)
 {
 	double	helper[3];
 
@@ -47,24 +47,30 @@ static void	rotate_cylinder(t_rt *rt, t_hit *hit, t_frame *local_frame)
 	scalar_product(1, new_ray_direction, hit->ray_direction);
 }
 
-static void	save_world_frame(t_rt *rt, t_hit *hit, double *ray_origin, double *ray_direction)
+void	revert_to_world_frame(t_rt *rt, t_hit *hit, t_frame *local_frame)
 {
-	scalar_product(1, rt->C->coordinates, ray_origin);
-	scalar_product(1, hit->ray_direction, ray_direction);
+	double	world_origin[3];
+	double	world_direction[3];
+	double	component[3];
+
+	scalar_product(rt->C->coordinates[0], local_frame->right, world_origin);
+	scalar_product(rt->C->coordinates[1], local_frame->up, component);
+	add_vectors(world_origin, component, world_origin);
+	scalar_product(rt->C->coordinates[2], local_frame->forward, component);
+	add_vectors(world_origin, component, world_origin);
+	add_vectors(world_origin, rt->first_object->coordinates, world_origin);
+	scalar_product(hit->ray_direction[0], local_frame->right, world_direction);
+	scalar_product(hit->ray_direction[1], local_frame->up, component);
+	add_vectors(world_direction, component, world_direction);
+	scalar_product(hit->ray_direction[2], local_frame->forward, component);
+	add_vectors(world_direction, component, world_direction);
+	make_vector(world_origin, rt->C->coordinates);
+	make_vector(world_direction, hit->ray_direction);
 }
 
-void	revert_to_world_frame(t_rt *rt, t_hit *hit, double *ray_origin, double *ray_direction)
+void	transform_cylinder(t_rt *rt, t_hit *hit, t_frame *local_frame)
 {
-	make_vector(ray_origin, rt->C->coordinates);
-	make_vector(ray_direction, hit->ray_direction);
-}
-
-void	transform_cylinder(t_rt *rt, t_hit *hit, double *world_ray_origin, double *world_ray_direction)
-{	
-	t_frame	local_frame;
-
-	save_world_frame(rt, hit, world_ray_origin, world_ray_direction);
-	define_local_frame(rt, hit, &local_frame);
+	define_local_frame(rt, local_frame);
 	vector_subst(rt->C->coordinates, rt->first_object->coordinates, rt->C->coordinates);
-	rotate_cylinder(rt, hit, &local_frame);
+	rotate_cylinder(rt, hit, local_frame);
 }

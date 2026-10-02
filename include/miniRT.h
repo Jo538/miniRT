@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 11:11:10 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 11:41:39 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,13 @@ typedef struct s_rt
 /*                              PER-RAY WORK DATA                             */
 /* ************************************************************************** */
 
+typedef struct s_frame
+{
+	double		right[3];
+	double		up[3];
+	double		forward[3];
+}	t_frame;
+
 typedef struct s_hit
 {
 	t_object	*closest;
@@ -140,13 +147,6 @@ typedef struct s_hit
 	double		intersection[3];
 	double		origin[3];
 }	t_hit;
-
-typedef struct s_frame
-{
-	double		right[3];
-	double		up[3];
-	double		forward[3];
-}	t_frame;
 
 
 typedef struct s_shade
@@ -228,10 +228,8 @@ int		is_new_best(double new_t, t_hit *hit, t_rt *rt,
 			int (*check)(t_rt *, t_hit *, double));
 int		pass_height_check(t_rt *rt, t_hit *hit, double t);
 int		pass_cap_check(t_rt *rt, t_hit *hit, double t);
-void	transform_cylinder(t_rt *rt, t_hit *hit, double *world_ray_origin,
-			double *world_ray_direction);
-void	revert_to_world_frame(t_rt *rt, t_hit *hit, double *ray_origin,
-			double *ray_direction);
+void	transform_cylinder(t_rt *rt, t_hit *hit, t_frame *local_frame);
+void	revert_to_world_frame(t_rt *rt, t_hit *hit, t_frame *local_frame);
 
 double	solver_pl(t_hit *hit, t_object *obj);
 int		solver_main(t_rt *rt, t_hit *hit);

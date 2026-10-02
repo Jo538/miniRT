@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 20:21:55 by admin             #+#    #+#             */
-/*   Updated: 2026/10/01 12:38:18 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/02 11:43:31 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,21 @@ static void	solve_cap(t_rt *rt, t_hit *hit)
 
 int	solver_cylinder(t_rt *rt, t_hit *hit)
 {
-	double	world_ray_origin[3];
-	double	world_ray_direction[3];
-
-	transform_cylinder(rt, hit, world_ray_origin, world_ray_direction);
+	t_frame	local_frame;
+	
+	transform_cylinder(rt, hit, &local_frame);
 	if (solve_quadratic(rt, hit))
 	{
-		revert_to_world_frame(rt, hit, world_ray_origin, world_ray_direction);
+		revert_to_world_frame(rt, hit, &local_frame);
 		return (1);
 	}
 	solve_cap(rt, hit);
 	if (hit->t == INFINITY)
 	{
-		revert_to_world_frame(rt, hit, world_ray_origin, world_ray_direction);
+		revert_to_world_frame(rt, hit, &local_frame);
 		return (1);
 	}
-	revert_to_world_frame(rt, hit, world_ray_origin, world_ray_direction);
+	revert_to_world_frame(rt, hit, &local_frame);
 	find_intersection(rt, hit);
 	return (0);
 }
