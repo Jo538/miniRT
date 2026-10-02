@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 12:25:20 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 14:18:28 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	parse_image(t_rt *rt)
 		{
 			init_hit(rt, &hit);
 			find_ray_direction(col, row, rt, &hit);
-			if (!solver_main(rt, &hit))
+			if (!solver(rt, &hit))
 				colour_pixel(rt, col, row, &hit);
 			col++;
 		}
