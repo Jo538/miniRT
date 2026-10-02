@@ -6,27 +6,19 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:30:10 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/02 14:39:34 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 15:07:44 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	object_orchestrator(t_object *obj, t_hit *hit)
+static void	object_orchestrator(t_hit *hit)
 {
-	// double	t;
-
-	// if (obj->id == PLANE)
-	// {
-	// 	t = solver_pl(hit, obj);
-	// 	if (t <= 0)
-	// 		return (1);
-	// 	hit->t = t;
-	// 	find_intersection(hit);
-	// }
-	if (obj->id == SPHERE)
-	 	solver_sphere(obj, hit);
-	if (obj->id == CYLINDER)
+	if (hit->closest->id == PLANE)
+		solver_pl(hit);
+	if (hit->closest->id == SPHERE)
+	 	solver_sphere(hit);
+	if (hit->closest->id == CYLINDER)
 		solver_cylinder(hit);
 }
 
@@ -58,7 +50,7 @@ int	solver(t_rt *rt, t_hit *hit)
 	while (object_trot)
 	{
 		init_candidate(object_trot, &candidate, hit);
-		object_orchestrator(object_trot, &candidate);
+		object_orchestrator(&candidate);
 		if (candidate.t < hit->t)
 			parse_hit(&candidate, hit);
 		object_trot = object_trot->next;

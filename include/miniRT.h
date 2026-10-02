@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 14:40:08 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 15:03:36 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,7 @@ void	normalise_color(double *normalised_colour, double *src);
 /*                                   SOLVERS                                  */
 /* ************************************************************************** */
 
-void	solver_sphere(t_object *object, t_hit *hit);
+void	solver_sphere(t_hit *hit);
 void	solver_cylinder(t_hit *hit);
 void	find_intersection(t_hit *hit);
 int		is_new_best(double new_t, t_hit *hit, int (*check)(t_hit *, double));
@@ -229,7 +229,7 @@ int		pass_height_check(t_hit *hit, double t);
 int		pass_cap_check(t_hit *hit, double t);
 void	transform_cylinder(t_hit *hit, t_frame *local_frame);
 void	revert_to_world_frame(t_hit *hit, t_frame *local_frame);
-double	solver_pl(t_hit *hit, t_object *obj);
+void	solver_pl(t_hit *hit);
 int		solver(t_rt *rt, t_hit *hit);
 
 /* ************************************************************************** */

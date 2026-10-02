@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/02 14:59:14 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 15:00:51 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static void	intersection(t_hit *hit)
 	add_vectors(hit->origin, tmp1, hit->intersection);
 }
 
-void	solver_sphere(t_object *object, t_hit *hit)
+void	solver_sphere(t_hit *hit)
 {
 	double	CO[3];
 	double	rayon;
 	t_quadratic	eq;
 
 	vector_subst(hit->origin, hit->closest->coordinates, CO);
-	rayon = (object->diameter / 2) * (object->diameter / 2);
+	rayon = (hit->closest->diameter / 2) * (hit->closest->diameter / 2);
 	eq.a = make_dot_product(hit->ray_direction, hit->ray_direction);
 	eq.b = make_dot_product(CO, hit->ray_direction) * 2;
 	eq.c = make_dot_product(CO, CO) - rayon;
