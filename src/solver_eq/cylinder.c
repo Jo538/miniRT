@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 20:21:55 by admin             #+#    #+#             */
-/*   Updated: 2026/10/02 11:43:31 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 12:10:47 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	solve_cap(t_rt *rt, t_hit *hit)
 	}
 }
 
-int	solver_cylinder(t_rt *rt, t_hit *hit)
+int	solver_cylinder(t_hit *hit)
 {
 	t_frame	local_frame;
 	

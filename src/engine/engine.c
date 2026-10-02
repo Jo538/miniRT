@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 16:20:59 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/02 12:25:20 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+static void	init_hit(t_rt *rt, t_hit *hit)
+{
+	hit->closest = NULL;
+	hit->t = INFINITY;
+	hit->surface = DEFAULT;
+	ft_bzero(hit->ray_direction, 3 * sizeof(double));
+	ft_bzero(hit->intersection, 3 * sizeof(double));
+	make_vector(rt->C->coordinates, hit->origin);
+}
 
 static int	parse_image(t_rt *rt)
 {
@@ -24,8 +34,7 @@ static int	parse_image(t_rt *rt)
 		col = 0;
 		while (col < X_MAX)
 		{
-			hit.t = INFINITY;
-			hit.closest = NULL;
+			init_hit(rt, &hit);
 			find_ray_direction(col, row, rt, &hit);
 			if (!solver_main(rt, &hit))
 				colour_pixel(rt, col, row, &hit);

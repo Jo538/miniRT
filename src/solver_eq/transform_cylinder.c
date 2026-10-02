@@ -6,13 +6,13 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 13:26:58 by admin             #+#    #+#             */
-/*   Updated: 2026/10/02 11:42:13 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 12:11:57 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	define_local_frame(t_rt *rt, t_frame *local_frame)
+static void	define_local_frame(t_frame *local_frame)
 {
 	double	helper[3];
 
@@ -68,9 +68,9 @@ void	revert_to_world_frame(t_rt *rt, t_hit *hit, t_frame *local_frame)
 	make_vector(world_direction, hit->ray_direction);
 }
 
-void	transform_cylinder(t_rt *rt, t_hit *hit, t_frame *local_frame)
+void	transform_cylinder(t_hit *hit, t_frame *local_frame)
 {
-	define_local_frame(rt, local_frame);
+	define_local_frame(local_frame);
 	vector_subst(rt->C->coordinates, rt->first_object->coordinates, rt->C->coordinates);
 	rotate_cylinder(rt, hit, local_frame);
 }

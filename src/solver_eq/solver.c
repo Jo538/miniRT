@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:30:10 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/02 10:57:06 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 12:25:00 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,26 @@ static int	solver_main_bis(t_rt *rt, t_object *obj, t_hit *hit)
 	return (0);
 }
 
+static void	init_candidate(t_object *object, t_hit *candidate, t_hit *hit)
+{
+	candidate->closest = object;
+	candidate->t = INFINITY;
+	candidate->surface = DEFAULT;
+	make_vector(hit->ray_direction, candidate->ray_direction);
+	ft_bzero(candidate->intersection, 3 * sizeof(double));
+	make_vector(hit->origin, candidate->origin);
+}
+
 int	solver_main(t_rt *rt, t_hit *hit)
 {
 	t_object	*object_trot;
 	t_hit		candidate;
 
 	object_trot = rt->first_object;
-	while (object_trot != NULL)
+	while (object_trot)
 	{
-		candidate = *hit;
-		candidate.t = INFINITY;
-		candidate.closest = NULL;
+
+		candidate.closest = object_trot;
 		if (!solver_main_bis(rt, object_trot, &candidate)
 			&& candidate.t < hit->t)
 			*hit = candidate;
