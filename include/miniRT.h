@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 15:44:54 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 17:48:28 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@
 // DEFINITION DES TAILLES DE L ECRAN CENTRE EN 0
 
 # ifndef X_MAX
-#  define X_MAX (1920 / 2)
+#  define X_MAX 1920
 # endif
 
 # ifndef Y_MAX
-#  define Y_MAX (1080 / 2)
+#  define Y_MAX 1080
 # endif
 
 // LE KEYCODE D ESC DEPEND DE L OS :
