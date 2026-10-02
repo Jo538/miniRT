@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shading.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/01 12:55:39 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/02 15:21:49 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	compute_light_vector(t_rt *rt, t_hit *hit, t_shade *shade)
 	normalise_vector(shade->light_vector);
 }
 
-static void	compute_normal_cylinder(t_rt *rt, t_hit *hit, t_shade *shade)
+static void	compute_normal_cylinder(t_hit *hit, t_shade *shade)
 {
 	double	hit_point[3];
 	double	tmp;
@@ -34,24 +34,24 @@ static void	compute_normal_cylinder(t_rt *rt, t_hit *hit, t_shade *shade)
 	
 	if (hit->surface == SIDE_WALL)
 	{
-		vector_subst(hit->intersection, rt->first_object->coordinates, hit_point);
-		tmp = make_dot_product(hit_point, rt->first_object->vector);
-		scalar_product(tmp, rt->first_object->vector, tmp1);
+		vector_subst(hit->intersection, hit->closest->coordinates, hit_point);
+		tmp = make_dot_product(hit_point, hit->closest->vector);
+		scalar_product(tmp, hit->closest->vector, tmp1);
 		vector_subst(hit_point, tmp1, tmp1);
-		scalar_product(1 / (rt->first_object->diameter / 2), tmp1, shade->normal);		
+		scalar_product(1 / (hit->closest->diameter / 2), tmp1, shade->normal);		
 	}
 	if (hit->surface == TOP_CAP)
-		scalar_product(1, rt->first_object->vector, shade->normal);
+		scalar_product(1, hit->closest->vector, shade->normal);
 	if (hit->surface == BOTTOM_CAP)
-		scalar_product(-1, rt->first_object->vector, shade->normal);	
+		scalar_product(-1, hit->closest->vector, shade->normal);	
 	normalise_vector(shade->normal);	
 }
 
-static void	compute_normal(t_rt *rt, t_hit *hit, t_shade *shade)
+static void	compute_normal(t_hit *hit, t_shade *shade)
 {
 	t_object	*object;
 
-	object = rt->first_object;
+	object = hit->closest;
 	
 	if (object->id == SPHERE)
 	{
@@ -59,7 +59,7 @@ static void	compute_normal(t_rt *rt, t_hit *hit, t_shade *shade)
 		normalise_vector(shade->normal);		
 	}
 	else
-		compute_normal_cylinder(rt, hit, shade);
+		compute_normal_cylinder(hit, shade);
 }
 
 static void	compute_reflection_vector(t_shade *shade)
@@ -77,15 +77,15 @@ void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb)
 	t_shade	shade;
 	double	n_dot_l;
 
-	compute_normal(rt, hit, &shade);
+	compute_normal(hit, &shade);
 	compute_light_vector(rt, hit, &shade);
 	compute_eye_vector(hit, &shade);
 	compute_reflection_vector(&shade);
 	n_dot_l = make_dot_product(shade.normal, shade.light_vector);
 	if (n_dot_l < 0)
 		n_dot_l = 0;
-	compute_ambient_light(rt, &shade);
-	compute_diffuse_light(rt, n_dot_l, &shade);
+	compute_ambient_light(rt, hit, &shade);
+	compute_diffuse_light(rt, n_dot_l, hit, &shade);
 	if (n_dot_l > 0)
 		compute_specular_light(rt, &shade);
 	else

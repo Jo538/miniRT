@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   shading_bis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/25 16:53:03 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/02 15:19:45 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	compute_ambient_light(t_rt *rt, t_shade *shade)
+void	compute_ambient_light(t_rt *rt, t_hit *hit, t_shade *shade)
 {	
 	t_object	*a_light;
-	t_object	*sphere;
+	t_object	*object;
 	double		light_colour[3];
 	double		reflectivity[3];
 
 	a_light = rt->A;
-	sphere = rt->first_object;
+	object = hit->closest;
 	
-	normalise_color(reflectivity, sphere->rgb);
+	normalise_color(reflectivity, object->rgb);
 	normalise_color(light_colour, a_light->rgb);
 	
 	scalar_product(a_light->ratio, light_colour, light_colour);
@@ -30,17 +30,17 @@ void	compute_ambient_light(t_rt *rt, t_shade *shade)
 	component_wise_multiplication(reflectivity, light_colour, shade->ambient_light);
 }
 
-void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade)
+void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_hit *hit, t_shade *shade)
 {
 	t_object	*light_source;
-	t_object	*sphere;
+	t_object	*object;
 	double		tmp[3];
 	double		reflectivity[3];
 	double		light_colour[3];
 
 	light_source = rt->L;
-	sphere = rt->first_object;
-	normalise_color(reflectivity, sphere->rgb);
+	object = hit->closest;
+	normalise_color(reflectivity, object->rgb);
 	normalise_color(light_colour, light_source->rgb);
 	scalar_product(light_source->ratio, light_colour, light_colour);
 	component_wise_multiplication(reflectivity, light_colour, tmp);

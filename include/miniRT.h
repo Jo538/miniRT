@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 15:03:36 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 15:19:56 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,8 +246,8 @@ void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit);
 /* ************************************************************************** */
 
 void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb);
-void	compute_ambient_light(t_rt *rt, t_shade *shade);
-void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_shade *shade);
+void	compute_ambient_light(t_rt *rt, t_hit *hit, t_shade *shade);
+void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_hit *hit, t_shade *shade);
 void	compute_specular_light(t_rt *rt, t_shade *shade);
 
 /* ************************************************************************** */
