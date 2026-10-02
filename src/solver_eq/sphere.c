@@ -3,65 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/01 15:25:55 by benji            ###   ########.fr       */
+/*   Updated: 2026/10/02 14:59:14 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-double	find_lowest_soluc(double a, double b, double c)
+void	parse_lowest_soluc(t_quadratic *eq, t_hit *hit)
 {
 	double rc;
 	double	sol1;
 	double	sol2;
 
-	rc = (b * b) - (4 * a * c);
+	rc = (eq->b * eq->b) - (4 * eq->a * eq->c);
 	if (rc < 0)
-		return (-1000); // sert a se rendre compte q il n y a pas de solutions
-	sol1 = (-b + sqrt(rc)) / (2 * a);
-	sol2 = (-b - sqrt(rc)) / (2 * a);
+		return ;
+	sol1 = (-eq->b + sqrt(rc)) / (2 * eq->a);
+	sol2 = (-eq->b - sqrt(rc)) / (2 * eq->a);
 
 	if (sol1 >= 0 && sol1 <= sol2)
-		return (sol1);
+		hit->t = sol1;
 	else if (sol2 >= 0 && sol2 <= sol2)
-		return (sol2);
-	else
-		return (-1000);
+		hit->t = sol2;
 }
 
-static int	intersection(t_hit *hit, double t)
+static void	intersection(t_hit *hit)
 {
 	double	tmp1[3];
 
-	if (t == -1000)
-		return (1);
-	hit->t = t;
-	scalar_product(t, hit->ray_direction, tmp1);
+	if (hit->t == INFINITY)
+		return ;
+	scalar_product(hit->t, hit->ray_direction, tmp1);
 	add_vectors(hit->origin, tmp1, hit->intersection);
-	return (0);
 }
 
-int	solver_sphere(t_object *object, t_hit *hit)
+void	solver_sphere(t_object *object, t_hit *hit)
 {
 	double	CO[3];
-	double	D[3];
 	double	rayon;
 	t_quadratic	eq;
-	double	t;
 
-	CO[0] = hit->origin[0] - object->coordinates[0];
-	CO[1] = hit->origin[1] - object->coordinates[1];
-	CO[2] = hit->origin[2] - object->coordinates[2];
-	D[0] = hit->ray_direction[0];
-	D[1] = hit->ray_direction[1];
-	D[2] = hit->ray_direction[2];
+	vector_subst(hit->origin, hit->closest->coordinates, CO);
 	rayon = (object->diameter / 2) * (object->diameter / 2);
-	eq.a = make_dot_product(D, D);
-	eq.b = make_dot_product(CO, D) * 2;
+	eq.a = make_dot_product(hit->ray_direction, hit->ray_direction);
+	eq.b = make_dot_product(CO, hit->ray_direction) * 2;
 	eq.c = make_dot_product(CO, CO) - rayon;
-	t = find_lowest_soluc(eq.a, eq.b, eq.c);
-	return (intersection(hit, t));
+	parse_lowest_soluc(&eq, hit);
+	if (hit->t != INFINITY)
+		intersection(hit);
 }

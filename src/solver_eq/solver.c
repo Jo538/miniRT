@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:30:10 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/02 14:38:02 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 14:39:34 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	object_orchestrator(t_object *obj, t_hit *hit)
 	// 	hit->t = t;
 	// 	find_intersection(hit);
 	// }
-	// if (obj->id == SPHERE)
-	// 	return (solver_sphere(obj, hit));
+	if (obj->id == SPHERE)
+	 	solver_sphere(obj, hit);
 	if (obj->id == CYLINDER)
 		solver_cylinder(hit);
 }
