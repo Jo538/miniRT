@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 15:19:56 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 15:44:54 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 
 # define SPECULAR_REFLECTIVITY_COEFF 0.5
 # define SHININESS_EXPONENT 32
+# define EPSILON 0.0001f
 
 /* ************************************************************************** */
 /*                                    ENUMS                                   */

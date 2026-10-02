@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   viewport.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 16:36:40 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/02 15:50:29 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	is_equal(double *vector_1, double *vector_2)
 		return (0);
 	if (vector_1[1] != vector_2[1])
 		return (0);
-	if (vector_1[2] != vector_2[1])
+	if (vector_1[2] != vector_2[2])
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 15:21:49 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 16:06:29 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,17 @@ static void	compute_normal(t_hit *hit, t_shade *shade)
 
 	object = hit->closest;
 	
+	if (object->id == PLANE)
+	{
+		make_vector(object->vector, shade->normal);	
+		normalise_vector(shade->normal);	
+	}
 	if (object->id == SPHERE)
 	{
 		vector_subst(hit->intersection, object->coordinates, shade->normal);
 		normalise_vector(shade->normal);		
 	}
-	else
+	if (object->id == CYLINDER)
 		compute_normal_cylinder(hit, shade);
 }
 
@@ -80,6 +85,8 @@ void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb)
 	compute_normal(hit, &shade);
 	compute_light_vector(rt, hit, &shade);
 	compute_eye_vector(hit, &shade);
+	if (make_dot_product(shade.normal, shade.eye_vector) < 0)
+		scalar_product(-1, shade.normal, shade.normal);
 	compute_reflection_vector(&shade);
 	n_dot_l = make_dot_product(shade.normal, shade.light_vector);
 	if (n_dot_l < 0)

@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/02 15:00:51 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 15:56:27 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@ void	parse_lowest_soluc(t_quadratic *eq, t_hit *hit)
 	sol1 = (-eq->b + sqrt(rc)) / (2 * eq->a);
 	sol2 = (-eq->b - sqrt(rc)) / (2 * eq->a);
 
-	if (sol1 >= 0 && sol1 <= sol2)
+	if ((sol1 >= 0 && sol1 <= sol2)
+		|| (sol1 >= 0 && sol2 < 0))
 		hit->t = sol1;
-	else if (sol2 >= 0 && sol2 <= sol2)
+	else if ((sol2 >= 0 && sol2 <= sol1)
+		|| (sol2 >= 0 && sol1 < 0))
 		hit->t = sol2;
 }
 
