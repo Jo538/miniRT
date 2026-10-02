@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/27 20:21:55 by admin             #+#    #+#             */
-/*   Updated: 2026/10/02 14:12:53 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 14:30:02 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,12 +96,8 @@ void	solver_cylinder(t_hit *hit)
 		return ;
 	}
 	solve_cap(hit);
-	if (hit->t == INFINITY)
-	{
-		revert_to_world_frame(hit, &local_frame);
-		return ;
-	}
 	revert_to_world_frame(hit, &local_frame);
+	if (hit->t == INFINITY)
+		return ;
 	find_intersection(hit);
-	return ;
 }

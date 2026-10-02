@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 14:18:21 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 14:33:56 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@
 // DEFINITION DES TAILLES DE L ECRAN CENTRE EN 0
 
 # ifndef X_MAX
-#  define X_MAX 1920 / 2
+#  define X_MAX (1920 / 2)
 # endif
 
 # ifndef Y_MAX
-#  define Y_MAX 1080 / 2
+#  define Y_MAX (1080 / 2)
 # endif
 
 // LE KEYCODE D ESC DEPEND DE L OS :

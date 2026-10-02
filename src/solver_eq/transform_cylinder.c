@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 13:26:58 by admin             #+#    #+#             */
-/*   Updated: 2026/10/02 13:45:53 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 14:35:13 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	revert_to_world_frame(t_hit *hit, t_frame *local_frame)
 	scalar_product(hit->origin[2], local_frame->forward, component);
 	add_vectors(world_origin, component, world_origin);
 	add_vectors(world_origin, hit->closest->coordinates, world_origin);
-	scalar_product(hit->origin[0], local_frame->right, world_direction);
+	scalar_product(hit->ray_direction[0], local_frame->right, world_direction);
 	scalar_product(hit->ray_direction[1], local_frame->up, component);
 	add_vectors(world_direction, component, world_direction);
 	scalar_product(hit->ray_direction[2], local_frame->forward, component);

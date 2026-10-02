@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:30:10 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/02 14:23:08 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/02 14:38:02 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	init_candidate(t_object *object, t_hit *candidate, t_hit *hit)
 static void	parse_hit(t_hit *candidate, t_hit *hit)
 {
 	hit->closest = candidate->closest;
+	hit->t = candidate->t;
+	hit->surface = candidate->surface;
 	make_vector(candidate->intersection, hit->intersection);	
 }
 
