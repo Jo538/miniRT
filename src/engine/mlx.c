@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 18:28:21 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/05 18:51:34 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/05 20:31:07 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	mlx_initialization(t_rt *rt)
 		return ((void)(rt->err = 1));
 	rt->mlx = data_mlx;
 	data_mlx->mlx = mlx_init();
+	if (data_mlx->mlx == (void *)0)
+	{
+		rt->err = 1;
+		return ;
+	}
 	data_mlx->img = mlx_new_image(data_mlx->mlx, X_MAX, Y_MAX);
 	data_mlx->mlx_win = mlx_new_window(data_mlx->mlx, X_MAX, Y_MAX, "TEST");
 	data_mlx->addr = mlx_get_data_addr(data_mlx->img, &data_mlx->bits_per_pixel,

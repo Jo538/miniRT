@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/11 13:29:51 by benji             #+#    #+#             */
-/*   Updated: 2026/10/05 19:13:29 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/05 20:21:06 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ t_object	*create_init_objects(char **row, int type_obj)
 		to_return = parse_plane(row);
 	if (type_obj == CYLINDER)
 		to_return = parse_cylinder(row);
+	if (!to_return)
+		return (NULL);
 	to_return->next = NULL;
 	return (to_return);
 }

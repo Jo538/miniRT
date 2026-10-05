@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:58:35 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/05 19:27:39 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/05 19:31:11 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	plane(char **row)
 int	is_correct(char **row)
 {
 	int			type;
-	const int	(*func[6])(char **) = {ambient_light, camera, light,
+	int	(*func[6])(char **) = {ambient_light, camera, light,
 		sphere, plane, cylinder};
 	int			i;
 
