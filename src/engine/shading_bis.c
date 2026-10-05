@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   shading_bis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 15:19:45 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/05 14:45:11 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
 void	compute_ambient_light(t_rt *rt, t_hit *hit, t_shade *shade)
-{	
+{
 	t_object	*a_light;
 	t_object	*object;
 	double		light_colour[3];
@@ -21,12 +21,12 @@ void	compute_ambient_light(t_rt *rt, t_hit *hit, t_shade *shade)
 
 	a_light = rt->A;
 	object = hit->closest;
-	
+
 	normalise_color(reflectivity, object->rgb);
 	normalise_color(light_colour, a_light->rgb);
-	
+
 	scalar_product(a_light->ratio, light_colour, light_colour);
-	
+
 	component_wise_multiplication(reflectivity, light_colour, shade->ambient_light);
 }
 

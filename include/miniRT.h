@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 17:48:28 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/05 16:19:37 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ void	cross_product(double *vector_1, double *vector_2, double *to_fill);
 void	component_wise_multiplication(double *vector_1, double *vector_2,
 			double *to_fill);
 void	normalise_color(double *normalised_colour, double *src);
+void	multiply_a_vector(double *vector1, double mul, double *to_fill);
 
 /* ************************************************************************** */
 /*                                   SOLVERS                                  */
