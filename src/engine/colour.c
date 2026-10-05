@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/30 15:23:16 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/05 18:57:29 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	attrib_color(t_rt *rt, int colour, int position)
 
 static int	rgb_to_int(double *rgb)
 {
-
 	int	colour;
 
 	colour = ((int)rgb[0] << 16) | ((int)rgb[1] << 8) | (int)rgb[2];
@@ -52,8 +51,8 @@ static int	find_position(t_rt *rt, int col, int row)
 
 void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit)
 {
-	int	colour;
-	int position;
+	int		colour;
+	int		position;
 	double	shaded_rgb[3];
 
 	position = find_position(rt, col, row);

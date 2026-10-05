@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 13:26:58 by admin             #+#    #+#             */
-/*   Updated: 2026/10/02 14:35:13 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/05 18:31:28 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,30 @@ static void	define_local_frame(t_hit *hit, t_frame *local_frame)
 	double	helper[3];
 
 	make_vector(hit->closest->vector, local_frame->up);
-
 	if (fabs(hit->closest->vector[1]) > 0.999)
 		make_vector((double []){1, 0, 0}, helper);
 	else
 		make_vector((double []){0, 1, 0}, helper);
-
 	cross_product(local_frame->up, helper, local_frame->right);
 	normalise_vector(local_frame->right);
-
-	cross_product(local_frame->right, local_frame->up, local_frame->forward);	
+	cross_product(local_frame->right, local_frame->up, local_frame->forward);
 }
 
 static void	rotate_cylinder(t_hit *hit, t_frame *local_frame)
 {
 	double	new_ray_origin[3];
 	double	new_ray_direction[3];
-	
+
 	new_ray_origin[0] = make_dot_product(hit->origin, local_frame->right);
 	new_ray_origin[1] = make_dot_product(hit->origin, local_frame->up);
 	new_ray_origin[2] = make_dot_product(hit->origin, local_frame->forward);
-
 	scalar_product(1, new_ray_origin, hit->origin);
-
-	new_ray_direction[0] = make_dot_product(hit->ray_direction, local_frame->right);
-	new_ray_direction[1] = make_dot_product(hit->ray_direction, local_frame->up);
-	new_ray_direction[2] = make_dot_product(hit->ray_direction, local_frame->forward);
-
+	new_ray_direction[0] = make_dot_product(hit->ray_direction,
+			local_frame->right);
+	new_ray_direction[1] = make_dot_product(hit->ray_direction,
+			local_frame->up);
+	new_ray_direction[2] = make_dot_product(hit->ray_direction,
+			local_frame->forward);
 	scalar_product(1, new_ray_direction, hit->ray_direction);
 }
 

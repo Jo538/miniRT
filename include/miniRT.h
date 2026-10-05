@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/05 16:19:37 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/05 19:24:33 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ typedef struct s_data_mlx
 
 typedef struct s_rt
 {
-	t_object	*A;
-	t_object	*L;
-	t_object	*C;
+	t_object	*a;
+	t_object	*l;
+	t_object	*c;
 	t_object	*first_object;
 	t_data_mlx	*mlx;
 	t_viewport	*viewport;
@@ -148,7 +148,6 @@ typedef struct s_hit
 	double		intersection[3];
 	double		origin[3];
 }	t_hit;
-
 
 typedef struct s_shade
 {
@@ -249,8 +248,12 @@ void	colour_pixel(t_rt *rt, int col, int row, t_hit *hit);
 
 void	compute_shaded_colour(t_rt *rt, t_hit *hit, double *shaded_rgb);
 void	compute_ambient_light(t_rt *rt, t_hit *hit, t_shade *shade);
-void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_hit *hit, t_shade *shade);
+void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_hit *hit,
+			t_shade *shade);
 void	compute_specular_light(t_rt *rt, t_shade *shade);
+void	compute_eye_vector(t_hit *hit, t_shade *shade);
+void	compute_light_vector(t_rt *rt, t_hit *hit, t_shade *shade);
+void	compute_normal_cylinder(t_hit *hit, t_shade *shade);
 
 /* ************************************************************************** */
 /*                                     MLX                                    */
@@ -259,7 +262,7 @@ void	compute_specular_light(t_rt *rt, t_shade *shade);
 void	mlx_initialization(t_rt *rt);
 void	mlx_run(t_rt *rt);
 int		close_window_key(int keypress, void *rt_tmp);
-// int		close_window(void *rt_tmp);
+int		close_window(void *rt_tmp);
 
 /* ************************************************************************** */
 /*                                   CLEANUP                                  */

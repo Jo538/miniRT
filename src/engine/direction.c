@@ -3,37 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   direction.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: benji <benji@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:02:06 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/01 15:24:37 by benji            ###   ########.fr       */
+/*   Updated: 2026/10/05 19:23:59 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-static void	normalise_pixel(double pixel_x, double pixel_y, double *normalised_coord)
+static void	normalise_pixel(double pixel_x, double pixel_y,
+		double *normalised_coord)
 {
 	normalised_coord[0] = (pixel_x + 0.5) / X_MAX;
 	normalised_coord[1] = (pixel_y + 0.5) / Y_MAX;
 }
 
-static void	find_viewport_coordinates(double *normalised_coord, t_rt *rt, double *viewport_coord)
+static void	find_viewport_coordinates(double *normalised_coord, t_rt *rt,
+		double *viewport_coord)
 {
-	t_viewport *viewport = rt->viewport;
+	t_viewport	*viewport;
 
-	viewport_coord[0] = normalised_coord[0] * viewport->width - viewport->width/ 2;
-	viewport_coord[1] = viewport->height / 2 - normalised_coord[1] * viewport->height;
+	viewport = rt->viewport;
+	viewport_coord[0] = normalised_coord[0] * viewport->width
+		- viewport->width / 2;
+	viewport_coord[1] = viewport->height / 2
+		- normalised_coord[1] * viewport->height;
 }
 
-static void	find_D(double *viewport_coord, t_hit *hit, t_rt *rt)
+static void	find_d(double *viewport_coord, t_hit *hit, t_rt *rt)
 {
-	double u_right[3];
-	double v_up[3];
+	double	u_right[3];
+	double	v_up[3];
 
 	scalar_product(viewport_coord[0], rt->viewport->right, u_right);
 	scalar_product(viewport_coord[1], rt->viewport->up, v_up);
-
 	hit->ray_direction[0] = rt->viewport->forward[0] + u_right[0] + v_up[0];
 	hit->ray_direction[1] = rt->viewport->forward[1] + u_right[1] + v_up[1];
 	hit->ray_direction[2] = rt->viewport->forward[2] + u_right[2] + v_up[2];
@@ -45,10 +49,10 @@ void	find_ray_direction(double pixel_x, double pixel_y, t_rt *rt, t_hit *hit)
 	double	normalised_coord[2];
 	double	viewport_coord[2];
 
-	hit->origin[0] = rt->C->coordinates[0];
-	hit->origin[1] = rt->C->coordinates[1];
-	hit->origin[2] = rt->C->coordinates[2];
+	hit->origin[0] = rt->c->coordinates[0];
+	hit->origin[1] = rt->c->coordinates[1];
+	hit->origin[2] = rt->c->coordinates[2];
 	normalise_pixel(pixel_x, pixel_y, normalised_coord);
 	find_viewport_coordinates(normalised_coord, rt, viewport_coord);
-	find_D(viewport_coord, hit, rt);
+	find_d(viewport_coord, hit, rt);
 }

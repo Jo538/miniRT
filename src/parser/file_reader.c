@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_reader.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/08 14:22:21 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/23 11:42:39 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/05 19:21:40 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ char	**extract_line(int fd, int *error)
 	return (row);
 }
 
-static int	has_ACL(t_rt *head)
+static int	has_acl(t_rt *head)
 {
-	if (!head->A || !head->C || !head->L)
+	if (!head->a || !head->c || !head->l)
 	{
 		ft_putstr_fd("Error: one of ACL is missing.\n", 2);
-		return (0);				
+		return (0);
 	}
 	return (1);
 }
@@ -73,14 +73,10 @@ int	extract_file(int fd, t_rt *rt)
 		if (!*row)
 		{
 			free_tab(row);
-			continue ;			
+			continue ;
 		}
 		if (!is_correct(row))
-		{
-			free_hoa(rt);
-			free_tab(row);
-			return (1);
-		}
+			return (free_hoa(rt), free_tab(row), 1);
 		parse_line(row, rt);
 		free_tab(row);
 		if (rt->err)
@@ -88,7 +84,6 @@ int	extract_file(int fd, t_rt *rt)
 	}
 	return (0);
 }
-
 
 int	parse(int fd, t_rt *rt)
 {
@@ -98,17 +93,17 @@ int	parse(int fd, t_rt *rt)
 		get_next_line(fd);
 		return (1);
 	}
-	if (!has_ACL(rt))
+	if (!has_acl(rt))
 	{
 		close(fd);
 		free_hoa(rt);
-		return (1);		
+		return (1);
 	}
 	if (parse_viewport(rt))
 	{
 		close(fd);
 		free_hoa(rt);
-		return (1);		
+		return (1);
 	}
 	return (0);
 }

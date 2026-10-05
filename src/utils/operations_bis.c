@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/05 16:18:55 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/05 18:19:43 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	multiply_a_vector(double *vector1, double mul, double *to_fill)
 	to_fill[2] = vector1[2] * mul;
 }
 
-void	component_wise_multiplication(double *vector_1, double *vector_2, double *to_fill)
+void	component_wise_multiplication(double *vector_1, double *vector_2,
+	double *to_fill)
 {
 	to_fill[0] = vector_1[0] * vector_2[0];
 	to_fill[1] = vector_1[1] * vector_2[1];

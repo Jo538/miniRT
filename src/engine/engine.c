@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   engine.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/02 14:18:28 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/05 19:23:59 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	init_hit(t_rt *rt, t_hit *hit)
 	hit->surface = DEFAULT;
 	ft_bzero(hit->ray_direction, 3 * sizeof(double));
 	ft_bzero(hit->intersection, 3 * sizeof(double));
-	make_vector(rt->C->coordinates, hit->origin);
+	make_vector(rt->c->coordinates, hit->origin);
 }
 
 static int	parse_image(t_rt *rt)

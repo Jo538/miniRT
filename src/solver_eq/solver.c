@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solver.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/28 16:30:10 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/02 15:07:44 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/05 18:30:20 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	object_orchestrator(t_hit *hit)
 	if (hit->closest->id == PLANE)
 		solver_pl(hit);
 	if (hit->closest->id == SPHERE)
-	 	solver_sphere(hit);
+		solver_sphere(hit);
 	if (hit->closest->id == CYLINDER)
 		solver_cylinder(hit);
 }
@@ -37,7 +37,7 @@ static void	parse_hit(t_hit *candidate, t_hit *hit)
 	hit->closest = candidate->closest;
 	hit->t = candidate->t;
 	hit->surface = candidate->surface;
-	make_vector(candidate->intersection, hit->intersection);	
+	make_vector(candidate->intersection, hit->intersection);
 }
 
 int	solver(t_rt *rt, t_hit *hit)
@@ -46,7 +46,6 @@ int	solver(t_rt *rt, t_hit *hit)
 	t_hit		candidate;
 
 	object_trot = rt->first_object;
-	
 	while (object_trot)
 	{
 		init_candidate(object_trot, &candidate, hit);
@@ -55,7 +54,6 @@ int	solver(t_rt *rt, t_hit *hit)
 			parse_hit(&candidate, hit);
 		object_trot = object_trot->next;
 	}
-	
 	if (hit->t != INFINITY)
 		return (0);
 	return (1);

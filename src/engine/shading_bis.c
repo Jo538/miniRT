@@ -6,7 +6,7 @@
 /*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/05 14:45:11 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/05 19:23:59 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,17 @@ void	compute_ambient_light(t_rt *rt, t_hit *hit, t_shade *shade)
 	double		light_colour[3];
 	double		reflectivity[3];
 
-	a_light = rt->A;
+	a_light = rt->a;
 	object = hit->closest;
-
 	normalise_color(reflectivity, object->rgb);
 	normalise_color(light_colour, a_light->rgb);
-
 	scalar_product(a_light->ratio, light_colour, light_colour);
-
-	component_wise_multiplication(reflectivity, light_colour, shade->ambient_light);
+	component_wise_multiplication(reflectivity, light_colour,
+		shade->ambient_light);
 }
 
-void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_hit *hit, t_shade *shade)
+void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_hit *hit,
+			t_shade *shade)
 {
 	t_object	*light_source;
 	t_object	*object;
@@ -38,7 +37,7 @@ void	compute_diffuse_light(t_rt *rt, double n_dot_l, t_hit *hit, t_shade *shade)
 	double		reflectivity[3];
 	double		light_colour[3];
 
-	light_source = rt->L;
+	light_source = rt->l;
 	object = hit->closest;
 	normalise_color(reflectivity, object->rgb);
 	normalise_color(light_colour, light_source->rgb);
@@ -54,7 +53,7 @@ void	compute_specular_light(t_rt *rt, t_shade *shade)
 	double		tmp1[3];
 	double		tmp2;
 
-	light_source = rt->L;
+	light_source = rt->l;
 	normalise_color(light_colour, light_source->rgb);
 	scalar_product(light_source->ratio, light_colour, light_colour);
 	scalar_product(SPECULAR_REFLECTIVITY_COEFF, light_colour, tmp1);

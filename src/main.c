@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/24 10:35:42 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/05 19:18:47 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	open_scene(char *file, int *fd)
 {
 	*fd = open(file, O_RDONLY);
-
 	if (*fd == -1)
 	{
 		perror("Error");
@@ -26,7 +25,7 @@ static int	open_scene(char *file, int *fd)
 
 int	main(int argc, char **argv)
 {
-	int	fd;
+	int		fd;
 	t_rt	*rt;
 
 	if (argc != 2)

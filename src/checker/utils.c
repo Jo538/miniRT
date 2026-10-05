@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:25:54 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 10:47:31 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/05 18:49:21 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	has_correct_separator_formatting(char *str, char separator)
 	size = ft_strlen(str) - 1;
 	while (str[i])
 	{
-		if ((i == 0 && str[i] == separator) 
+		if ((i == 0 && str[i] == separator)
 			|| (i == size && str[i] == separator)
-				|| (i != 0 && str[i] == separator && str[i - 1] == separator))
+			|| (i != 0 && str[i] == separator && str[i - 1] == separator))
 		{
 			ft_putstr_fd("Error: separators are not correctly formatted.\n", 2);
 			return (0);
@@ -68,8 +68,8 @@ static int	sign_format(char *str, char sign)
 	i = 0;
 	while (str[i] && str[i + 1])
 	{
-		if (i != 0 && str[i] == sign && str[i - 1] != ',' 
-				&& !ft_isdigit(str[i] - '0'))
+		if (i != 0 && str[i] == sign && str[i - 1] != ','
+			&& !ft_isdigit(str[i] - '0'))
 		{
 			ft_putstr_fd("Error: incorrect positioning of sign.\n", 2);
 			return (0);
@@ -84,11 +84,12 @@ static int	sign_format(char *str, char sign)
 	return (1);
 }
 
-int	has_correct_sign_formatting(char *str, bool check_negative, bool check_positive)
+int	has_correct_sign_formatting(char *str, bool check_negative,
+		bool check_positive)
 {
 	if (check_negative && !sign_format(str, '-'))
 		return (0);
 	if (check_positive && !sign_format(str, '+'))
 		return (0);
-	return (1);	
+	return (1);
 }

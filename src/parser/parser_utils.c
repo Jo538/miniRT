@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 17:04:10 by benji             #+#    #+#             */
-/*   Updated: 2026/09/22 20:16:54 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/05 19:22:27 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,19 @@ void	free_hoa(t_rt *head)
 	t_object	*tmp;
 
 	trot = head->first_object;
-	if (head->A)
-		free(head->A);
-	if (head->C)
-		free(head->C);
-	if (head->L)
-		free(head->L);
+	if (head->a)
+		free(head->a);
+	if (head->c)
+		free(head->c);
+	if (head->l)
+		free(head->l);
 	if (head->viewport)
 		free(head->viewport);
 	while (trot)
 	{
 		tmp = trot->next;
 		free(trot);
-		trot = tmp; 
+		trot = tmp;
 	}
 	free(head);
 }

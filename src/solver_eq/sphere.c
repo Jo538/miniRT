@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/18 11:56:56 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/02 15:56:27 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/05 18:33:29 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_lowest_soluc(t_quadratic *eq, t_hit *hit)
 {
-	double rc;
+	double	rc;
 	double	sol1;
 	double	sol2;
 
@@ -23,12 +23,9 @@ void	parse_lowest_soluc(t_quadratic *eq, t_hit *hit)
 		return ;
 	sol1 = (-eq->b + sqrt(rc)) / (2 * eq->a);
 	sol2 = (-eq->b - sqrt(rc)) / (2 * eq->a);
-
-	if ((sol1 >= 0 && sol1 <= sol2)
-		|| (sol1 >= 0 && sol2 < 0))
+	if ((sol1 >= 0 && sol1 <= sol2) || (sol1 >= 0 && sol2 < 0))
 		hit->t = sol1;
-	else if ((sol2 >= 0 && sol2 <= sol1)
-		|| (sol2 >= 0 && sol1 < 0))
+	else if ((sol2 >= 0 && sol2 <= sol1) || (sol2 >= 0 && sol1 < 0))
 		hit->t = sol2;
 }
 
@@ -44,15 +41,15 @@ static void	intersection(t_hit *hit)
 
 void	solver_sphere(t_hit *hit)
 {
-	double	CO[3];
-	double	rayon;
+	double		co[3];
+	double		rayon;
 	t_quadratic	eq;
 
-	vector_subst(hit->origin, hit->closest->coordinates, CO);
+	vector_subst(hit->origin, hit->closest->coordinates, co);
 	rayon = (hit->closest->diameter / 2) * (hit->closest->diameter / 2);
 	eq.a = make_dot_product(hit->ray_direction, hit->ray_direction);
-	eq.b = make_dot_product(CO, hit->ray_direction) * 2;
-	eq.c = make_dot_product(CO, CO) - rayon;
+	eq.b = make_dot_product(co, hit->ray_direction) * 2;
+	eq.c = make_dot_product(co, co) - rayon;
 	parse_lowest_soluc(&eq, hit);
 	if (hit->t != INFINITY)
 		intersection(hit);

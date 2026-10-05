@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bis.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:25:54 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 11:42:30 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/05 18:48:20 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ int	has_correct_number_of_items(char *str, int expected)
 		count++;
 		str = ptr + 1;
 	}
-
 	if (count != expected)
 	{
 		ft_putstr_fd("Error: incorrect number of items in string.\n", 2);
-		return (0);		
+		return (0);
 	}
 	return (1);
 }
@@ -41,17 +40,18 @@ int	has_valid_char(char *str, char *expected)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_strchr(expected, str[i]))	
+		if (!ft_strchr(expected, str[i]))
 		{
 			ft_putstr_fd("Error: invalid character.\n", 2);
-			return (0);			
+			return (0);
 		}
 		i++;
 	}
 	return (1);
 }
 
-static int	has_correct_float_formatting_bis(char *str, int i, int size, int count)
+static int	has_correct_float_formatting_bis(char *str, int i,
+				int size, int count)
 {
 	if (count > 1)
 		return (0);
@@ -63,7 +63,7 @@ static int	has_correct_float_formatting_bis(char *str, int i, int size, int coun
 		return (1);
 	return (0);
 }
-	
+
 int	has_correct_float_formatting(char *str)
 {
 	int	i;
@@ -80,7 +80,7 @@ int	has_correct_float_formatting(char *str)
 			if (!has_correct_float_formatting_bis(str, i, size, ++count))
 			{
 				ft_putstr_fd("Error: incorrect float formatting.\n", 2);
-				return (0);					
+				return (0);
 			}
 		}
 		i++;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   line.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 14:58:35 by jchartie          #+#    #+#             */
-/*   Updated: 2026/09/15 12:08:55 by admin            ###   ########.fr       */
+/*   Updated: 2026/10/05 18:39:14 by bribot           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int	ambient_light(char ** row)
+int	ambient_light(char **row)
 {
 	if (!has_right_number_of_cells(row, 3))
 		return (0);
@@ -23,12 +23,12 @@ int	ambient_light(char ** row)
 	return (1);
 }
 
-int	camera(char ** row)
+int	camera(char **row)
 {
 	if (!has_right_number_of_cells(row, 4))
 		return (0);
 	if (!has_correct_coordinates_format(row[1]))
-	 	return (0);
+		return (0);
 	if (!has_correct_vector_format(row[2]))
 		return (0);
 	if (!is_in_range(row[3], 0, 180))
@@ -36,12 +36,12 @@ int	camera(char ** row)
 	return (1);
 }
 
-int	light(char ** row)
+int	light(char **row)
 {
 	if (!has_right_number_of_cells(row, 4))
 		return (0);
 	if (!has_correct_coordinates_format(row[1]))
-	 	return (0);
+		return (0);
 	if (!is_in_range(row[2], 0.0f, 1.0f))
 		return (0);
 	if (!has_correct_colour_format(row[3]))
@@ -49,12 +49,12 @@ int	light(char ** row)
 	return (1);
 }
 
-int	plane(char ** row)
+int	plane(char **row)
 {
 	if (!has_right_number_of_cells(row, 4))
 		return (0);
 	if (!has_correct_coordinates_format(row[1]))
-	 	return (0);
+		return (0);
 	if (!has_correct_vector_format(row[2]))
 		return (0);
 	if (!has_correct_colour_format(row[3]))
@@ -64,10 +64,12 @@ int	plane(char ** row)
 
 int	is_correct(char **row)
 {
-	int type = recognize_obj_type(row);
+	int	type;
 	int (*func[6])(char **) = {ambient_light, camera, light, sphere, plane, cylinder};
-	int i = 0;
+	int i;
 
+	type = recognize_obj_type(row);
+	i = 0;
 	while (i < 6)
 	{
 		if (type == i)
@@ -75,5 +77,5 @@ int	is_correct(char **row)
 		i++;
 	}
 	ft_putstr_fd("Error: invalid object in .rt file\n", 2);
-	return (0);	
+	return (0);
 }
