@@ -23,6 +23,7 @@ For every pixel of the window, a ray is cast from the camera through that pixel,
 
 - `cc`, `make`
 - **Linux:** X11 development packages (`libxext-dev`, `libx11-dev`) and `zlib` (`-lm -lz` are linked)
+  Run `git clone https://github.com/42paris/minilibx-linux.git lib/mlx_linux` to add the mlx library on Linux.
 - **macOS:** OpenGL / AppKit frameworks (the Makefile picks `lib/mlx_macos` automatically)
 
 MiniLibX and libft are bundled in `lib/`; the Makefile builds them for you.

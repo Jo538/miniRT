@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 18:28:21 by bribot            #+#    #+#             */
-/*   Updated: 2026/10/05 20:31:07 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/08 14:23:10 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	mlx_initialization(t_rt *rt)
 		return ;
 	}
 	data_mlx->img = mlx_new_image(data_mlx->mlx, X_MAX, Y_MAX);
-	data_mlx->mlx_win = mlx_new_window(data_mlx->mlx, X_MAX, Y_MAX, "TEST");
+	data_mlx->mlx_win = mlx_new_window(data_mlx->mlx, X_MAX, Y_MAX, "miniRT");
 	data_mlx->addr = mlx_get_data_addr(data_mlx->img, &data_mlx->bits_per_pixel,
 			&data_mlx->line_length, &data_mlx->endian);
 }

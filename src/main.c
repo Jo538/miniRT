@@ -3,17 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/07 15:01:25 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/05 19:18:47 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/08 13:06:01 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+
+static int	has_correct_extension(char *file)
+{
+	int	len;
+
+	len = ft_strlen(file);
+	if (ft_strncmp(file + len - 3, ".rt", 3))
+	{
+		ft_putstr_fd("Error: wrong file extension\n", 2);
+		return (0);
+	}
+	return (1);
+}
+
 static int	open_scene(char *file, int *fd)
 {
+	if (!has_correct_extension(file))
+		return (1);
 	*fd = open(file, O_RDONLY);
 	if (*fd == -1)
 	{
