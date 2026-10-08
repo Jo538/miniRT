@@ -9,7 +9,7 @@
 			"type": "lldb",
 			"request": "launch",
 			"program": "${workspaceFolder}/miniRT",
-			"args": ["${workspaceFolder}/scenes/cylinder_y.rt"],
+			"args": ["${workspaceFolder}/scenes/multi_objects.rt"],
 			"stopOnEntry": false,
 			"cwd": "${workspaceFolder}"
 		}

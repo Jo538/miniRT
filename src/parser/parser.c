@@ -3,19 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:18:53 by benji             #+#    #+#             */
-/*   Updated: 2026/10/05 19:23:59 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/08 12:40:44 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_object	*parse_camera(char **row)
+t_object	*parse_camera(t_rt *rt, char **row)
 {
 	t_object	*to_return;
 
+	if (rt->c)
+	{
+		free(rt->c);
+		ft_putstr_fd("Error: more than 1 unique object\n", 2);
+		return (NULL);
+	}
 	to_return = malloc(sizeof(t_object));
 	if (!to_return)
 		return (NULL);
@@ -28,10 +34,16 @@ t_object	*parse_camera(char **row)
 	return (to_return);
 }
 
-t_object	*parse_ambient_lighting(char **row)
+t_object	*parse_ambient_lighting(t_rt *rt, char **row)
 {
 	t_object	*to_return;
 
+	if (rt->a)
+	{
+		free(rt->a);
+		ft_putstr_fd("Error: more than 1 unique object\n", 2);
+		return (NULL);
+	}
 	to_return = malloc(sizeof(t_object));
 	if (!to_return)
 		return (NULL);
@@ -42,10 +54,16 @@ t_object	*parse_ambient_lighting(char **row)
 	return (to_return);
 }
 
-t_object	*parse_light(char **row)
+t_object	*parse_light(t_rt *rt, char **row)
 {
 	t_object	*to_return;
 
+	if (rt->l)
+	{
+		free(rt->l);
+		ft_putstr_fd("Error: more than 1 unique object\n", 2);
+		return (NULL);
+	}
 	to_return = malloc(sizeof(t_object));
 	if (!to_return)
 		return (NULL);
@@ -62,19 +80,19 @@ void	acl_case(t_rt *rt, char **row, int type_obj)
 {
 	if (type_obj == AMBIENT_LIGHTING)
 	{
-		rt->a = parse_ambient_lighting(row);
+		rt->a = parse_ambient_lighting(rt, row);
 		if (!rt->a)
 			return ((void)(rt->err = 1));
 	}
 	if (type_obj == CAMERA)
 	{
-		rt->c = parse_camera(row);
+		rt->c = parse_camera(rt, row);
 		if (!rt->c)
 			return ((void)(rt->err = 1));
 	}
 	if (type_obj == LIGHT)
 	{
-		rt->l = parse_light(row);
+		rt->l = parse_light(rt, row);
 		if (!rt->l)
 			return ((void)(rt->err = 1));
 	}
