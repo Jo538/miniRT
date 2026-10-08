@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 12:14:51 by jchartie          #+#    #+#             */
-/*   Updated: 2025/11/21 11:02:56 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/08 11:35:33 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 		k = j;
 	while (i < k)
 	{
-			dst[n + i] = src[i];
-			i++;
+		dst[n + i] = src[i];
+		i++;
 	}
 	dst[n + i] = '\0';
 	return (n + j);

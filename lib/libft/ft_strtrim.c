@@ -6,7 +6,7 @@
 /*   By: jchartie <jchartie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 16:35:23 by jchartie          #+#    #+#             */
-/*   Updated: 2025/11/21 11:23:37 by jchartie         ###   ########.fr       */
+/*   Updated: 2026/10/08 11:35:52 by jchartie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static size_t	ft_start(char const *s1, char const *set)
 {
 	size_t	start;
 
-		start = 0;
+	start = 0;
 	while (s1[start] && ft_strchr(set, s1[start]))
 		start++;
 	return (start);
