@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   nested_items.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bribot <bribot@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/09 15:25:54 by jchartie          #+#    #+#             */
-/*   Updated: 2026/10/05 18:47:14 by bribot           ###   ########.fr       */
+/*   Updated: 2026/10/09 15:33:06 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	has_correct_vector_format(char *str)
 	while (str_array[i])
 	{
 		if (!has_correct_float_formatting(str_array[i])
-			| !is_in_range(str_array[i], -1, +1))
+			|| !is_in_range(str_array[i], -1, +1))
 			return (free_tab(str_array), 0);
 		i++;
 	}

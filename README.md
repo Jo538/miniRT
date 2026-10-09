@@ -1,7 +1,7 @@
-*This project has been created as part of the 42 curriculum by jchartie, bribot.*
 
 # miniRT
 
+![alt text](image-1.png)
 ## Description
 
 **miniRT** is a small ray tracer written in C  on top of the MiniLibX graphics library. The program reads a scene description file (`.rt`) and renders the scene in a window, as seen from a camera placed anywhere in 3D space.
